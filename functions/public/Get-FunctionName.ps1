@@ -1,6 +1,6 @@
 Function Get-FunctionName {
     [cmdletbinding()]
-    [outputType("string")]
+    [outputType("string","PSFunctionName")]
     Param(
         [Parameter(Position = 0, Mandatory, HelpMessage = "Specify the .ps1 or .psm1 file with defined functions.")]
         [ValidateScript({
@@ -23,7 +23,9 @@ Function Get-FunctionName {
         })]
         [string]$Path,
         [Parameter(HelpMessage = "List all detected function names.")]
-        [switch]$All
+        [switch]$All,
+        [Parameter(HelpMessage = "Write a rich detailed object to the pipeline.")]
+        [switch]$Detailed
     )
 
     New-Variable astTokens -Force
@@ -36,10 +38,22 @@ Function Get-FunctionName {
     $functions = $ast.FindAll({ $args[0] -is [System.Management.Automation.Language.FunctionDefinitionAst] }, $true)
     if ($functions.count -gt 0) {
         if ($All) {
-            $Functions.Name
+            $out = $Functions.Name
         }
         Else {
-            $functions.Name | Test-FunctionName
+            $out = $functions.Name | Test-FunctionName
+        }
+        if ($Detailed) {
+            foreach ($item in $($out |Sort-object)) {
+                [pscustomobject]@{
+                    PSTypeName = "PSFunctionName"
+                    Name = $item
+                    Path = $Path
+                }
+            }
+        }
+        else {
+            $out
         }
     }
     else {

@@ -5,7 +5,7 @@
 @{
 
     RootModule           = 'PSFunctionTools.psm1'
-    ModuleVersion        = '0.1.0'
+    ModuleVersion        = '0.2.0'
     CompatiblePSEditions = 'Desktop', 'Core'
     GUID                 = '151466e0-a952-4b6a-ad81-40dafc9ef9bb'
     Author               = 'Jeff Hicks'
@@ -14,15 +14,19 @@
     Description          = 'A set of PowerShell commands for working with PowerShell scripts and functions.'
     PowerShellVersion    = '5.1'
     # TypesToProcess = @()
-    FormatsToProcess = @('formats\modulelayout.format.ps1xml','formats\psscriptrequirements.format.ps1xml')
-    FunctionsToExport    = 'Test-FunctionName', 'Get-FunctionName', 'Get-FunctionAlias',
-    'Export-FunctionFromFile', 'Export-ModuleLayout',
-    'Import-ModuleLayout', 'Convert-ScriptToFunction',
-    'Get-PSRequirements', 'New-CommentHelp', 'Format-FunctionName',
-    'Get-ModuleLayout'
+    FormatsToProcess     = @('formats\modulelayout.format.ps1xml',
+        'formats\psscriptrequirements.format.ps1xml',
+        'formats\psfunctionname.format.ps1xml')
+    FunctionsToExport    = @(
+        'Test-FunctionName', 'Get-FunctionName', 'Get-FunctionAlias',
+        'Export-FunctionFromFile', 'Export-ModuleLayout',
+        'Import-ModuleLayout', 'Convert-ScriptToFunction',
+        'Get-PSRequirements', 'New-CommentHelp', 'Format-FunctionName',
+        'Get-ModuleLayout', 'Get-ParameterBlock', 'Get-FunctionAttribute')
     CmdletsToExport      = @()
     # VariablesToExport = @()
-    AliasesToExport      = 'gfal', 'ga', 'eff', 'eml', 'iml', 'csf'
+    AliasesToExport      = @('gfal', 'ga', 'eff', 'eml', 'iml', 'csf', 'gpb',
+        'gfa')
     PrivateData          = @{
 
         PSData = @{

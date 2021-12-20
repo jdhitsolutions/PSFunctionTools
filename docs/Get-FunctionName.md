@@ -61,6 +61,24 @@ Open-URL
 
 Get the names of all functions in the specified file regardless of naming convention.
 
+### Example 3
+
+```powershell
+PS C:\>  Get-FunctionName C:\scripts\Convert-FunctionToFile.ps1 -Detailed
+
+
+   Path: C:\scripts\Convert-FunctionToFile.ps1
+
+Name
+----
+Export-FunctionFromFile
+Get-FunctionAlias
+Get-FunctionName
+Test-FunctionName
+```
+
+Get detailed output from the command which includes the path to source file.
+
 ## PARAMETERS
 
 ### -All
@@ -107,6 +125,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### string
 
+### PSFunctionName
+
 ## NOTES
 
 Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
@@ -114,3 +134,7 @@ Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell
 ## RELATED LINKS
 
 [Get-FunctionAlias](Get-FunctionAlias.md)
+
+[Get-FunctionAttribute](Get-FunctionAttribute.md)
+
+[Get-ParameterBlock](Get-Parameterblock.md)

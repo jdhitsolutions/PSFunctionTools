@@ -8,29 +8,54 @@ schema: 2.0.0
 # Test-FunctionName
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Test the validity of a PowerShell function name.
 
 ## SYNTAX
 
-```
+```yaml
 Test-FunctionName [-Name] <String> [-Quiet] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+PowerShell function names should follow naming convention of Verb-Noun. The verb should be a standard verb that you see with Get-Verb. Use this command in your scripting automation to validate a PowerShell function name.
+
+If the name passes validation it will be written to the pipeline. Or you can use the -Quiet parameter to return a traditional boolean result.
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Test-FunctionName Test-Widget
+Test-Widget
 ```
 
-{{ Add example description here }}
+Because the name passes validation, it is written to the pipeline.
+
+### Example 2
+
+```powershell
+PS C:\> Test-FunctionName -Name stop-foo | Format-FunctionName
+Stop-Foo
+```
+
+Test the function name and format the result.
+
+### Example 3
+
+```powershell
+PS C:\> Test-FunctionName kill-system -Quiet
+False
+```
+
+Test with boolean result.
 
 ## PARAMETERS
 
 ### -Name
+
 Specify a function name.
 
 ```yaml
@@ -46,6 +71,7 @@ Accept wildcard characters: False
 ```
 
 ### -Quiet
+
 Get a boolean test result.
 
 ```yaml
@@ -61,6 +87,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -75,4 +102,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
+Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
+
 ## RELATED LINKS
+
+[Format-FunctionName](Format-FunctionName.md)

@@ -665,19 +665,19 @@ PS C:\&gt;</dev:code>
       <command:verb>Format</command:verb>
       <command:noun>FunctionName</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Format a function name to proper case.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Format-FunctionName is intended to be used as a helper function in your scripting automation. This is a simple function that will format a verb-noun function name into proper case. It will take an input such as test-data and format it as Test-Data. It will not format as camel-case. The command also will not verify that the verb component is acceptable. Use Test-FunctionName for that process.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Format-FunctionName</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="byValue" position="0" aliases="none">
           <maml:name>Name</maml:name>
           <maml:description>
-            <maml:para>What is the name of your function? It should follow the Verb-Noun naming convention.</maml:para>
+            <maml:para>What is the name of your function? It should follow the Verb-Noun naming convention. Although the verb will not be validate.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -689,10 +689,10 @@ PS C:\&gt;</dev:code>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="byValue" position="0" aliases="none">
         <maml:name>Name</maml:name>
         <maml:description>
-          <maml:para>What is the name of your function? It should follow the Verb-Noun naming convention.</maml:para>
+          <maml:para>What is the name of your function? It should follow the Verb-Noun naming convention. Although the verb will not be validate.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -715,7 +715,7 @@ PS C:\&gt;</dev:code>
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>System.String</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -724,19 +724,33 @@ PS C:\&gt;</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Format-FunctionName test-data
+Test-Data</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Format the lower-case command name to proper case.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Format-FunctionName try-pssystem
+Try-Pssystem</dev:code>
+        <dev:remarks>
+          <maml:para>The command does not validate the verb nor can it produce a camel-case result like Try-PsSystem.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Test-FunctionName</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -744,11 +758,11 @@ PS C:\&gt;</dev:code>
       <command:verb>Get</command:verb>
       <command:noun>FunctionAlias</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Get a defined function alias.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Get-FunctionAlias is tool you can use in your scripting automation. It will extract function names and aliases from a PowerShell script file. The source must be a .ps1 or .psm1 file. The command will only idenfity aliases defined as part of the function using code like [alias('foo')].</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -794,7 +808,7 @@ PS C:\&gt;</dev:code>
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>string</maml:name>
+          <maml:name>PSFunctionAlias</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -809,13 +823,200 @@ PS C:\&gt;</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Get-FunctionAlias -Path C:\scripts\SQLBackup.psm1
+
+Name                Alias
+----                 -----
+Backup-SQLDatabase  Backup-SQL
+Restore-SQLdatabase rsql</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Get functions and aliases from the specified file.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-FunctionName</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-FunctionAttribute</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>FunctionAttribute</command:noun>
+      <maml:description>
+        <maml:para>Get function attributes like cmdletbinding.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>This command can be used to get function attributes such as cmdletbinding or alias settings.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-FunctionAttribute</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+          <maml:name>Name</maml:name>
+          <maml:description>
+            <maml:para>Specify the name of the PowerShell function.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>Specify the path to the .ps1 or .psm1 file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>ToString</maml:name>
+          <maml:description>
+            <maml:para>Display the attribute block as a string.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <maml:name>Name</maml:name>
+        <maml:description>
+          <maml:para>Specify the name of the PowerShell function.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>Specify the path to the .ps1 or .psm1 file.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>ToString</maml:name>
+        <maml:description>
+          <maml:para>Display the attribute block as a string.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>PSFunctionAttribute</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-Functionattribute -path c:\scripts\PSFunctionTools\functions\public\Get-ParameterBlock.ps1 -Name get-parameterblock
+
+
+Type                : cmdletbinding
+NamedArguments      : {}
+PositionalArguments : {}
+String              : [cmdletbinding()]
+Function            : Get-Parameterblock
+Path                : C:\scripts\PSFunctionTools\functions\public\Get-ParameterB
+                      lock.ps1
+
+Type                : alias
+NamedArguments      : {}
+PositionalArguments : {"gpb"}
+String              : [alias("gpb")]
+Function            : Get-Parameterblock
+Path                : C:\scripts\PSFunctionTools\functions\public\Get-ParameterB
+                      lock.ps1
+
+Type                : OutputType
+NamedArguments      : {}
+PositionalArguments : {"ParamBlockAst", "String"}
+String              : [OutputType("ParamBlockAst","String")]
+Function            : Get-Parameterblock
+Path                : C:\scripts\PSFunctionTools\functions\public\Get-ParameterB
+                      lock.ps1</dev:code>
+        <dev:remarks>
+          <maml:para>Get detailed function attributes.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-Functionattribute -path c:\scripts\New-OneDriveLink.ps1 -name new-onedrivelink  -ToString
+[cmdletbinding(SupportsShouldProcess)]
+[alias("odl")]</dev:code>
+        <dev:remarks>
+          <maml:para>Get function attributes as a string.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-ParameterBlock</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-FunctionAlias</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -823,11 +1024,11 @@ PS C:\&gt;</dev:code>
       <command:verb>Get</command:verb>
       <command:noun>FunctionName</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Identify the names of PowerShell functions in a PowerShell script file.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>When exporting functions from files, you may only want to export specific functions. Which you can do if you know the name. Use Get-FunctionName to identify the names of functions. The default behavior is to get names of functions that follow the verb-noun naming convention.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -847,7 +1048,7 @@ PS C:\&gt;</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>All</maml:name>
           <maml:description>
-            <maml:para>List all detected function names.</maml:para>
+            <maml:para>List all detected function names regardless of naming convention.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -861,7 +1062,7 @@ PS C:\&gt;</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>All</maml:name>
         <maml:description>
-          <maml:para>List all detected function names.</maml:para>
+          <maml:para>List all detected function names regardless of naming convention.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -902,10 +1103,18 @@ PS C:\&gt;</dev:code>
           <maml:para></maml:para>
         </maml:description>
       </command:returnValue>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>PSFunctionName</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -923,11 +1132,222 @@ Get-ZipInfo
 Get-RSSFeed
 Open-URL</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Get the names of all standard functions in the specified file.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-FunctionName C:\scripts\MyInternetTools.psm1
+_log
+_parseOutput
+Get-MyWhoIs
+Get-GeoIP
+Get-MyPublicIP
+Get-MyWeather
+Get-WeatherByProxy
+Get-WeatherLocation
+Get-QOTD
+Get-ZipInfo
+Get-RSSFeed
+Open-URL</dev:code>
+        <dev:remarks>
+          <maml:para>Get the names of all functions in the specified file regardless of naming convention.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt;  Get-FunctionName C:\scripts\Convert-FunctionToFile.ps1 -Detailed
+
+
+   Path: C:\scripts\Convert-FunctionToFile.ps1
+
+Name
+----
+Export-FunctionFromFile
+Get-FunctionAlias
+Get-FunctionName
+Test-FunctionName</dev:code>
+        <dev:remarks>
+          <maml:para>Get detailed output from the command which includes the path to source file.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-FunctionAlias</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-FunctionAttribute</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-ParameterBlock</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-ParameterBlock</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>ParameterBlock</command:noun>
+      <maml:description>
+        <maml:para>Get a function's parameter block.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>This command is designed to use the PowerShell AST and retrieve a function's parameter block. You might use this to build comment-based help.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-ParameterBlock</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+          <maml:name>Name</maml:name>
+          <maml:description>
+            <maml:para>Specify the name of the PowerShell function.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>Specify the path to the .ps1 or .psm1 file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>ToString</maml:name>
+          <maml:description>
+            <maml:para>Display the parameter block as a string.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <maml:name>Name</maml:name>
+        <maml:description>
+          <maml:para>Specify the name of the PowerShell function.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>Specify the path to the .ps1 or .psm1 file.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>ToString</maml:name>
+        <maml:description>
+          <maml:para>Display the parameter block as a string.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>ParamBlockAst</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\Scripts&gt; Get-parameterblock -path c:\scripts\SimpleFunction.ps1 -name Get-FolderData
+
+Attributes Parameters                Extent
+---------- ----------                ------
+{}         {$Path, $Cutoff, $Filter} Param (…</dev:code>
+        <dev:remarks>
+          <maml:para>Get the AST parameter block object.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\Scripts&gt; Get-parameterblock  -path c:\scripts\SimpleFunction.ps1 -name Get-FolderData -ToString
+[parameter(HelpMessage = "Specify the folder to analyze")]
+[string]$Path="."
+[datetime]$Cutoff
+[string]$Filter="*.*"</dev:code>
+        <dev:remarks>
+          <maml:para>Get the parameter block for the given function as a string.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>New-CommentHelp</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-FunctionAlias</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-FunctionAttribute</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -935,11 +1355,11 @@ Open-URL</dev:code>
       <command:verb>Get</command:verb>
       <command:noun>PSRequirements</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>List PowerShell command requirements.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>As part of your scripting automation, you may want to capture requirements defined in a script file such as '# requires -version 5.1'. Get-PSRequirements will process a PowerShell script file for these type of requirements.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -947,7 +1367,7 @@ Open-URL</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
           <maml:name>Path</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Path Description }}</maml:para>
+            <maml:para>The path to your PowerShell script file. It must be a .ps1 or .psm1 file.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -962,7 +1382,7 @@ Open-URL</dev:code>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
         <maml:name>Path</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Path Description }}</maml:para>
+          <maml:para>The path to your PowerShell script file. It must be a .ps1 or .psm1 file.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -985,7 +1405,7 @@ Open-URL</dev:code>
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>object</maml:name>
+          <maml:name>PSScriptRequirements</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -994,15 +1414,24 @@ Open-URL</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Get-PSRequirements -Path C:\scripts\SQLBackup.psm1
+
+Path                  : C:\scripts\SQLBackup.psm1
+RequiredApplicationId :
+RequiredPSVersion     : 5.1
+RequiredPSEditions    : {}
+RequiredModules       : {}
+RequiresPSSnapIns     : {}
+RequiredAssemblies    : {}
+IsElevationRequired   : True</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>If you run this command in the PowerShell console or VS Code, and elevation is required, the 'True' value will be displayed in green.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1223,19 +1652,20 @@ Mode                 LastWriteTime         Length Name
       <command:verb>New</command:verb>
       <command:noun>CommentHelp</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Create comment based help.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>You can use this command in your scripting automation to generate a comment-based help block for a function. The function will use the parameter block which you can get with Get-ParameterBlock to define help parameters. If your parameter has a HelpMessage defined, the value will be used in the parameter description.</maml:para>
+      <maml:para>You can also specify a synopsis and/or description. Otherwise, you can edit the placeholders later.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>New-CommentHelp</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="none">
           <maml:name>ParamBlock</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ParamBlock Description }}</maml:para>
+            <maml:para>A parameter block AST object. Use Get-ParameterBlock.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">ParamBlockAst</command:parameterValue>
           <dev:type>
@@ -1244,13 +1674,37 @@ Mode                 LastWriteTime         Length Name
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Description</maml:name>
+          <maml:description>
+            <maml:para>Provide a longer description. You can always edit this later.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>"&lt;long description&gt;"</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Synopsis</maml:name>
+          <maml:description>
+            <maml:para>Provide a short description. You can always edit this later.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>"&lt;short description&gt;"</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="none">
         <maml:name>ParamBlock</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ParamBlock Description }}</maml:para>
+          <maml:para>A parameter block AST object. Use Get-ParameterBlock.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">ParamBlockAst</command:parameterValue>
         <dev:type>
@@ -1259,11 +1713,35 @@ Mode                 LastWriteTime         Length Name
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Description</maml:name>
+        <maml:description>
+          <maml:para>Provide a longer description. You can always edit this later.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>"&lt;long description&gt;"</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Synopsis</maml:name>
+        <maml:description>
+          <maml:para>Provide a short description. You can always edit this later.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>"&lt;short description&gt;"</dev:defaultValue>
+      </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
         <dev:type>
-          <maml:name>None</maml:name>
+          <maml:name>ParamBlockAST</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -1282,19 +1760,47 @@ Mode                 LastWriteTime         Length Name
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\Scripts&gt; Get-parameterblock  -path c:\scripts\SimpleFunction.ps1 -name Get-FolderData | New-CommentHelp -Synopsis "Get folder details"
+&lt;#
+    .Synopsis
+      Get folder details
+    .Description
+      &lt;long description&gt;
+    .Parameter Path
+      Specify the folder to analyze
+    .Parameter Cutoff
+      &lt;enter a parameter description&gt;
+    .Parameter Filter
+      &lt;enter a parameter description&gt;
+    .Example
+      PS C:\&gt;
+      &lt;output and explanation&gt;
+    .Inputs
+      &lt;Inputs to this function (if any)&gt;
+    .Outputs
+      &lt;Output from this function (if any)&gt;
+    .Notes
+      &lt;General notes&gt;
+    .Link
+      &lt;enter a link reference&gt;
+#&gt;</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>This example is getting the parameter block for the specified function and creating comment-base help. The Path parameter has a HelpMessage defined so that value is used in the help. You would need to fill in your own descriptions for the other parameters.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-ParameterBlock</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -1302,11 +1808,12 @@ Mode                 LastWriteTime         Length Name
       <command:verb>Test</command:verb>
       <command:noun>FunctionName</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Test the validity of a PowerShell function name.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>PowerShell function names should follow naming convention of Verb-Noun. The verb should be a standard verb that you see with Get-Verb. Use this command in your scripting automation to validate a PowerShell function name.</maml:para>
+      <maml:para>If the name passes validation it will be written to the pipeline. Or you can use the -Quiet parameter to return a traditional boolean result.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1392,18 +1899,40 @@ Mode                 LastWriteTime         Length Name
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Test-FunctionName Test-Widget
+Test-Widget</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Because the name passes validation, it is written to the pipeline.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Test-FunctionName -Name stop-foo | Format-FunctionName
+Stop-Foo</dev:code>
+        <dev:remarks>
+          <maml:para>Test the function name and format the result.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Test-FunctionName kill-system -Quiet
+False</dev:code>
+        <dev:remarks>
+          <maml:para>Test with boolean result.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Format-FunctionName</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
 </helpItems>
