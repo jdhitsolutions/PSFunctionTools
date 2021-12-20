@@ -1,0 +1,150 @@
+<!--
+Format type data generated 12/16/2021 12:14:10 by THINKP1\Jeff
+
+This file was created using the New-PSFormatXML command that is part
+of the PSScriptTools module.
+
+https://github.com/jdhitsolutions/PSScriptTools
+-->
+<Configuration>
+  <ViewDefinitions>
+    <View>
+      <!--Created 12/16/2021 12:14:10 by THINKP1\Jeff-->
+      <Name>default</Name>
+      <ViewSelectedBy>
+        <TypeName>ModuleLayout</TypeName>
+      </ViewSelectedBy>
+      <GroupBy>
+        <!--
+            You can also use a scriptblock to define a custom property name.
+            You must have a Label tag.
+            <ScriptBlock>$_.machinename.toUpper()</ScriptBlock>
+            <Label>Computername</Label>
+
+            Use <Label> to set the displayed value.
+-->
+        <PropertyName>Path</PropertyName>
+        <Label>Path</Label>
+      </GroupBy>
+      <TableControl>
+        <!--Delete the AutoSize node if you want to use the defined widths.-->
+        <AutoSize />
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Created</Label>
+            <Width>22</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>CreatedBy</Label>
+            <Width>15</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Version</Label>
+            <Width>8</Width>
+            <Alignment>center</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Folders</Label>
+            <Width>8</Width>
+            <Alignment>right</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Files</Label>
+            <Width>6</Width>
+            <Alignment>right</Alignment>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <!--
+            By default the entries use property names, but you can replace them with scriptblocks.
+            <ScriptBlock>$_.foo /1mb -as [int]</ScriptBlock>
+-->
+              <TableColumnItem>
+                <PropertyName>Created</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>CreatedBy</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>LayoutVersion</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>$_.folders.count</ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>$_.Files.count</ScriptBlock>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <!--Created 12/16/2021 12:18:32 by THINKP1\Jeff-->
+      <Name>source</Name>
+      <ViewSelectedBy>
+        <TypeName>ModuleLayout</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <!--Delete the AutoSize node if you want to use the defined widths.-->
+        <AutoSize />
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Path</Label>
+            <Width>31</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Created</Label>
+            <Width>22</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Version</Label>
+            <Width>8</Width>
+            <Alignment>center</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>SourcePath</Label>
+            <Width>17</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>SourceComputer</Label>
+            <Width>17</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <!--
+            By default the entries use property names, but you can replace them with scriptblocks.
+            <ScriptBlock>$_.foo /1mb -as [int]</ScriptBlock>
+-->
+              <TableColumnItem>
+                <PropertyName>Path</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Created</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>LayoutVersion</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>SourcePath</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>SourceComputer</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>

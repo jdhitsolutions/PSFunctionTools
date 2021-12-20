@@ -10,7 +10,7 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>This command takes the body of a script file and wraps it in a function declaration. The command will insert missing elements like [cmdletbinding()] and comment-based help. You will most likely need to edit and clean up the result in your scripting editor.</maml:para>
+      <maml:para>This command takes the body of a script file and wraps it in a function declaration. The command will insert missing elements like cmdletbinding() and comment-based help. You will most likely need to edit and clean up the result in your scripting editor.</maml:para>
       <maml:para>If you run this command in the PowerShell ISE or the VS Code PowerShell integrated terminal, you can use the dynamic parameter ToEditor to open a new file with with the output. You can edit and save the file manually.</maml:para>
       <maml:para>It is assumed that your script file is complete and without syntax errors.</maml:para>
     </maml:description>
@@ -32,7 +32,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="2" aliases="none">
           <maml:name>Name</maml:name>
           <maml:description>
-            <maml:para>What is the name of your new function? It should have a Verb-Noun name.</maml:para>
+            <maml:para>What is the name of your new function? It should have a standard Verb-Noun name.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -71,7 +71,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="2" aliases="none">
         <maml:name>Name</maml:name>
         <maml:description>
-          <maml:para>What is the name of your new function? It should have a Verb-Noun name.</maml:para>
+          <maml:para>What is the name of your new function? It should have a standard Verb-Noun name.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -106,27 +106,27 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Convert-ScriptToFunction c:\scripts\Daily.ps1 -name Invoke-DailyTask | Set-Clipboard</dev:code>
+        <dev:code>PS C:\&gt; Convert-ScriptToFunction c:\scripts\Daily.ps1 -name Invoke-DailyTask | Set-Clipboard</dev:code>
         <dev:remarks>
           <maml:para>Convert Daily.ps1 to a function called Invoke-DailyTask and copy the results to the Windows clipboard. You can then paste the results into scripting editor.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Convert-ScriptToFunction c:\scripts\systemreport.ps1 -name New-SystemReport | Out-File c:\scripts\New-SystemReport.ps1</dev:code>
+        <dev:code>PS C:\&gt; Convert-ScriptToFunction c:\scripts\systemreport.ps1 -name New-SystemReport | Out-File c:\scripts\New-SystemReport.ps1</dev:code>
         <dev:remarks>
           <maml:para>Convert the SystemReport.ps1 script file to a function called New-SystemReport and save the results to a file.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>Convert-ScriptToFunction c:\scripts\systemreport.ps1 -name New-System -alias nsr | Tee-Object -variable f</dev:code>
+        <dev:code>PS C:\&gt; Convert-ScriptToFunction c:\scripts\systemreport.ps1 -name New-System -alias nsr | Tee-Object -variable f</dev:code>
         <dev:remarks>
           <maml:para>Convert the script to a function called New-System and tee the output to $f. This will also define an function alias of nsr.</maml:para>
         </dev:remarks>
@@ -140,11 +140,13 @@
       <command:verb>Export</command:verb>
       <command:noun>FunctionFromFile</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Export a PowerShell function from a script file.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>You should use Export-FunctionFromFile when you want to export PowerShell functions defined in in a single script file, placing each function in its own file. You might want to do this to build or restructure a PowerShell module.</maml:para>
+      <maml:para>You can export all functions from a file or specific functions. The default behavior is to only export functions that follow a standard verb-noun naming convention. The source must be a .ps1 or .psm1 script file.</maml:para>
+      <maml:para>If you run this command in the PowerShell ISE or the VS Code integrated PowerShell Terminal, you can use the dynamic parameter Remove to delete the function from the source file.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -164,7 +166,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>All</maml:name>
           <maml:description>
-            <maml:para>Export all detected functions.</maml:para>
+            <maml:para>Export all detected functions regardless of name.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -217,6 +219,17 @@
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Remove</maml:name>
+          <maml:description>
+            <maml:para>This is a dynamic parameter that is only available if you are running this command in the PowerShell ISE of the VS Code integrated PowerShell terminal. The function will be deleted from the source file after it has been exported.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Export-FunctionFromFile</maml:name>
@@ -246,7 +259,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Name</maml:name>
           <maml:description>
-            <maml:para>Specify a function by name</maml:para>
+            <maml:para>Specify a function by name.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -289,13 +302,24 @@
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Remove</maml:name>
+          <maml:description>
+            <maml:para>This is a dynamic parameter that is only available if you are running this command in the PowerShell ISE of the VS Code integrated PowerShell terminal. The function will be deleted from the source file after it has been exported.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>All</maml:name>
         <maml:description>
-          <maml:para>Export all detected functions.</maml:para>
+          <maml:para>Export all detected functions regardless of name.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -319,7 +343,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Name</maml:name>
         <maml:description>
-          <maml:para>Specify a function by name</maml:para>
+          <maml:para>Specify a function by name.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -376,6 +400,18 @@
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Remove</maml:name>
+        <maml:description>
+          <maml:para>This is a dynamic parameter that is only available if you are running this command in the PowerShell ISE of the VS Code integrated PowerShell terminal. The function will be deleted from the source file after it has been exported.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
@@ -407,19 +443,31 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Export-FunctionFromFile C:\scripts\MyInternetTools.psm1 -Name get-zipinfo -OutputPath c:\scripts\psinternettools\functions</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Export the Get-ZipInfo function from C:\scripts\MyInternetTools.psm1 to its own file. The original file remains unchanged.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Export-FunctionFromFile C:\scripts\MyInternetTools.psm1 -OutputPath c:\scripts\psinternettools\functions</dev:code>
+        <dev:remarks>
+          <maml:para>Export all functions that follow the verb-noun naming convention to separate files under C:\Scripts\PSInternetTools\Functions.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-FunctionName</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -427,17 +475,40 @@
       <command:verb>Export</command:verb>
       <command:noun>ModuleLayout</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Export a model module layout.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Use Export-ModuleLayout to export a model module directory structure to a json file. You can use Import-ModuleLayout to recreate the layout from the json file. The export process will include not only directories, but also text files like a readme or license file.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Export-ModuleLayout</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-          <maml:name>Path</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>FilePath</maml:name>
+          <maml:description>
+            <maml:para>Specify the name of the Json file to store the result.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>modulelayout.json</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Passthru</maml:name>
+          <maml:description>
+            <maml:para>Show the file result.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>SourcePath</maml:name>
           <maml:description>
             <maml:para>Specify the model module path.</maml:para>
           </maml:description>
@@ -448,11 +519,47 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Version</maml:name>
+          <maml:description>
+            <maml:para>Define a version number for this layout.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>1.0</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-        <maml:name>Path</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>FilePath</maml:name>
+        <maml:description>
+          <maml:para>Specify the name of the Json file to store the result.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>modulelayout.json</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Passthru</maml:name>
+        <maml:description>
+          <maml:para>Show the file result.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>SourcePath</maml:name>
         <maml:description>
           <maml:para>Specify the model module path.</maml:para>
         </maml:description>
@@ -462,6 +569,18 @@
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Version</maml:name>
+        <maml:description>
+          <maml:para>Define a version number for this layout.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>1.0</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes>
@@ -477,7 +596,15 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>String</maml:name>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.IO.FileInfo</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -486,19 +613,51 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Export-ModuleLayout c:\work\sample -FilePath c:\work\layout.json -Verbose
+VERBOSE: Starting Export-ModuleLayout
+VERBOSE: Exporting directory structure from c:\work\sample
+VERBOSE: Processing .github
+VERBOSE: Processing .vscode
+VERBOSE: Processing docs
+VERBOSE: Processing en-us
+VERBOSE: Processing formats
+VERBOSE: Processing functions
+VERBOSE: Processing icons
+VERBOSE: Processing images
+VERBOSE: Processing samples
+VERBOSE: Processing tests
+VERBOSE: Processing types
+VERBOSE: Processing changelog.md
+VERBOSE: Processing License.txt
+VERBOSE: Processing README.md
+VERBOSE: Processing scratch-changelog.md
+VERBOSE: Processing .vscode\tasks.json
+VERBOSE: Processing formats\readme.txt
+VERBOSE: Processing functions\private
+VERBOSE: Processing functions\public
+VERBOSE: Processing functions\private\readme.txt
+VERBOSE: Processing functions\public\readme.txt
+VERBOSE: Processing tests\readme.txt
+VERBOSE: Processing types\readme.txt
+VERBOSE: Exporting module layout to c:\work\layout.json.
+PS C:\&gt;</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Export the directory layout defined under C:\Work\sample to a c:\work\layout.json.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Import-ModuleLayout</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -752,7 +911,17 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Get-FunctionName C:\scripts\MyInternetTools.psm1
+Get-MyWhoIs
+Get-GeoIP
+Get-MyPublicIP
+Get-MyWeather
+Get-WeatherByProxy
+Get-WeatherLocation
+Get-QOTD
+Get-ZipInfo
+Get-RSSFeed
+Open-URL</dev:code>
         <dev:remarks>
           <maml:para>{{ Add example description here }}</maml:para>
         </dev:remarks>
@@ -845,11 +1014,11 @@
       <command:verb>Import</command:verb>
       <command:noun>ModuleLayout</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Create a module structure from a layout file.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Use Import-ModuleLayout to recreate a module structure from a json file created with Export-ModuleLayout. Importing the json file will recreate the folders and files.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -899,7 +1068,7 @@
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <dev:defaultValue>.</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
           <maml:name>WhatIf</maml:name>
@@ -961,7 +1130,7 @@
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <dev:defaultValue>.</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
         <maml:name>WhatIf</maml:name>
@@ -989,7 +1158,15 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>none</maml:name>
+          <maml:name>System.IO.FileInfo</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.IO.DirectoryInfo</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -998,19 +1175,47 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Import-ModuleLayout -Name PSDemo -ParentPath D:\scripts -Layout C:\work\layout.json
+
+    Directory: C:\scripts\PSDemo
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          12/16/2021  9:45 AM                types
+d----          12/16/2021  9:45 AM                .github
+d----          12/16/2021  9:45 AM                .vscode
+d----          12/16/2021  9:45 AM                docs
+...
+    Directory: D:\scripts\PSDemo\functions
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          12/16/2021  9:45 AM                public
+d----          12/16/2021  9:45 AM                private
+
+    Directory: D:\scripts\PSDemo\functions\public
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          12/16/2021  9:49 AM            276 readme.txt
+...</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Create the directory structure from C:\work\layout.json under a new path of D:\scripts\PSDemo. The parent path, D:\scripts, must already exist.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Export-ModuleLayout</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>

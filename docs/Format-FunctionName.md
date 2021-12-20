@@ -8,31 +8,45 @@ schema: 2.0.0
 # Format-FunctionName
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Format a function name to proper case.
 
 ## SYNTAX
 
-```
+```yaml
 Format-FunctionName [[-Name] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+Format-FunctionName is intended to be used as a helper function in your scripting automation. This is a simple function that will format a verb-noun function name into proper case. It will take an input such as test-data and format it as Test-Data. It will not format as camel-case. The command also will not verify that the verb component is acceptable. Use Test-FunctionName for that process.
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Format-FunctionName test-data
+Test-Data
+
 ```
 
-{{ Add example description here }}
+Format the lower-case command name to proper case.
+
+### Example 2
+
+```powershell
+PS C:\> Format-FunctionName try-pssystem
+Try-Pssystem
+```
+
+The command does not validate the verb nor can it produce a camel-case result like Try-PsSystem.
 
 ## PARAMETERS
 
 ### -Name
-What is the name of your function?
-It should follow the Verb-Noun naming convention.
+
+What is the name of your function? It should follow the Verb-Noun naming convention. Although the verb will not be validate.
 
 ```yaml
 Type: String
@@ -47,6 +61,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -55,7 +70,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
+### System.String
+
 ## NOTES
 
+Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
+
 ## RELATED LINKS
+
+[Test-FunctionName](Test-FunctionName.md)

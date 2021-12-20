@@ -8,30 +8,56 @@ schema: 2.0.0
 # Import-ModuleLayout
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Create a module structure from a layout file.
 
 ## SYNTAX
 
-```
-Import-ModuleLayout [-Name] <String> [-ParentPath <String>] -Layout <String> [-WhatIf] [-Confirm]
- [<CommonParameters>]
+```yaml
+Import-ModuleLayout [-Name] <String> [-ParentPath <String>] -Layout <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+Use Import-ModuleLayout to recreate a module structure from a json file created with Export-ModuleLayout. Importing the json file will recreate the folders and files.
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Import-ModuleLayout -Name PSDemo -ParentPath D:\scripts -Layout C:\work\layout.json
+
+    Directory: C:\scripts\PSDemo
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          12/16/2021  9:45 AM                types
+d----          12/16/2021  9:45 AM                .github
+d----          12/16/2021  9:45 AM                .vscode
+d----          12/16/2021  9:45 AM                docs
+...
+    Directory: D:\scripts\PSDemo\functions
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          12/16/2021  9:45 AM                public
+d----          12/16/2021  9:45 AM                private
+
+    Directory: D:\scripts\PSDemo\functions\public
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          12/16/2021  9:49 AM            276 readme.txt
+...
 ```
 
-{{ Add example description here }}
+Create the directory structure from C:\work\layout.json under a new path of D:\scripts\PSDemo. The parent path, D:\scripts, must already exist.
 
 ## PARAMETERS
 
 ### -Confirm
+
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
@@ -47,6 +73,7 @@ Accept wildcard characters: False
 ```
 
 ### -Layout
+
 Specify the path to the module layout json file.
 
 ```yaml
@@ -62,6 +89,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
+
 What is the name of your new module?
 
 ```yaml
@@ -77,6 +105,7 @@ Accept wildcard characters: False
 ```
 
 ### -ParentPath
+
 What is the parent path?
 The default is the current location
 
@@ -87,12 +116,13 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: .
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -WhatIf
+
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
@@ -109,6 +139,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -117,8 +148,14 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### none
+### System.IO.FileInfo
+
+### System.IO.DirectoryInfo
 
 ## NOTES
 
+Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
+
 ## RELATED LINKS
+
+[Export-ModuleLayout](Export-ModuleLayout.md)

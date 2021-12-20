@@ -73,7 +73,7 @@ Function Export-FunctionFromFile {
             Write-Verbose "[BEGIN  ] Looking for functions $($name -join ',')"
         }
 
-        #insert a temporty line for each line of the function
+        #insert a temporary line for each line of the function
         #this will be deleted at the end. Define this in the Begin block so
         #that it remains static
         $line = "DEL-FUNCTION-$(Get-Date -f 'hhmmss')`n"

@@ -1,33 +1,50 @@
 Function Export-ModuleLayout {
     [cmdletbinding()]
     [alias("eml")]
-    [OutputType("String")]
+    [OutputType("None","System.IO.FileInfo")]
 
     Param(
         [Parameter(Position = 0, Mandatory, HelpMessage = "Specify the model module path.")]
         [ValidateScript( { Test-Path $_ })]
-        [string]$Path
+        [string]$SourcePath,
+        [Parameter(HelpMessage = "Define a version number for this layout.")]
+        [string]$Version = "1.0",
+        [Parameter(HelpMessage = "Specify the name of the Json file to store the result.")]
+        [ValidateNotNullOrEmpty()]
+        [ValidatePattern("\.json$")]
+        [string]$FilePath = ".\modulelayout.json",
+        [Parameter(HelpMessage = "Show the file result.")]
+        [switch]$Passthru
     )
+    Write-Verbose "Starting $($MyInvocation.MyCommand)"
 
     $out = [System.Collections.Generic.list[object]]::New()
+    #making the metadata work cross-platform
     $meta = [pscustomobject]@{
+        ItemType     = "ModuleLayoutMetadata"
         Created      = (Get-Date -Format g)
-        CreatedBy    = $env:USERNAME
-        Computername = $env:COMPUTERNAME
-        Source       = (Convert-Path $path)
-        Version      = "0.9"
+        CreatedBy    = "$([System.Environment]::UserDomainName)\$([System.Environment]::UserName)"
+        Computername = [System.Environment]::MachineName
+        Source       = (Convert-Path $SourcePath)
+        Version      = $version
     }
     $out.Add($meta)
     Push-Location
-    Set-Location $Path
-    Get-ChildItem $Path -Recurse |
+    #change location to the folder so that the relative path structure can be used.
+    Set-Location -path $SourcePath
+    Write-Verbose "Exporting directory structure from $Sourcepath"
+
+    Get-ChildItem -Recurse |
     ForEach-Object {
-        $relPath = (Resolve-Path -Path $_ -Relative) -replace "\.\\", ""
+        $relPath = (Resolve-Path -Path $_.fullname -Relative) -replace "\.\\", ""
+        Write-Verbose "Processing $relPath"
         if ($_.Gettype().name -eq 'FileInfo') {
             $f = [pscustomobject]@{
                 ItemType = "file"
                 Path     = $relPath
-                Content  = (Get-Content -Path $_)
+                #Windows PowerShell adds PS environment data to json conversions
+                #this is a work around
+                Content  = (Get-Content -Path $_.fullname | Out-String)
             }
             $out.add($f)
         }
@@ -38,8 +55,13 @@ Function Export-ModuleLayout {
             }
             $out.Add($d)
         }
-    }
+    } #foreach-object
 
-    $out | ConvertTo-Json
+    Write-Verbose "Exporting module layout to $FilePath"
+    $out | ConvertTo-Json | Out-File -FilePath $FilePath
     Pop-Location
+    if ($Passthru) {
+        Get-Item $Filepath
+    }
+    Write-Verbose "Ending $($myinvocation.MyCommand)"
 }

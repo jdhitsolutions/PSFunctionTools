@@ -11,26 +11,39 @@ function Import-ModuleLayout {
         [ValidateScript( { Test-Path $_ })]
         [string]$ParentPath = ".",
         [Parameter(Mandatory, HelpMessage = "Specify the path to the module layout json file.")]
-        [ValidateScript( { Test-Path $_ })]
+        [ValidateScript({Test-Path $_ })]
+        [ValidatePattern("\.json$")]
         [string]$Layout
     )
 
+    Write-Verbose "Starting $($MyInvocation.MyCommand)"
     $ParentPath = Convert-Path $ParentPath
     Write-Verbose "Creating module layout for $name under $parentpath using layout from $layout."
     $modpath = New-Item -Path $ParentPath -Name $name -ItemType Directory -Force
 
-    Get-Content $Layout |
-    ConvertFrom-Json | Sort-Object -Property ItemType |
+    <#
+     ConvertFrom-Json has a bug in Windows PowerShell so
+     piping the converted content to ForEach-Object and
+     passing each object back to the pipeline works around it
+    #>
+    Get-Content -path $Layout |
+    ConvertFrom-Json | ForEach-Object {$_} |
+    Sort-Object -Property ItemType |
     ForEach-Object {
+        #create all the directories first
         if ($_.Itemtype -eq 'directory') {
             if ($pscmdlet.ShouldProcess($_.path, "Create directory")) {
                 New-Item -Path $modpath -Name $_.path -ItemType Directory -Force
             }
-        }
+        } #directory item
         elseif ($_.itemtype -eq 'file') {
             if ($pscmdlet.ShouldProcess($_.path, "Create file")) {
-                Set-Content -Path (Join-Path -Path $modPath -ChildPath $_.path) -Value $_.content
+                $newFile = (Join-Path -Path $modPath -ChildPath $_.path)
+                Set-Content -Path $newfile -Value $_.content
+                Get-Item -path $newFile
             }
-        }
-    }
+        } #file item
+    } #foreach-object
+
+    Write-Verbose "Ending $($MyInvocation.MyCommand)"
 }

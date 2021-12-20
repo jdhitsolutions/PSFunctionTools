@@ -8,30 +8,64 @@ schema: 2.0.0
 # Get-FunctionName
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Identify the names of PowerShell functions in a PowerShell script file.
 
 ## SYNTAX
 
-```
+```yaml
 Get-FunctionName [-Path] <String> [-All] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+When exporting functions from files, you may only want to export specific functions. Which you can do if you know the name. Use Get-FunctionName to identify the names of functions. The default behavior is to get names of functions that follow the verb-noun naming convention.
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-FunctionName C:\scripts\MyInternetTools.psm1
+Get-MyWhoIs
+Get-GeoIP
+Get-MyPublicIP
+Get-MyWeather
+Get-WeatherByProxy
+Get-WeatherLocation
+Get-QOTD
+Get-ZipInfo
+Get-RSSFeed
+Open-URL
 ```
 
-{{ Add example description here }}
+Get the names of all standard functions in the specified file.
+
+### Example 2
+
+```powershell
+PS C:\> Get-FunctionName C:\scripts\MyInternetTools.psm1
+_log
+_parseOutput
+Get-MyWhoIs
+Get-GeoIP
+Get-MyPublicIP
+Get-MyWeather
+Get-WeatherByProxy
+Get-WeatherLocation
+Get-QOTD
+Get-ZipInfo
+Get-RSSFeed
+Open-URL
+```
+
+Get the names of all functions in the specified file regardless of naming convention.
 
 ## PARAMETERS
 
 ### -All
-List all detected function names.
+
+List all detected function names regardless of naming convention.
 
 ```yaml
 Type: SwitchParameter
@@ -46,6 +80,7 @@ Accept wildcard characters: False
 ```
 
 ### -Path
+
 Specify the .ps1 or .psm1 file with defined functions.
 
 ```yaml
@@ -61,6 +96,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -73,4 +109,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
+Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
+
 ## RELATED LINKS
+
+[Get-FunctionAlias](Get-FunctionAlias.md)

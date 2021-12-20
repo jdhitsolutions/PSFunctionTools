@@ -8,29 +8,38 @@ schema: 2.0.0
 # Get-FunctionAlias
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Get a defined function alias.
 
 ## SYNTAX
 
-```
+```yaml
 Get-FunctionAlias [-Path] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+Get-FunctionAlias is tool you can use in your scripting automation. It will extract function names and aliases from a PowerShell script file. The source must be a .ps1 or .psm1 file. The command will only idenfity aliases defined as part of the function using code like [alias('foo')].
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-FunctionAlias -Path C:\scripts\SQLBackup.psm1
+
+Name                Alias
+----                 -----
+Backup-SQLDatabase  Backup-SQL
+Restore-SQLdatabase rsql
 ```
 
-{{ Add example description here }}
+Get functions and aliases from the specified file.
 
 ## PARAMETERS
 
 ### -Path
+
 Specify the .ps1 or .psm1 file with defined functions.
 
 ```yaml
@@ -46,6 +55,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -54,8 +64,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### string
+### PSFunctionAlias
 
 ## NOTES
 
 ## RELATED LINKS
+
+[Get-FunctionName](Get-FunctionName.md)

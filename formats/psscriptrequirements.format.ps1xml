@@ -1,0 +1,141 @@
+<!--
+Format type data generated 12/20/2021 13:04:36 by THINKP1\Jeff
+
+This file was created using the New-PSFormatXML command that is part
+of the PSScriptTools module.
+
+https://github.com/jdhitsolutions/PSScriptTools
+-->
+<Configuration>
+  <ViewDefinitions>
+    <View>
+      <!--Created 12/20/2021 13:04:36 by THINKP1\Jeff-->
+      <Name>default</Name>
+      <ViewSelectedBy>
+        <TypeName>PSScriptRequirements</TypeName>
+      </ViewSelectedBy>
+      <ListControl>
+        <ListEntries>
+          <ListEntry>
+            <ListItems>
+              <!--
+            By default the entries use property names, but you can replace them with scriptblocks.
+            <ScriptBlock>$_.foo /1mb -as [int]</ScriptBlock>
+-->
+              <ListItem>
+                <Label>Path</Label>
+                <PropertyName>Path</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>RequiredApplicationId</Label>
+                <PropertyName>RequiredApplicationId</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>RequiredPSVersion</Label>
+                <PropertyName>RequiredPSVersion</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>RequiredPSEditions</Label>
+                <PropertyName>RequiredPSEditions</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>RequiredModules</Label>
+                <PropertyName>RequiredModules</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>RequiresPSSnapIns</Label>
+                <PropertyName>RequiresPSSnapIns</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>RequiredAssemblies</Label>
+                <PropertyName>RequiredAssemblies</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>IsElevationRequired</Label>
+                <ScriptBlock>
+                 If ($_.IsElevationRequired -AND $host.name -match "console|code") {
+                  "$([char]27)[92m$($_.IsElevationRequired)$([char]27)[0m"
+                 }
+                 else {
+                   $_.IsElevationRequired
+                 }
+                 </ScriptBlock>
+              </ListItem>
+            </ListItems>
+          </ListEntry>
+        </ListEntries>
+      </ListControl>
+    </View>
+    <View>
+      <!--Created 12/20/2021 13:08:49 by THINKP1\Jeff-->
+      <Name>default</Name>
+      <ViewSelectedBy>
+        <TypeName>PSScriptRequirements</TypeName>
+      </ViewSelectedBy>
+      <GroupBy>
+        <PropertyName>Path</PropertyName>
+        <Label>Path</Label>
+      </GroupBy>
+      <TableControl>
+        <!--Delete the AutoSize node if you want to use the defined widths.-->
+        <AutoSize />
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>ApplicationId</Label>
+            <Width>20</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>PSVersion</Label>
+            <Width>20</Width>
+            <Alignment>right</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>PSEditions</Label>
+            <Width>15</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>PSSnapIns</Label>
+            <Width>25</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Assemblies</Label>
+            <Width>25</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>IsElevationRequired</Label>
+            <Width>22</Width>
+            <Alignment>center</Alignment>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>RequiredApplicationId</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RequiredPSVersion</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RequiredPSEditions</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RequiresPSSnapIns</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RequiredAssemblies</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>IsElevationRequired</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>

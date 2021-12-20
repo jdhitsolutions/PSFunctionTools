@@ -8,30 +8,43 @@ schema: 2.0.0
 # Get-PSRequirements
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+List PowerShell command requirements.
 
 ## SYNTAX
 
-```
+```yaml
 Get-PSRequirements [-Path] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+As part of your scripting automation, you may want to capture requirements defined in a script file such as '# requires -version 5.1'. Get-PSRequirements will process a PowerShell script file for these type of requirements.
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-PSRequirements -Path C:\scripts\SQLBackup.psm1
+
+Path                  : C:\scripts\SQLBackup.psm1
+RequiredApplicationId :
+RequiredPSVersion     : 5.1
+RequiredPSEditions    : {}
+RequiredModules       : {}
+RequiresPSSnapIns     : {}
+RequiredAssemblies    : {}
+IsElevationRequired   : True
 ```
 
-{{ Add example description here }}
+If you run this command in the PowerShell console or VS Code, and elevation is required, the 'True' value will be displayed in green.
 
 ## PARAMETERS
 
 ### -Path
-{{ Fill Path Description }}
+
+The path to your PowerShell script file. It must be a .ps1 or .psm1 file.
 
 ```yaml
 Type: String
@@ -46,6 +59,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -54,8 +68,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### object
+### PSScriptRequirements
 
 ## NOTES
+
+Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
 
 ## RELATED LINKS
