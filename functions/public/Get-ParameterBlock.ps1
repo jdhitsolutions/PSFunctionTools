@@ -6,12 +6,14 @@ Function Get-ParameterBlock {
         [Parameter(
             Position = 0,
             Mandatory,
+            ValueFromPipelineByPropertyName,
             HelpMessage = "Specify the name of the PowerShell function."
             )]
         [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter(
             Mandatory,
+            ValueFromPipelineByPropertyName,
             HelpMessage = "Specify the path to the .ps1 or .psm1 file."
             )]
             [ValidateScript({
@@ -40,9 +42,9 @@ Function Get-ParameterBlock {
         Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Starting $($myinvocation.mycommand)"
         New-Variable astTokens -Force
         New-Variable astErr -Force
-        $Path = Convert-Path -Path $path
     } #begin
     Process {
+        $Path = Convert-Path -Path $path
         Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Processing function $(Format-FunctionName $name) from $Path "
         $AST = [System.Management.Automation.Language.Parser]::ParseFile($Path, [ref]$astTokens, [ref]$astErr)
 

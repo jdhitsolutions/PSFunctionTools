@@ -119,7 +119,12 @@ Function $Name {
             }
             else {
                 Write-Verbose "Generating new comment based help from parameters"
-                New-CommentHelp -ParamBlock $ast.ParamBlock | Foreach-Object { $new.Add("$_")}
+                if ($ast.ParamBlock) {
+                    New-CommentHelp -ParamBlock $ast.ParamBlock | Foreach-Object { $new.Add("$_")}
+                }
+                else {
+                    New-CommentHelp -templateonly |Foreach-Object { $new.Add("$_")}
+                }
                 $new.Add("`n")
             }
 

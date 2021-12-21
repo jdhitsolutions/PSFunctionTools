@@ -1,5 +1,13 @@
 # Changelog for PSFunctionTools
 
+## v0.3.0
+
++ Added sample scripts.
++ Modified `New-CommentHelp` with a `-TemplateOnly` parameter to generate help without any parameter definitions.
++ Modified `Get-FunctionName` to accept `Path` parameter values from pipeline input.
++ Modified `Get-ParameterBlock` to accept `Path` and `Name` values from pipeline input by property name.
++ Added function `New-ModuleFromFiles`. This should be considered experimental.
+
 ## v0.2.0
 
 + Updated help documentation.

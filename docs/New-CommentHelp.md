@@ -13,8 +13,16 @@ Create comment based help.
 
 ## SYNTAX
 
+### ast (Default)
+
 ```yaml
 New-CommentHelp [-ParamBlock] <ParamBlockAst> [-Synopsis <String>] [-Description <String>] [<CommonParameters>]
+```
+
+### template
+
+```yaml
+New-CommentHelp [-Synopsis <String>] [-Description <String>] [-TemplateOnly] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -28,7 +36,7 @@ You can also specify a synopsis and/or description. Otherwise, you can edit the 
 ### Example 1
 
 ```powershell
-PS C:\Scripts> Get-parameterblock  -path c:\scripts\SimpleFunction.ps1 -name Get-FolderData | New-CommentHelp -Synopsis "Get folder details"
+PS C:\> Get-Parameterblock  -path c:\scripts\SimpleFunction.ps1 -name Get-FolderData | New-CommentHelp -Synopsis "Get folder details"
 <#
     .Synopsis
       Get folder details
@@ -64,7 +72,7 @@ A parameter block AST object. Use Get-ParameterBlock.
 
 ```yaml
 Type: ParamBlockAst
-Parameter Sets: (All)
+Parameter Sets: ast
 Aliases:
 
 Required: True
@@ -102,6 +110,22 @@ Aliases:
 Required: False
 Position: Named
 Default value: "<short description>"
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -TemplateOnly
+
+Insert a standard help template without any parameter definitions.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: template
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -5,7 +5,7 @@
 @{
 
     RootModule           = 'PSFunctionTools.psm1'
-    ModuleVersion        = '0.2.0'
+    ModuleVersion        = '0.3.0'
     CompatiblePSEditions = 'Desktop', 'Core'
     GUID                 = '151466e0-a952-4b6a-ad81-40dafc9ef9bb'
     Author               = 'Jeff Hicks'
@@ -22,7 +22,8 @@
         'Export-FunctionFromFile', 'Export-ModuleLayout',
         'Import-ModuleLayout', 'Convert-ScriptToFunction',
         'Get-PSRequirements', 'New-CommentHelp', 'Format-FunctionName',
-        'Get-ModuleLayout', 'Get-ParameterBlock', 'Get-FunctionAttribute')
+        'Get-ModuleLayout', 'Get-ParameterBlock', 'Get-FunctionAttribute',
+        'New-ModuleFromFiles')
     CmdletsToExport      = @()
     # VariablesToExport = @()
     AliasesToExport      = @('gfal', 'ga', 'eff', 'eml', 'iml', 'csf', 'gpb',
