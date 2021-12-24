@@ -1,11 +1,11 @@
 #
-# Module manifest for module 'PSFunctionTools'
+# Module manifest for module PSFunctionTools
 #
 
 @{
 
     RootModule           = 'PSFunctionTools.psm1'
-    ModuleVersion        = '0.3.0'
+    ModuleVersion        = '0.4.0'
     CompatiblePSEditions = 'Desktop', 'Core'
     GUID                 = '151466e0-a952-4b6a-ad81-40dafc9ef9bb'
     Author               = 'Jeff Hicks'
@@ -23,7 +23,7 @@
         'Import-ModuleLayout', 'Convert-ScriptToFunction',
         'Get-PSRequirements', 'New-CommentHelp', 'Format-FunctionName',
         'Get-ModuleLayout', 'Get-ParameterBlock', 'Get-FunctionAttribute',
-        'New-ModuleFromFiles')
+        'New-ModuleFromFiles','New-ModuleFromLayout')
     CmdletsToExport      = @()
     # VariablesToExport = @()
     AliasesToExport      = @('gfal', 'ga', 'eff', 'eml', 'iml', 'csf', 'gpb',
@@ -32,8 +32,8 @@
 
         PSData = @{
             Tags = @('AST', 'scripting', 'module', 'function')
-            # LicenseUri = ''
-            # ProjectUri = ''
+            LicenseUri = 'https://github.com/jdhitsolutions/PSFunctionTools/blob/main/License.txt'
+            ProjectUri = 'https://github.com/jdhitsolutions/PSFunctionTools'
             # IconUri = ''
             # ReleaseNotes = ''
             # Prerelease = ''

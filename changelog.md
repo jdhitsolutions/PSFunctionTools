@@ -1,5 +1,12 @@
 # Changelog for PSFunctionTools
 
+## v0.4.0
+
++ Moved helper functions in `New-ModuleFromFiles` to `functions\private\helpers.ps1'`.
++ Updated `New-ModuleFromFiles` to use `Functionpath` parameter when creating the root psm1 file.
++ Added function `New-ModuleFromLayout`.
++ Help updates.
+
 ## v0.3.0
 
 + Added sample scripts.

@@ -202,7 +202,7 @@ Aliases:
 
 Required: True
 Position: 1
-Default value: None
+Default value: none
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -247,3 +247,5 @@ Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell
 [Import-ModuleLayout](Import-ModuleLayout.md)
 
 [Export-FunctionFromFile](Export-FunctionFromFile.md)
+
+[New-ModuleFromLayout](New-ModuleFromLayout.md)

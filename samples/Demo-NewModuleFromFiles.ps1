@@ -9,6 +9,7 @@ $splat = @{
     Verbose       = $True
     CreateHelp    = $True
     FunctionPath  = "functions\public"
-    InitializeGit = $true
+    InitializeGit = $True
 }
+
 New-ModuleFromFiles @splat
