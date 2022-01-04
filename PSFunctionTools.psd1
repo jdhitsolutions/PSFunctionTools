@@ -5,14 +5,14 @@
 @{
 
     RootModule           = 'PSFunctionTools.psm1'
-    ModuleVersion        = '0.4.0'
-    CompatiblePSEditions = 'Desktop', 'Core'
+    ModuleVersion        = '0.5.0'
+    CompatiblePSEditions = 'Core'
     GUID                 = '151466e0-a952-4b6a-ad81-40dafc9ef9bb'
     Author               = 'Jeff Hicks'
     CompanyName          = 'JDH Information Technology Solutions, Inc.'
-    Copyright            = '(c) 2021 JDH Information Technology Solutions, Inc.'
+    Copyright            = '(c) 2021-2022 JDH Information Technology Solutions, Inc.'
     Description          = 'A set of PowerShell commands for working with PowerShell scripts and functions.'
-    PowerShellVersion    = '5.1'
+    PowerShellVersion    = '7.1'
     # TypesToProcess = @()
     FormatsToProcess     = @('formats\modulelayout.format.ps1xml',
         'formats\psscriptrequirements.format.ps1xml',

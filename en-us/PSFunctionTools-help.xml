@@ -657,6 +657,10 @@ PS C:\&gt;</dev:code>
         <maml:linkText>Import-ModuleLayout</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-ModuleLayout</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -1206,6 +1210,167 @@ Test-FunctionName</dev:code>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-ParameterBlock</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-ModuleLayout</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>ModuleLayout</command:noun>
+      <maml:description>
+        <maml:para>Get information about a module layout file.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>This command will provide information about a module layout folder which was created using Export-ModuleLayout. The default output is custom object. You can elect to view the layout as a tree. This parameter requires the tree commandline utility which should be available on Windows systems by default. On non-Windows platforms, you may need to install the utility.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-ModuleLayout</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>Specify the path to the module layout json file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>AsTree</maml:name>
+          <maml:description>
+            <maml:para>Show the module layout as a tree. This will create a temporary folder structure in %TEMP% or its equivalent on non-Windows platforms.This parameter relies on tree command line utility which should be installed by default on Windows systems. You may need to install a tree utility on non-Windows platforms.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>AsTree</maml:name>
+        <maml:description>
+          <maml:para>Show the module layout as a tree. This will create a temporary folder structure in %TEMP% or its equivalent on non-Windows platforms.This parameter relies on tree command line utility which should be installed by default on Windows systems. You may need to install a tree utility on non-Windows platforms.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="none">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>Specify the path to the module layout json file.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>ModuleLayout</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-ModuleLayout C:\scripts\ModuleLayout.json
+
+   Path: C:\scripts\ModuleLayout.json
+
+Created             CreatedBy    Version Folders Files
+-------             ---------    ------- ------- -----
+12/16/2021 11:42 AM THINKP1\Jeff   1.0        13    10</dev:code>
+        <dev:remarks>
+          <maml:para>The default output is a custom object.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-ModuleLayout C:\scripts\ModuleLayout.json | Format-List
+
+Path           : C:\scripts\ModuleLayout.json
+Created        : 12/16/2021 11:42 AM
+CreatedBy      : THINKP1\Jeff
+SourcePath     : C:\work\sample
+LayoutVersion  : 1.0
+SourceComputer : THINKP1
+Folders        : {.github, .vscode, docs, en-us…}
+Files          : {changelog.md, License.txt, README.md, scratch-changelog.md…}</dev:code>
+        <dev:remarks>
+          <maml:para>The default output is a rich object.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-ModuleLayout C:\scripts\simplelayout.json -AsTree
+C:\&lt;PathTo&gt;\&lt;MYMODULE&gt;
+|   changelog.md
+|   README.md
+|
++---.vscode
++---docs
++---en-us
++---formats
+|       readme.txt
+|
++---functions
+|
++---tests
+|       readme.txt
+|
+\---types
+        readme.txt</dev:code>
+        <dev:remarks>
+          <maml:para>Display the layout as a tree.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Export-ModuleLayout</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>

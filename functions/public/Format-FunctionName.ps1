@@ -1,5 +1,6 @@
 Function Format-FunctionName {
     [cmdletbinding()]
+    [Outputtype("String")]
     Param (
         [parameter(
             Position = 0,
@@ -7,14 +8,14 @@ Function Format-FunctionName {
             HelpMessage = "What is the name of your function? It should follow the Verb-Noun naming convention."
         )]
         [ValidateScript( {
-                if ($_ -match "^\w+-\w+$") {
-                    $true
-                }
-                else {
-                    Throw "Your function name should have a Verb-Noun naming convention"
-                    $False
-                }
-            })]
+            if ($_ -match "^\w+-\w+$") {
+                $true
+            }
+            else {
+                Throw "Your function name should have a Verb-Noun naming convention"
+                $False
+            }
+        })]
         [string]$Name
     )
 

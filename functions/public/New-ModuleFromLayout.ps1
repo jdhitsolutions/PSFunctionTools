@@ -1,5 +1,6 @@
 Function New-ModuleFromLayout {
     [cmdletbinding(SupportsShouldProcess)]
+    [OutputType("System.IO.FileInfo","System.IO.DirectoryInfo")]
     Param(
         [Parameter(
             Position = 0,

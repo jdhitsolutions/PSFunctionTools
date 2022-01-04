@@ -145,4 +145,6 @@ Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell
 
 ## RELATED LINKS
 
-[Import-ModuleLayout](Import-ModuleLayout.ps1)
+[Import-ModuleLayout](Import-ModuleLayout.md)
+
+[Get-ModuleLayout](Get-ModuleLayout.md)
