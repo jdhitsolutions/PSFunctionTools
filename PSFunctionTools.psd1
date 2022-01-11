@@ -27,7 +27,7 @@
     CmdletsToExport      = @()
     # VariablesToExport = @()
     AliasesToExport      = @('gfal', 'ga', 'eff', 'eml', 'iml', 'csf', 'gpb',
-        'gfa')
+        'gfa','nch')
     PrivateData          = @{
 
         PSData = @{
@@ -36,7 +36,7 @@
             ProjectUri = 'https://github.com/jdhitsolutions/PSFunctionTools'
             # IconUri = ''
             # ReleaseNotes = ''
-            # Prerelease = ''
+            Prerelease = 'beta-1'
             # ExternalModuleDependencies = @()
 
         } # End of PSData hashtable

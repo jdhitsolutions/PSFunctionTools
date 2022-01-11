@@ -64,6 +64,31 @@ PS C:\> Get-Parameterblock  -path c:\scripts\SimpleFunction.ps1 -name Get-Folder
 
 This example is getting the parameter block for the specified function and creating comment-base help. The Path parameter has a HelpMessage defined so that value is used in the help. You would need to fill in your own descriptions for the other parameters.
 
+### EXAMPLE 2
+
+```powershell
+PS C:\> New-CommentHelp -Synopsis "Get something" -Description "This is the beginning" -TemplateOnly
+<#
+  .Synopsis
+    Get something
+  .Description
+    This is the beginning
+  .Example
+    PS C:\>
+    <output and explanation>
+  .Inputs
+    <Inputs to this function (if any)>
+  .Outputs
+    <Output from this function (if any)>
+  .Notes
+    <General notes>
+  .Link
+    <enter a link reference>
+#>
+```
+
+Create a comment help block template without relying on a parameter block.
+
 ## PARAMETERS
 
 ### -ParamBlock

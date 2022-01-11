@@ -12,7 +12,8 @@ Function Get-ModuleLayout {
         [ValidatePattern("\.json$")]
         [ValidateScript({ Test-Path $_ })]
         [string]$Path,
-        [Parameter(HelpMessage = "show the module layout as a tree. This will create a temporary folder structure in %TEMP%.")]
+
+        [Parameter(HelpMessage = "Show the module layout as a tree. This will create a temporary folder structure in %TEMP%.")]
         [switch]$AsTree
     )
     Begin {
@@ -66,8 +67,8 @@ Function Get-ModuleLayout {
                 SourcePath     = $in[0].Source
                 LayoutVersion  = $in[0].Version
                 SourceComputer = $in[0].computername
-                Folders        = $in.where( { $_.itemtype -eq 'directory' }).Path
-                Files          = $in.where( { $_.itemtype -eq 'file' }).Path
+                Folders        = $in.where({ $_.itemtype -eq 'directory' }).Path
+                Files          = $in.where({ $_.itemtype -eq 'file' }).Path
             }
         }
     } #process

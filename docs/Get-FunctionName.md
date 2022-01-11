@@ -44,7 +44,7 @@ Get the names of all standard functions in the specified file.
 ### Example 2
 
 ```powershell
-PS C:\> Get-FunctionName C:\scripts\MyInternetTools.psm1
+PS C:\> Get-FunctionName C:\scripts\MyInternetTools.psm1 -All
 _log
 _parseOutput
 Get-MyWhoIs

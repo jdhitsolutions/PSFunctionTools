@@ -58,8 +58,6 @@ Function Convert-ScriptToFunction {
     Begin {
         Write-Verbose "Starting $($MyInvocation.MyCommand)"
         Write-Verbose "Initializing"
-        New-Variable astTokens -Force
-        New-Variable astErr -Force
         $new = [System.Collections.Generic.list[string]]::new()
     } #begin
     Process {
@@ -68,7 +66,7 @@ Function Convert-ScriptToFunction {
         $Name = Format-FunctionName $Name
 
         Write-Verbose "Processing $path"
-        $AST = [System.Management.Automation.Language.Parser]::ParseFile($Path, [ref]$astTokens, [ref]$astErr)
+        $AST = _getAST $path
 
         if ($ast.extent) {
             Write-Verbose "Getting any comment based help"

@@ -1,5 +1,16 @@
 # Changelog for PSFunctionTools
 
+## v0.5.0
+
++ Module will be written to support PowerShell 7.1 and later. Commands may run in Windows PowerShell but I am __not__ marking the module as `Desktop` compatible.
++ Added a parameter called `AsTree` to `Get-ModuleLayout` to show module layout as a tree.
++ Moved code to parse path for `AST` data to a private helper function.
++ Help documentation updates.
++ Initial Pester 5 tests for the module and functions.
++ Module manifest updates.
++ Updated `README.md`.
++ First public preview release.
+
 ## v0.4.0
 
 + Moved helper functions in `New-ModuleFromFiles` to `functions\private\helpers.ps1'`.

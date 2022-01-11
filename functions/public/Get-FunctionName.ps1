@@ -11,18 +11,16 @@ Function Get-FunctionName {
         [ValidateScript({
             If (Test-Path $_ ) {
                 $True
+                If ($_ -match "\.ps(m)?1$") {
+                    $True
+                }
+                Else {
+                    Throw "The path must be to a .ps1 or .psm1 file."
+                    $False
+                }
             }
             Else {
                 Throw "Can't validate that $_ exists. Please verify and try again."
-                $False
-            }
-        })]
-        [ValidateScript({
-            If ($_ -match "\.ps(m)?1$") {
-                $True
-            }
-            Else {
-                Throw "The path must be to a .ps1 or .psm1 file."
                 $False
             }
         })]
@@ -33,11 +31,9 @@ Function Get-FunctionName {
         [switch]$Detailed
     )
 
-    New-Variable astTokens -Force
-    New-Variable astErr -Force
     $Path = Convert-Path -Path $path
     Write-Verbose "Parsing $path for functions."
-    $AST = [System.Management.Automation.Language.Parser]::ParseFile($Path, [ref]$astTokens, [ref]$astErr)
+    $AST = _getAst $path
 
     #parse out functions using the AST
     $functions = $ast.FindAll({ $args[0] -is [System.Management.Automation.Language.FunctionDefinitionAst] }, $true)

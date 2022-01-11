@@ -7,18 +7,16 @@ Function Export-FunctionFromFile {
         [ValidateScript({
             If (Test-Path $_ ) {
                 $True
+                If ($_ -match "\.ps(m)?1$") {
+                    $True
+                }
+                Else {
+                    Throw "The path must be to a .ps1 or .psm1 file."
+                    $False
+                }
             }
             Else {
                 Throw "Can't validate that $_ exists. Please verify and try again."
-                $False
-            }
-        })]
-        [ValidateScript({
-            If ($_ -match "\.ps(m)?1$") {
-                $True
-            }
-            Else {
-                Throw "The path must be to a .ps1 or .psm1 file."
                 $False
             }
         })]
@@ -34,7 +32,7 @@ Function Export-FunctionFromFile {
     )
     DynamicParam {
 
-        If ($host.name -match 'ise|code') {
+        If ( $Host.name -match 'ise|Code') {
 
             $paramDictionary = New-Object -Type System.Management.Automation.RuntimeDefinedParameterDictionary
 
@@ -61,9 +59,6 @@ Function Export-FunctionFromFile {
 
         Write-Verbose "[BEGIN  ] Starting $($MyInvocation.MyCommand) [$($pscmdlet.ParameterSetName)]"
         Write-Verbose ($PSBoundParameters | Out-String)
-        #always create these variables
-        New-Variable astTokens -Force -WhatIf:$False
-        New-Variable astErr -Force -WhatIf:$False
 
         if (-Not $OutputPath) {
             #use the parent path of the file unless the user specifies a different path
@@ -83,7 +78,7 @@ Function Export-FunctionFromFile {
         $path = Convert-Path -Path $path
         Write-Verbose "[PROCESS] Processing $path for functions"
         #the file will always be parsed regardless of WhatIfPreference
-        $AST = [System.Management.Automation.Language.Parser]::ParseFile((Convert-Path $Path), [ref]$astTokens, [ref]$astErr)
+        $AST = _getAST $path
 
         #parse out functions using the AST
         $functions = $ast.FindAll({ $args[0] -is [System.Management.Automation.Language.FunctionDefinitionAst] }, $true)

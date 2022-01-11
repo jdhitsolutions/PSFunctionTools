@@ -38,15 +38,12 @@ Function Get-FunctionAttribute {
     )
     Begin {
         Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Starting $($myinvocation.mycommand)"
-        New-Variable astTokens -Force
-        New-Variable astErr -Force
         $Path = Convert-Path -Path $path
         $Name = Format-FunctionName $Name
     } #begin
     Process {
         Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Processing function $name from $Path "
-        $AST = [System.Management.Automation.Language.Parser]::ParseFile($Path, [ref]$astTokens, [ref]$astErr)
-
+        $AST = _getAST $path
         #parse out functions using the AST
         $function = $ast.Find( {
                 $args[0] -is [System.Management.Automation.Language.FunctionDefinitionAst] -AND
@@ -57,10 +54,13 @@ Function Get-FunctionAttribute {
             $pb = $function.find( { $args[0] -is [System.Management.Automation.Language.ParamBlockAst] }, $True)
 
             if ($pb.attributes.extent.text -AND $ToString) {
+                Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Showing as string"
                 $pb.attributes.extent.text
             }
             elseif ($pb.attributes.extent.text) {
+                Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Processing extent text"
                 foreach ($item in $pb.attributes) {
+                    Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] $($item.typename.name)"
                     [pscustomobject]@{
                         PSTypeName          = "PSFunctionAttribute"
                         Type                = $item.TypeName.name

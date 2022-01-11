@@ -4,6 +4,7 @@ Function Format-FunctionName {
     Param (
         [parameter(
             Position = 0,
+            Mandatory,
             ValueFromPipeline,
             HelpMessage = "What is the name of your function? It should follow the Verb-Noun naming convention."
         )]
@@ -15,7 +16,7 @@ Function Format-FunctionName {
                 Throw "Your function name should have a Verb-Noun naming convention"
                 $False
             }
-        })]
+            })]
         [string]$Name
     )
 

@@ -37,7 +37,7 @@ Function New-ModuleFromFiles {
             Mandatory,
             HelpMessage = "Specify the module layout json file created with Export-ModuleLayout."
         )]
-        [ValidateScript( { Test-Path $_ })]
+        [ValidateScript({Test-Path $_ })]
         [ValidatePattern("\.json$")]
         [string]$Layout,
 
@@ -46,8 +46,6 @@ Function New-ModuleFromFiles {
         [string]$FunctionPath = "functions"
     )
     DynamicParam {
-        # Add customizations
-
         $paramDictionary = New-Object -Type System.Management.Automation.RuntimeDefinedParameterDictionary
         If (Get-Command -name New-MarkdownHelp) {
             #CreateHelp
@@ -96,7 +94,6 @@ Function New-ModuleFromFiles {
 
             }
         }
-
         return $paramDictionary
     } #end DynamicParam
 
@@ -130,10 +127,17 @@ Function New-ModuleFromFiles {
         }
 
         if ($functionFiles) {
-            $export.AddRange($functionFiles.baseName)
+            Write-Verbose "Adding file(s) $($functionFiles.basename -join ',')"
+            if ($functionFiles.count -gt 1) {
+                $export.AddRange($functionFiles.baseName)
+            }
+            else {
+                $export.Add($functionFiles.baseName)
+            }
         }
 
         #create the root module
+        Write-Verbose "Creating root module $path\$newmodulename.psm1"
         $psm1 = @"
 
 Get-Childitem `$psscriptroot\$functionPath\*.ps1 -recurse |
@@ -142,7 +146,6 @@ Foreach-Object {
 }
 
 "@
-        Write-Verbose "Creating root module $path\$newmodulename.psm1"
         $psm1 | Out-File "$path\$newmodulename.psm1"
 
         #create the module manifest

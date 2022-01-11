@@ -673,15 +673,15 @@ PS C:\&gt;</dev:code>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Format-FunctionName is intended to be used as a helper function in your scripting automation. This is a simple function that will format a verb-noun function name into proper case. It will take an input such as test-data and format it as Test-Data. It will not format as camel-case. The command also will not verify that the verb component is acceptable. Use Test-FunctionName for that process.</maml:para>
+      <maml:para>Format-FunctionName is intended to be used as a helper function in your scripting automation. This is a simple function that will format a verb-noun function name into proper case. It will take an input such as test-data and format it as Test-Data. It will not format as PascalCase. The command also will not verify that the verb component is acceptable. Use Test-FunctionName for that process.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Format-FunctionName</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="byValue" position="0" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="byValue" position="0" aliases="none">
           <maml:name>Name</maml:name>
           <maml:description>
-            <maml:para>What is the name of your function? It should follow the Verb-Noun naming convention. Although the verb will not be validate.</maml:para>
+            <maml:para>What is the name of your function? It should follow the Verb-Noun naming convention. Although the verb will not be validated.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -693,10 +693,10 @@ PS C:\&gt;</dev:code>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="byValue" position="0" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="byValue" position="0" aliases="none">
         <maml:name>Name</maml:name>
         <maml:description>
-          <maml:para>What is the name of your function? It should follow the Verb-Noun naming convention. Although the verb will not be validate.</maml:para>
+          <maml:para>What is the name of your function? It should follow the Verb-Noun naming convention. Although the verb will not be validated.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -745,7 +745,7 @@ Test-Data</dev:code>
         <dev:code>PS C:\&gt; Format-FunctionName try-pssystem
 Try-Pssystem</dev:code>
         <dev:remarks>
-          <maml:para>The command does not validate the verb nor can it produce a camel-case result like Try-PsSystem.</maml:para>
+          <maml:para>The command does not validate the verb nor can it produce a PascalCase result like Try-PsSystem.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -766,7 +766,7 @@ Try-Pssystem</dev:code>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Get-FunctionAlias is tool you can use in your scripting automation. It will extract function names and aliases from a PowerShell script file. The source must be a .ps1 or .psm1 file. The command will only idenfity aliases defined as part of the function using code like [alias('foo')].</maml:para>
+      <maml:para>Get-FunctionAlias is a tool you can use in your scripting automation. It will extract function names and aliases from a PowerShell script file. The source must be a .ps1 or .psm1 file. The command will only idenfity aliases defined as part of the function using code like [alias('foo')].</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1164,7 +1164,7 @@ Open-URL</dev:code>
       </command:example>
       <command:example>
         <maml:title>-------------------------- Example 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-FunctionName C:\scripts\MyInternetTools.psm1
+        <dev:code>PS C:\&gt; Get-FunctionName C:\scripts\MyInternetTools.psm1 -All
 _log
 _parseOutput
 Get-MyWhoIs
@@ -2030,6 +2030,30 @@ Mode                 LastWriteTime         Length Name
 #&gt;</dev:code>
         <dev:remarks>
           <maml:para>This example is getting the parameter block for the specified function and creating comment-base help. The Path parameter has a HelpMessage defined so that value is used in the help. You would need to fill in your own descriptions for the other parameters.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; New-CommentHelp -Synopsis "Get something" -Description "This is the beginning" -TemplateOnly
+&lt;#
+  .Synopsis
+    Get something
+  .Description
+    This is the beginning
+  .Example
+    PS C:\&gt;
+    &lt;output and explanation&gt;
+  .Inputs
+    &lt;Inputs to this function (if any)&gt;
+  .Outputs
+    &lt;Output from this function (if any)&gt;
+  .Notes
+    &lt;General notes&gt;
+  .Link
+    &lt;enter a link reference&gt;
+#&gt;</dev:code>
+        <dev:remarks>
+          <maml:para>Create a comment help block template without relying on a parameter block.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>

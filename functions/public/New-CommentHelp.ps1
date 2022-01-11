@@ -1,7 +1,7 @@
 Function New-CommentHelp {
     [cmdletbinding(DefaultParameterSetName="ast")]
     [alias('nch')]
-    [OutputType("string")]
+    [OutputType("System.String")]
     Param(
         [Parameter(
             Position = 0,
