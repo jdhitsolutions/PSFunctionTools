@@ -36,7 +36,7 @@
             ProjectUri = 'https://github.com/jdhitsolutions/PSFunctionTools'
             # IconUri = ''
             # ReleaseNotes = ''
-            Prerelease = 'beta-1'
+            Prerelease = '-beta1'
             # ExternalModuleDependencies = @()
 
         } # End of PSData hashtable
