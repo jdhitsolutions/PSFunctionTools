@@ -1,7 +1,7 @@
 ---
 external help file: PSFunctionTools-help.xml
 Module Name: PSFunctionTools
-online version:
+online version: https://bit.ly/3KhHkY7
 schema: 2.0.0
 ---
 
@@ -26,7 +26,7 @@ This command can be used to get function attributes such as cmdletbinding or ali
 ### Example 1
 
 ```powershell
-PS C:\> Get-Functionattribute -path c:\scripts\PSFunctionTools\functions\public\Get-ParameterBlock.ps1 -Name get-parameterblock
+PS C:\> Get-Functionattribute -path c:\scripts\Get-ParameterBlock.ps1 -Name get-parameterblock
 
 
 Type                : cmdletbinding
@@ -34,16 +34,14 @@ NamedArguments      : {}
 PositionalArguments : {}
 String              : [cmdletbinding()]
 Function            : Get-Parameterblock
-Path                : C:\scripts\PSFunctionTools\functions\public\Get-ParameterB
-                      lock.ps1
+Path                : C:\scripts\Get-ParameterBlock.ps1
 
 Type                : alias
 NamedArguments      : {}
 PositionalArguments : {"gpb"}
 String              : [alias("gpb")]
 Function            : Get-Parameterblock
-Path                : C:\scripts\PSFunctionTools\functions\public\Get-ParameterB
-                      lock.ps1
+Path                : C:\scripts\Get-ParameterBlock.ps1
 
 Type                : OutputType
 NamedArguments      : {}
@@ -59,7 +57,7 @@ Get detailed function attributes.
 ### Example 2
 
 ```powershell
-PS C:\> Get-Functionattribute -path c:\scripts\New-OneDriveLink.ps1 -name new-onedrivelink  -ToString
+PS C:\> Get-FunctionName C:\scripts\New-OneDriveLink.ps1 -Detailed | Get-FunctionAttribute -ToString
 [cmdletbinding(SupportsShouldProcess)]
 [alias("odl")]
 ```
@@ -80,7 +78,7 @@ Aliases:
 Required: True
 Position: 0
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
@@ -96,7 +94,7 @@ Aliases:
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
@@ -117,7 +115,6 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS

@@ -1,4 +1,5 @@
-﻿#requires -version 3.0
+﻿#requires -version 5.0
+#requires -runasadministrator
 
 #this is a sample script
 

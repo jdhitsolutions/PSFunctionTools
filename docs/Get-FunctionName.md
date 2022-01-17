@@ -1,7 +1,7 @@
 ---
 external help file: PSFunctionTools-help.xml
 Module Name: PSFunctionTools
-online version:
+online version: https://bit.ly/3I3PdhR
 schema: 2.0.0
 ---
 
@@ -66,7 +66,6 @@ Get the names of all functions in the specified file regardless of naming conven
 ```powershell
 PS C:\>  Get-FunctionName C:\scripts\Convert-FunctionToFile.ps1 -Detailed
 
-
    Path: C:\scripts\Convert-FunctionToFile.ps1
 
 Name
@@ -104,7 +103,7 @@ Specify the .ps1 or .psm1 file with defined functions.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: pspath
 
 Required: True
 Position: 0
@@ -130,7 +129,6 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -154,3 +152,5 @@ Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell
 [Get-FunctionAttribute](Get-FunctionAttribute.md)
 
 [Get-ParameterBlock](Get-Parameterblock.md)
+
+[Get-FunctionProfile](Get-FunctionProfile.md)

@@ -1,4 +1,6 @@
-﻿#a proof of concept to convert scripts to a new module
+﻿#requires -version 7.1
+
+#a proof of concept to convert scripts to a new module
 
 Import-Module PSFunctionTools -Force
 

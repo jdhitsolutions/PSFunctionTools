@@ -1,0 +1,63 @@
+<!--
+Format type data generated 01/12/2022 15:32:34 by THINKX1-JH\Jeff
+
+This file was created using the New-PSFormatXML command that is part
+of the PSScriptTools module.
+
+https://github.com/jdhitsolutions/PSScriptTools
+-->
+<Configuration>
+  <ViewDefinitions>
+    <View>
+      <!--Created 01/12/2022 15:32:34 by THINKX1-JH\Jeff-->
+      <Name>default</Name>
+      <ViewSelectedBy>
+        <TypeName>PSFunctionTool</TypeName>
+      </ViewSelectedBy>
+      <GroupBy>
+        <ScriptBlock>"{0} [v{1}]" -f $_.Module, $_.moduleversion</ScriptBlock>
+        <Label>Module</Label>
+      </GroupBy>
+      <TableControl>
+        <!--Delete the AutoSize node if you want to use the defined widths.-->
+        <AutoSize />
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Name</Label>
+            <Width>27</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Alias</Label>
+            <Width>8</Width>
+            <Alignment>center</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Synopsis</Label>
+            <Width>50</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <!--
+            By default the entries use property names, but you can replace them with scriptblocks.
+            <ScriptBlock>$_.foo /1mb -as [int]</ScriptBlock>
+-->
+              <TableColumnItem>
+                <PropertyName>Name</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Alias</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Synopsis</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>

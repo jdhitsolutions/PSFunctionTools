@@ -1,5 +1,7 @@
 # PSFunctionTools
 
+[![PSGallery Version](https://img.shields.io/powershellgallery/v/PSFunctionTools.png?style=for-the-badge&label=PowerShell%20Gallery)](https://www.powershellgallery.com/packages/PSFunctionTools/) [![PSGallery Downloads](https://img.shields.io/powershellgallery/dt/PSFunctionTools.png?style=for-the-badge&label=Downloads)](https://www.powershellgallery.com/packages/PSFunctionTools/)
+
 The commands in this module have been developed to make it easier to automate the PowerShell scripting and module development. These tools were first described in a series of blog posts.
 
 + [Exporting PowerShell Functions to Files](https://jdhitsolutions.com/blog/powershell/8693/exporting-powershell-functions-to-files/)
@@ -11,10 +13,37 @@ The commands in this module have been developed to make it easier to automate th
 This module has been written for PowerShell 7.1 and later. It is most likely that the the commands will work in Windows PowerShell, but you will need to fork this module and revise as necessary. Otherwise, install this module from the PowerShell Gallery.
 
 ```powershell
-Install-Module PSFunctionTools -AllowPrelease
+Install-Module PSFunctionTools
 ```
 
 ## Commands
+
+To see a summary of these commands at any time, run [Get-PSFunctionTools](docs/Get-PSFunctionTools.md)
+
+```dos
+PS C:\> Get-PSFunctionTools
+
+   Module: PSFunctionTools [v0.6.0]
+
+Name                       Alias    Synopsis
+----                       -----    --------
+Convert-ScriptToFunction    csf     Convert a script file to a PowerShell funct…
+Export-FunctionFromFile     eff     Export a PowerShell function from a script …
+Export-ModuleLayout         eml     Export a model module layout.
+Format-FunctionName                 Format a function name to proper case.
+Get-FunctionAlias        {ga, gfal} Get a defined function alias.
+Get-FunctionAttribute       gfa     Get function attributes like cmdletbinding.
+Get-FunctionName                    Identify the names of PowerShell functions …
+Get-ModuleLayout                    Get information about a module layout file.
+Get-ParameterBlock          gpb     Get a function's parameter block.
+Get-PSFunctionTools                 Get a summary of PSFunctionTools commands.
+Get-PSRequirements                  List PowerShell command requirements.
+Import-ModuleLayout         iml     Create a module structure from a layout fil…
+New-CommentHelp             nch     Create comment based help.
+New-ModuleFromFiles                 Create a PowerShell module from a set of fi…
+New-ModuleFromLayout                Creat a new module based on a layout.
+Test-FunctionName                   Test the validity of a PowerShell function …
+```
 
 ### [Convert-ScriptToFunction](docs/Convert-ScriptToFunction.md)
 
@@ -292,7 +321,7 @@ If you have the [Platyps](https://github.com/powershell/platyps) module installe
 This command is very similar to `New-ModuleFromFiles`. That function builds a module structure from existing files. This function creates a new module but without defining any commands. `New-ModuleFromLayout` will still create a module structure based on a layout and it will still create module files. Specifically,the module manifest and root module files.
 
 ```powershell
-New-ModuleFromLayout -NewModuleName PSDataResource -ParentPath c:\scripts -Description "A class-based DSC resource to do something." -Layout .c:\scripts\DSCModuleLayout.json -initializegit
+New-ModuleFromLayout -NewModuleName PSDataResource -ParentPath c:\scripts -Description "A class-based DSC resource to do something." -Layout c:\scripts\DSCModuleLayout.json -initializegit
 ```
 
 If `git.exe` is detected, you can use the `InitializeGit` dynamic parameter to initialize the module as a git repository.
@@ -312,6 +341,95 @@ If the name passes validation it will be written to the pipeline. Or you can use
 PS C:\> Test-FunctionName kill-system -Quiet
 False
 ```
+
+### [Get-FunctionProfile](docs/Get-FunctionProfile.md)
+
+`Get-FunctionProfile` is designed to give you a technical summary of a PowerShell function. You might use this to preview what commands a function might execute or if it supports `-Whatif`. The function might be something someone else wrote, or perhaps you want to double-check your code.
+
+Note that the analysis may not be 100% accurate. For example, it is difficult to distinguish between the alias `foreach` and the `foreach` enumerator.
+
+```dos
+PS C:\...\samples> Get-FunctionProfile -path .\SampleScript5.ps1 -name Get-Result
+
+Name                  : Get-Result
+FunctionAlias         : grx
+SupportsShouldProcess : False
+ParameterSets         :
+DynamicParameters     : False
+RequiredVersion       : 5.1
+RequiredModules       : {}
+RequiresElevation     : True
+Commands              : {Get-CimInstance, Get-Random, Join-Path, New-Timespan…}
+ExternalCommands      : {c:\scripts\cleanup.bat, notepad.exe}
+DotNet                : {[system.datetime]::now,
+                        [system.environment]::getenvironmentvariable("temp")}
+Aliases               : {gcim, tee}
+Unresolved            : {w}
+Path                  : C:\Scripts\PSFunctionTools\samples\SampleScript5.ps1
+```
+
+Here is a sample analysis. Commands should be PowerShell cmdlets, including resolved aliases. Detected command aliases will also be retrieved. Unresolved commands might be undefined aliases or some other command that PowerShell could not resolve.
+
+## Code Samples
+
+This module includes a [Samples](samples) folder. Here, you can find sample PowerShell scripts and functions that you can use with the commands in this module.
+
+```dos
+PS C:\...\PSFunctionTools\samples> Get-FunctionName .\Tools.psm1
+Get-WindowsVersion
+Get-WindowsVersionString
+Get-OSInfo
+
+PS C:\...\PSFunctionTools\samples>Get-ModuleLayout .\ModuleLayout.json -AsTree
+
+C:\<PathTo>\<MYMODULE>
+|   changelog.md
+|   README.md
+|
++---.vscode
++---docs
++---en-us
++---formats
+|       readme.txt
+|
++---functions
+|   +---private
+|   |       readme.txt
+|   |
+|   \---public
+|           readme.txt
+|
++---tests
+|       readme.txt
+|
+\---types
+        readme.txt
+
+PS C:\Scripts\PSFunctionTools\samples> dir .\SampleScript* | Get-PSRequirements | Format-Table
+
+   Path: C:\Scripts\PSFunctionTools\samples\SampleScript.ps1
+
+ApplicationId PSVersion PSEditions PSSnapIns Assemblies IsElevationRequired
+------------- --------- ---------- --------- ---------- -------------------
+                    4.0 {}         {}        {}                False
+
+   Path: C:\Scripts\PSFunctionTools\samples\SampleScript2.ps1
+
+ApplicationId PSVersion PSEditions PSSnapIns Assemblies IsElevationRequired
+------------- --------- ---------- --------- ---------- -------------------
+                    3.0 {}         {}        {}                False
+
+   Path: C:\Scripts\PSFunctionTools\samples\SampleScript3.ps1
+
+ApplicationId PSVersion PSEditions PSSnapIns Assemblies IsElevationRequired
+------------- --------- ---------- --------- ---------- -------------------
+                    5.0 {}         {}        {}                True
+
+   Path: C:\Scripts\PSFunctionTools\samples\SampleScript4.ps1
+...
+```
+
+You are welcome to copy, paste, and edit these samples as much as you would like.
 
 ## Bugs and Enhancements
 

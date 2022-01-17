@@ -1,4 +1,4 @@
-﻿#requires -version 5.1
+﻿#requires -version 7.1
 #requires -module Platyps
 
 #Export functions from files and create a new module

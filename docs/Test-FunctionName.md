@@ -1,7 +1,7 @@
 ---
 external help file: PSFunctionTools-help.xml
 Module Name: PSFunctionTools
-online version:
+online version: https://bit.ly/3I2oxh8
 schema: 2.0.0
 ---
 

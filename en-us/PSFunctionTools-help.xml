@@ -132,7 +132,12 @@
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/3Fgi4gY</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -464,6 +469,10 @@
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/3GopWyo</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>Get-FunctionName</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
@@ -654,6 +663,10 @@ PS C:\&gt;</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/3nlhmJd</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>Import-ModuleLayout</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
@@ -751,6 +764,10 @@ Try-Pssystem</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/3nnpKYy</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>Test-FunctionName</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
@@ -771,7 +788,7 @@ Try-Pssystem</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-FunctionAlias</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="pspath">
           <maml:name>Path</maml:name>
           <maml:description>
             <maml:para>Specify the .ps1 or .psm1 file with defined functions.</maml:para>
@@ -786,7 +803,7 @@ Try-Pssystem</dev:code>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="pspath">
         <maml:name>Path</maml:name>
         <maml:description>
           <maml:para>Specify the .ps1 or .psm1 file with defined functions.</maml:para>
@@ -840,7 +857,15 @@ Restore-SQLdatabase rsql</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/3fjNFUw</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>Get-FunctionName</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-FunctionAttribute</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -860,7 +885,7 @@ Restore-SQLdatabase rsql</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-FunctionAttribute</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
           <maml:name>Name</maml:name>
           <maml:description>
             <maml:para>Specify the name of the PowerShell function.</maml:para>
@@ -872,7 +897,7 @@ Restore-SQLdatabase rsql</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>Path</maml:name>
           <maml:description>
             <maml:para>Specify the path to the .ps1 or .psm1 file.</maml:para>
@@ -898,7 +923,7 @@ Restore-SQLdatabase rsql</dev:code>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
         <maml:name>Name</maml:name>
         <maml:description>
           <maml:para>Specify the name of the PowerShell function.</maml:para>
@@ -910,7 +935,7 @@ Restore-SQLdatabase rsql</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>Path</maml:name>
         <maml:description>
           <maml:para>Specify the path to the .ps1 or .psm1 file.</maml:para>
@@ -971,7 +996,7 @@ Restore-SQLdatabase rsql</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-Functionattribute -path c:\scripts\PSFunctionTools\functions\public\Get-ParameterBlock.ps1 -Name get-parameterblock
+        <dev:code>PS C:\&gt; Get-Functionattribute -path c:\scripts\Get-ParameterBlock.ps1 -Name get-parameterblock
 
 
 Type                : cmdletbinding
@@ -979,16 +1004,14 @@ NamedArguments      : {}
 PositionalArguments : {}
 String              : [cmdletbinding()]
 Function            : Get-Parameterblock
-Path                : C:\scripts\PSFunctionTools\functions\public\Get-ParameterB
-                      lock.ps1
+Path                : C:\scripts\Get-ParameterBlock.ps1
 
 Type                : alias
 NamedArguments      : {}
 PositionalArguments : {"gpb"}
 String              : [alias("gpb")]
 Function            : Get-Parameterblock
-Path                : C:\scripts\PSFunctionTools\functions\public\Get-ParameterB
-                      lock.ps1
+Path                : C:\scripts\Get-ParameterBlock.ps1
 
 Type                : OutputType
 NamedArguments      : {}
@@ -1003,7 +1026,7 @@ Path                : C:\scripts\PSFunctionTools\functions\public\Get-ParameterB
       </command:example>
       <command:example>
         <maml:title>-------------------------- Example 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-Functionattribute -path c:\scripts\New-OneDriveLink.ps1 -name new-onedrivelink  -ToString
+        <dev:code>PS C:\&gt; Get-FunctionName C:\scripts\New-OneDriveLink.ps1 -Detailed | Get-FunctionAttribute -ToString
 [cmdletbinding(SupportsShouldProcess)]
 [alias("odl")]</dev:code>
         <dev:remarks>
@@ -1012,6 +1035,10 @@ Path                : C:\scripts\PSFunctionTools\functions\public\Get-ParameterB
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/3KhHkY7</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-ParameterBlock</maml:linkText>
         <maml:uri></maml:uri>
@@ -1037,7 +1064,7 @@ Path                : C:\scripts\PSFunctionTools\functions\public\Get-ParameterB
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-FunctionName</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="pspath">
           <maml:name>Path</maml:name>
           <maml:description>
             <maml:para>Specify the .ps1 or .psm1 file with defined functions.</maml:para>
@@ -1086,7 +1113,7 @@ Path                : C:\scripts\PSFunctionTools\functions\public\Get-ParameterB
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="pspath">
         <maml:name>Path</maml:name>
         <maml:description>
           <maml:para>Specify the .ps1 or .psm1 file with defined functions.</maml:para>
@@ -1185,7 +1212,6 @@ Open-URL</dev:code>
         <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt;  Get-FunctionName C:\scripts\Convert-FunctionToFile.ps1 -Detailed
 
-
    Path: C:\scripts\Convert-FunctionToFile.ps1
 
 Name
@@ -1201,6 +1227,10 @@ Test-FunctionName</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/3I3PdhR</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>Get-FunctionAlias</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
@@ -1210,6 +1240,164 @@ Test-FunctionName</dev:code>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-ParameterBlock</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-FunctionProfile</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-FunctionProfile</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>FunctionProfile</command:noun>
+      <maml:description>
+        <maml:para>Get a technical summary of a PowerShell function.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Get-FunctionProfile is designed to give you a technical summary of a PowerShell function. You might use this to preview what commands a function might execute or if it supports -Whatif. The function might be something someone else wrote, or perhaps you want to double-check your code. The command writes an object to the pipeline with properties that indicate the following:</maml:para>
+      <maml:para>+ Name : The function name</maml:para>
+      <maml:para>+ FunctionAlias : Defined aliases for the function</maml:para>
+      <maml:para>+ SupportsShouldProcess : Does the function support -WhatIf</maml:para>
+      <maml:para>+ ParameterSets : A list of any detected parameter sets</maml:para>
+      <maml:para>+ DynamicParameters : Does the function have dynamic parameters</maml:para>
+      <maml:para>+ RequiredVersion : Show a required PowerShell version</maml:para>
+      <maml:para>+ RequiredModules : List any required modules</maml:para>
+      <maml:para>+ RequiresElevation : Must the command be run as administrator</maml:para>
+      <maml:para>+ Commands : A list of detected PowerShell commands</maml:para>
+      <maml:para>+ ExternalCommands : A list of external commands that PowerShell can resolve</maml:para>
+      <maml:para>+ DotNet : A list of .NET detected classes and methods</maml:para>
+      <maml:para>+ Aliases : A list of detected PowerShell aliases</maml:para>
+      <maml:para>+ Unresolved : A list of unrecognized items detected as commands</maml:para>
+      <maml:para>+ Path : The path to the script file</maml:para>
+      <maml:para>Note that the analysis may not be 100% complete. For example, it is difficult to distinguish between the alias 'foreach' and the 'foreach' enumerator.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-FunctionProfile</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Name</maml:name>
+          <maml:description>
+            <maml:para>Specify the name of the PowerShell function.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>Specify the path to the .ps1 or .psm1 file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <maml:name>Name</maml:name>
+        <maml:description>
+          <maml:para>Specify the name of the PowerShell function.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>Specify the path to the .ps1 or .psm1 file.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>PSFunctionProfile</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\...\samples&gt; Get-FunctionProfile -path .\SampleScript5.ps1 -name Get-Result
+
+Name                  : Get-Result
+FunctionAlias         : grx
+SupportsShouldProcess : False
+ParameterSets         :
+DynamicParameters     : False
+RequiredVersion       : 5.1
+RequiredModules       : {}
+RequiresElevation     : True
+Commands              : {Get-CimInstance, Get-Random, Join-Path, New-Timespan…}
+ExternalCommands      : {c:\scripts\cleanup.bat, notepad.exe}
+DotNet                : {[system.datetime]::now,
+                        [system.environment]::getenvironmentvariable("temp")}
+Aliases               : {gcim, tee}
+Unresolved            : {w}
+Path                  : C:\Scripts\PSFunctionTools\samples\SampleScript5.ps1</dev:code>
+        <dev:remarks>
+          <maml:para>A sample analysis. Commands should be PowerShell cmdlets, including resolved aliases. Detected command aliases will also be retrieved. Unresolved commands might be undefined aliases or some other command that PowerShell could not resolve.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\Scripts\mymodule\functions&gt; dir *.ps1 | Get-FunctionName -Detailed | Get-FunctionProfile | Where-Object aliases</dev:code>
+        <dev:remarks>
+          <maml:para>Profile all function files in a module looking for those that still have command aliases defined.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-ParameterBlock</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-FunctionAlias</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-FunctionAttribute</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -1370,6 +1558,10 @@ C:\&lt;PathTo&gt;\&lt;MYMODULE&gt;
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/3FnnVkP</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>Export-ModuleLayout</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
@@ -1524,6 +1716,10 @@ Attributes Parameters                Extent
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/3HTXULi</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>New-CommentHelp</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
@@ -1533,6 +1729,86 @@ Attributes Parameters                Extent
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-FunctionAttribute</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-PSFunctionTools</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>PSFunctionTools</command:noun>
+      <maml:description>
+        <maml:para>Get a summary of PSFunctionTools commands.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>This command will give you a brief summary of all commands, including aliases, in the PSFunctionTools module.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-PSFunctionTools</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>PSFunctionTool</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; PS C:\Scripts\PSFunctionTools&gt; Get-PSFunctionTools
+
+   Module: PSFunctionTools [v0.6.0]
+
+Name                       Alias    Synopsis
+----                       -----    --------
+Convert-ScriptToFunction    csf     Convert a script file to a PowerShell funct…
+Export-FunctionFromFile     eff     Export a PowerShell function from a script …
+Export-ModuleLayout         eml     Export a model module layout.
+Format-FunctionName                 Format a function name to proper case.
+Get-FunctionAlias        {ga, gfal} Get a defined function alias.
+Get-FunctionAttribute       gfa     Get function attributes like cmdletbinding.
+Get-FunctionName                    Identify the names of PowerShell functions …
+Get-ModuleLayout                    Get information about a module layout file.
+Get-ParameterBlock          gpb     Get a function's parameter block.
+Get-PSFunctionTools                 Get a summary of PSFunctionTools commands.
+Get-PSRequirements                  List PowerShell command requirements.
+Import-ModuleLayout         iml     Create a module structure from a layout fil…
+New-CommentHelp             nch     Create comment based help.
+New-ModuleFromFiles                 Create a PowerShell module from a set of fi…
+New-ModuleFromLayout                Creat a new module based on a layout.
+Test-FunctionName                   Test the validity of a PowerShell function …</dev:code>
+        <dev:remarks>
+          <maml:para>The default output is formatted as a table.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-Command</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -1623,7 +1899,12 @@ IsElevationRequired   : True</dev:code>
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/3KhHsa3</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -1828,6 +2109,10 @@ Mode                 LastWriteTime         Length Name
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/3foUNyJ</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Export-ModuleLayout</maml:linkText>
         <maml:uri></maml:uri>
@@ -2058,6 +2343,10 @@ Mode                 LastWriteTime         Length Name
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/3fg4wYe</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-ParameterBlock</maml:linkText>
         <maml:uri></maml:uri>
@@ -2391,6 +2680,10 @@ PS C:\&gt; New-ModuleFromFiles @splat</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/3GurmYk</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>Export-ModuleLayout</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
@@ -2661,6 +2954,10 @@ PS C:\&gt; New-ModuleFromFiles @splat</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/3foUOCN</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>New-ModuleFromFiles</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
@@ -2797,6 +3094,10 @@ False</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/3I2oxh8</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Format-FunctionName</maml:linkText>
         <maml:uri></maml:uri>

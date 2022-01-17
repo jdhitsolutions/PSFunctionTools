@@ -13,7 +13,7 @@ Function _mkHelp {
     )
 
     Write-Verbose "Invoking Import-Module on $modulepath"
-    Import-Module -Name $ModulePath -scope global
+    Import-Module -Name $ModulePath -Scope global
     $ModuleName = (Get-Item $ModulePath).BaseName
     Get-Command -Module $NewModuleName -OutVariable modcmds | Out-String | Write-Verbose
     Write-Verbose "Invoking New-MarkdownHelp for module $modulename"
@@ -32,7 +32,7 @@ Function _getAST {
     Param([string]$Path)
 
     New-Variable astTokens -Force -WhatIf:$false
-    New-Variable astErr -Force -Whatif:$false
+    New-Variable astErr -Force -WhatIf:$false
     Write-Verbose "Parsing file $path for AST tokens"
     $AST = [System.Management.Automation.Language.Parser]::ParseFile($Path, [ref]$astTokens, [ref]$astErr)
     $AST

@@ -1,4 +1,8 @@
+#requires -version 7.1
 #this demo assumes you have the Platyps module and git installed
+
+[cmdletbinding(SupportsShouldProcess)]
+Param()
 
 $splat = @{
     Description   = "Demo exported module"
@@ -6,10 +10,13 @@ $splat = @{
     Layout        = "$PSScriptRoot\ModuleLayout.json"
     NewModuleName = "PSFooExport"
     ParentPath    = $env:temp
-    Verbose       = $True
     CreateHelp    = $True
     FunctionPath  = "functions\public"
     InitializeGit = $True
 }
 
-New-ModuleFromFiles @splat
+Write-Host "Using these parameters"
+$splat | Out-String | Write-Host
+Write-host "Whatif = $WhatIfPreference"
+pause
+New-ModuleFromFiles @splat -whatif

@@ -1,5 +1,20 @@
 # Changelog for PSFunctionTools
 
+## v0.6.0
+
++ Added online help links for previously published commands.
++ Modified `Get-FunctionAttribute` to accept pipeline input for `Name` and `Path` parameters.
++ Modified `Get-FunctionAlias` to accept pipeline input for `Path`.
++ Added command `Get-PSFunctionTools` and a related custom format file. This command makes it easy to see all module commands.
++ Added alias `ffn` for `Format-FunctionName`.
++ Added alias `gfn` for `Get-FunctionName`.
++ Added alias `tfn` for `Test-FunctionName`.
++ Added command `Get-FunctionProfile` and alias `gfp`.
++ Revised warning message in `Get-FunctionAttribute` and `Get-ParameterBlock` to include function name and path.
++ Updated `README.md`.
++ Help updates.
++ Initial public release to the PowerShell Gallery.
+
 ## v0.5.0
 
 + Module will be written to support PowerShell 7.1 and later. Commands may run in Windows PowerShell but I am __not__ marking the module as `Desktop` compatible.

@@ -1,5 +1,6 @@
 Function Format-FunctionName {
     [cmdletbinding()]
+    [alias("ffn")]
     [Outputtype("String")]
     Param (
         [parameter(

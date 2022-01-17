@@ -1,5 +1,6 @@
 Function Test-FunctionName {
     [CmdletBinding()]
+    [alias('tfn')]
     [OutputType("boolean", "string")]
     Param(
         [Parameter(Position = 0, Mandatory, ValueFromPipeline, HelpMessage = "Specify a function name.")]

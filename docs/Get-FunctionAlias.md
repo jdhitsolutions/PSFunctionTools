@@ -1,7 +1,7 @@
 ---
 external help file: PSFunctionTools-help.xml
 Module Name: PSFunctionTools
-online version:
+online version: https://bit.ly/3fjNFUw
 schema: 2.0.0
 ---
 
@@ -45,12 +45,12 @@ Specify the .ps1 or .psm1 file with defined functions.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: pspath
 
 Required: True
 Position: 0
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
@@ -71,3 +71,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Get-FunctionName](Get-FunctionName.md)
+
+[Get-FunctionAttribute](Get-FunctionAttribute.md)

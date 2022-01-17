@@ -59,7 +59,7 @@ Function Get-ParameterBlock {
                 $pb
             }
             else {
-                Write-Warning "No defined parameters detected."
+                Write-Warning "No defined parameters detected for $name in $path."
             }
         }
         else {

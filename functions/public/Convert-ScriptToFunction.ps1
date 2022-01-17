@@ -102,7 +102,6 @@ Function Convert-ScriptToFunction {
                 Write-Verbose "No script requirements found"
             }
 
-
            $head = @"
 # Function exported from $Path
 

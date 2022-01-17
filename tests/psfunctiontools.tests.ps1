@@ -26,8 +26,8 @@ Describe "$($global:ModuleName)" {
             $filePath | Should -Exist
         } -Tag Layout
     } -Tag structure
-    It "Has 15 exported functions" {
-        Get-Command -Module $moduleName -CommandType function | Should -HaveCount 15
+    It "Has 17 exported functions" {
+        Get-Command -Module $moduleName -CommandType function | Should -HaveCount 17
     } -Tag demo
 
     It "Has a markdown help file for <name>" -ForEach @(
@@ -1055,7 +1055,7 @@ Describe New-ModuleFromLayout {
         (Get-ChildItem TestDrive:\PSFooBar -Directory -Recurse).count | Should -Be 3
         (Get-ChildItem TestDrive:\PSFooBar -File -Recurse).count | Should -Be 4
 
-    } -tag acceptance
+    } -Tag acceptance
 
 } -Tag function
 
@@ -1065,23 +1065,102 @@ Describe Test-FunctionName {
     }
     It "Should have help documentation" {
         (Get-Help $cmd).Description | Should -Not -BeNullOrEmpty
-    } -tag acceptance
+    } -Tag acceptance
     It "Should have a defined output type" {
         (Get-Command -CommandType function -Name $cmd).OutputType | Should -Not -BeNullOrEmpty
-    } -tag acceptance
+    } -Tag acceptance
     It "Should have a mandatory parameter of <name>" -ForEach @(@{Name = "Name" }
     ) {
         Get-Command $cmd | Should -HaveParameter $Name -Mandatory
     } -Tag unit
 
     It "Should run return boolean results" {
-        Test-FunctionName -name Get-Foo -Quiet | Should -be $True
-        Test-FunctionName -name BadVerb-Foo -Quiet | Should -be $False
-    } -tag Acceptance
-
+        Test-FunctionName -Name Get-Foo -Quiet | Should -Be $True
+        Test-FunctionName -Name BadVerb-Foo -Quiet | Should -Be $False
+    } -Tag Acceptance
 
     It "Should run return string results" {
-        Test-FunctionName -name Get-Foo  | Should -be 'Get-Foo'
-        Test-FunctionName -name BadVerb-Foo | Should -be $null
-    } -tag Acceptance
+        Test-FunctionName -Name Get-Foo | Should -Be 'Get-Foo'
+        Test-FunctionName -Name BadVerb-Foo | Should -Be $null
+    } -Tag Acceptance
+} -Tag function
+
+Describe Get-FunctionProfile {
+    BeforeAll {
+        $cmd = "Get-FunctionProfile"
+        New-Item testdrive:\foo.ps1
+        $out = @'
+#requires -version 5.1
+Function Get-Foo {
+    [cmdletbinding()]
+    [alias('xyz')]
+    Param([string]$Name)
+    DynamicParam {
+        #code here
+    }
+    Begin { [datetime]::now}
+    Process { write-host $name }
+    End {}
+}
+'@
+
+    $out | Out-File testdrive:\get-foo.ps1
+    }
+    It "Should have a defined alias of 'gfp'" {
+        (Get-Alias 'gfp').ResolvedCommand.name | Should -Be $cmd
+    } -Tag acceptance
+    It "Should have help documentation" {
+        (Get-Help $cmd).Description | Should -Not -BeNullOrEmpty
+    } -Tag acceptance
+    It "Should have a defined output type" {
+        (Get-Command -CommandType function -Name $cmd).OutputType | Should -Not -BeNullOrEmpty
+    } -Tag acceptance
+    It "Should have a mandatory parameter of <name>" -ForEach @(@{Name = "Name" }, @{Name = "Path" }
+    ) {
+        Get-Command $cmd | Should -HaveParameter $Name -Mandatory
+    } -Tag unit
+    It "Should fail on an invalid path" {
+        Try {
+            $splat = @{
+                ErrorAction = "Stop"
+                Path        = "Q:\Foo\Bar"
+                Name        = "Get-Foo"
+            }
+            & $cmd @splat
+        }
+        Catch {
+            $e = $_
+        }
+        $e.exception.message | Should -Match "cannot validate argument on parameter 'Path'"
+    } -Tag acceptance
+
+    It "Should fail on an invalid function name" {
+        Try {
+            $splat = @{
+                ErrorAction = "Stop"
+                Path        = "Testdrive:\foo.ps1"
+                Name        = "BadName"
+            }
+            & $cmd @splat
+        }
+        Catch {
+            $e = $_
+        }
+        $e.exception.message | Should -Match "cannot validate argument on parameter 'Name'"
+    } -Tag acceptance
+
+    It "Should run without error" {
+        $r = & $cmd -name Get-Foo -path testdrive:\get-foo.ps1
+        ($r | get-member name).typename | Should -Be "PSFunctionProfile"
+        $r.DynamicParameters | Should -be $True
+        $r.FunctionAlias | Should -be 'xyz'
+        $r.dotNet | Should -Not -BeNullOrEmpty
+        $r.requiredversion | Should -Be "5.1"
+        $r.externalCommands | Should -BeNullOrEmpty
+        $r.name | Should -Be 'Get-Foo'
+    } -Tag Acceptance
+
+    It "Should accept pipeline input" {
+        { Get-ChildItem testdrive:\get-foo.ps1 | Get-FunctionName -detailed | Get-FunctionProfile} | Should -Not -Throw
+    } -tag acceptance
 } -Tag function

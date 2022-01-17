@@ -6,42 +6,42 @@ Function Get-FunctionAttribute {
         [Parameter(
             Position = 0,
             Mandatory,
+            ValueFromPipelineByPropertyName,
             HelpMessage = "Specify the name of the PowerShell function."
         )]
         [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter(
             Mandatory,
+            ValueFromPipelineByPropertyName,
             HelpMessage = "Specify the path to the .ps1 or .psm1 file."
         )]
         [ValidateScript( {
             If (Test-Path $_ ) {
                 $True
+                If ($_ -match "\.ps(m)?1$") {
+                    $True
+                }
+                Else {
+                    Throw "The path must be to a .ps1 or .psm1 file."
+                    $False
+                }
             }
             Else {
                 Throw "Can't validate that $_ exists. Please verify and try again."
                 $False
             }
         })]
-        [ValidateScript( {
-            If ($_ -match "\.ps(m)?1$") {
-                $True
-            }
-            Else {
-                Throw "The path must be to a .ps1 or .psm1 file."
-                $False
-            }
-            })]
         [string]$Path,
         [Parameter(HelpMessage = "Display the attribute block as a string.")]
         [switch]$ToString
     )
     Begin {
         Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Starting $($myinvocation.mycommand)"
-        $Path = Convert-Path -Path $path
-        $Name = Format-FunctionName $Name
     } #begin
     Process {
+        $Path = Convert-Path -Path $path
+        $Name = Format-FunctionName $Name
         Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Processing function $name from $Path "
         $AST = _getAST $path
         #parse out functions using the AST
@@ -73,7 +73,7 @@ Function Get-FunctionAttribute {
                 }
             }
             else {
-                Write-Warning "No defined function attributes detected."
+                Write-Warning "No defined function attributes detected for $name in $path."
             }
         }
         else {
