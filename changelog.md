@@ -1,5 +1,13 @@
 # Changelog for PSFunctionTools
 
+## v1.0.0
+
++ Added online help links for previously published commands.
++ Bumped version number to reflect feature-complete release.
++ Added `Export-FunctionToFile` to export a loaded function from your session to a script file.
++ Help updates.
++ Updated `README.md`.
+
 ## v0.6.0
 
 + Added online help links for previously published commands.

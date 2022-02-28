@@ -3,9 +3,8 @@
 #
 
 @{
-
     RootModule           = 'PSFunctionTools.psm1'
-    ModuleVersion        = '0.6.0'
+    ModuleVersion        = '1.0.0'
     CompatiblePSEditions = 'Core'
     GUID                 = '151466e0-a952-4b6a-ad81-40dafc9ef9bb'
     Author               = 'Jeff Hicks'
@@ -26,24 +25,23 @@
         'Get-PSRequirements', 'New-CommentHelp', 'Format-FunctionName',
         'Get-ModuleLayout', 'Get-ParameterBlock', 'Get-FunctionAttribute',
         'Get-FunctionProfile', 'New-ModuleFromFiles', 'New-ModuleFromLayout',
-        'Get-PSFunctionTools')
+        'Get-PSFunctionTools','Export-FunctionToFile')
     CmdletsToExport      = @()
     # VariablesToExport = @()
     AliasesToExport      = @('gfal', 'ga', 'eff', 'eml', 'iml', 'csf', 'gpb',
-        'gfa', 'nch', 'ffn', 'gfn', 'tfn', 'gfp')
+        'gfa', 'nch', 'ffn', 'gfn', 'tfn', 'gfp','etf')
     PrivateData          = @{
 
         PSData = @{
-            Tags       = @('AST', 'scripting', 'module', 'function','script')
+            Tags       = @('AST', 'scripting', 'module', 'function', 'script')
             LicenseUri = 'https://github.com/jdhitsolutions/PSFunctionTools/blob/main/License.txt'
             ProjectUri = 'https://github.com/jdhitsolutions/PSFunctionTools'
-            # IconUri = ''
+            IconUri    = 'https://raw.githubusercontent.com/jdhitsolutions/PSFunctionTools/main/images/psrobot.png'
             # ReleaseNotes = ''
             # Prerelease = ''
             # ExternalModuleDependencies = @()
 
         } # End of PSData hashtable
-
     } # End of PrivateData hashtable
 }
 

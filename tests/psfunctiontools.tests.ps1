@@ -26,7 +26,7 @@ Describe "$($global:ModuleName)" {
             $filePath | Should -Exist
         } -Tag Layout
     } -Tag structure
-    It "Has 17 exported functions" {
+    It "Has 18 exported functions" {
         Get-Command -Module $moduleName -CommandType function | Should -HaveCount 17
     } -Tag demo
 
@@ -1164,3 +1164,31 @@ Function Get-Foo {
         { Get-ChildItem testdrive:\get-foo.ps1 | Get-FunctionName -detailed | Get-FunctionProfile} | Should -Not -Throw
     } -tag acceptance
 } -Tag function
+Describe Export-FunctionToFile {
+    BeforeAll {
+        $cmd = "Export-FunctionToFile"
+    }
+
+    It "Should have help documentation" {
+        (Get-Help Export-FunctionToFile).Description | Should -Not -BeNullOrEmpty
+    } -Tag Acceptance
+    It "Should have a defined output type" {
+        (Get-Command -CommandType function -name Export-FunctionToFile).OutputType | Should -Not -BeNullOrEmpty
+    } -Tag Acceptance
+    It "Should have a mandatory parameter of <name>" -ForEach @(@{Name = "Name" }) {
+        Get-Command $cmd | Should -HaveParameter $Name -Mandatory
+    } -Tag unit
+    It "Should support -WhatIf" {
+        Get-Command $cmd | Should -HaveParameter "WhatIf"
+    } -Tag unit
+    It "Should run without error" {
+        {Export-FunctionToFile -name prompt -Path TestDrive:} | Should -Not -Throw
+    } -Tag Acceptance
+    It "Should fail on an invalid function name error" {
+        {Export-FunctionToFile -name foozzz -Path Testdrive:} | Should -Throw
+    } -Tag Acceptance
+    It "Should fail on an invalid path name error" {
+        {Export-FunctionToFile -name foozzz -Path TestDrive: } | Should -Throw
+    } -Tag Acceptance
+
+} -tag function

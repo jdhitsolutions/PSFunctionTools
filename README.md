@@ -10,7 +10,7 @@ The commands in this module have been developed to make it easier to automate th
 + [Fun with PowerShell Module Layout](https://jdhitsolutions.com/blog/powershell/8731/fun-with-powershell-module-layout/)
 + [Building a PowerShell Module Inception-Style](https://jdhitsolutions.com/blog/powershell/8741/building-a-powershell-module-inception-style/)
 
-This module has been written for PowerShell 7.1 and later. It is most likely that the the commands will work in Windows PowerShell, but you will need to fork this module and revise as necessary. Otherwise, install this module from the PowerShell Gallery.
+This module has been written for **PowerShell 7.1** and later. It is most likely that the the commands will work in Windows PowerShell, but you will need to fork this module and revise as necessary. Otherwise, install this module from the PowerShell Gallery.
 
 ```powershell
 Install-Module PSFunctionTools
@@ -23,17 +23,19 @@ To see a summary of these commands at any time, run [Get-PSFunctionTools](docs/G
 ```dos
 PS C:\> Get-PSFunctionTools
 
-   Module: PSFunctionTools [v0.6.0]
+   Module: PSFunctionTools [v1.0.0]
 
 Name                       Alias    Synopsis
 ----                       -----    --------
 Convert-ScriptToFunction    csf     Convert a script file to a PowerShell funct…
 Export-FunctionFromFile     eff     Export a PowerShell function from a script …
+Export-FunctionToFile       etf     Export a PowerShell function to a file.
 Export-ModuleLayout         eml     Export a model module layout.
-Format-FunctionName                 Format a function name to proper case.
+Format-FunctionName         ffn     Format a function name to proper case.
 Get-FunctionAlias        {ga, gfal} Get a defined function alias.
 Get-FunctionAttribute       gfa     Get function attributes like cmdletbinding.
-Get-FunctionName                    Identify the names of PowerShell functions …
+Get-FunctionName            gfn     Identify the names of PowerShell functions …
+Get-FunctionProfile         gfp     Get a technical summary of a PowerShell fun…
 Get-ModuleLayout                    Get information about a module layout file.
 Get-ParameterBlock          gpb     Get a function's parameter block.
 Get-PSFunctionTools                 Get a summary of PSFunctionTools commands.
@@ -42,7 +44,7 @@ Import-ModuleLayout         iml     Create a module structure from a layout fil�
 New-CommentHelp             nch     Create comment based help.
 New-ModuleFromFiles                 Create a PowerShell module from a set of fi…
 New-ModuleFromLayout                Creat a new module based on a layout.
-Test-FunctionName                   Test the validity of a PowerShell function …
+Test-FunctionName           tfn     Test the validity of a PowerShell function …
 ```
 
 ### [Convert-ScriptToFunction](docs/Convert-ScriptToFunction.md)
@@ -66,6 +68,16 @@ Export-FunctionFromFile C:\scripts\MyInternetTools.psm1 -Name get-zipinfo -Outpu
 ```
 
 If you run this command in the PowerShell ISE or the VS Code integrated PowerShell Terminal, you can use the dynamic parameter `Remove` to delete the function from the source file.
+
+### [Export-FunctionToFile](docs/Export-FunctionToFile.md)
+
+You +can use this command to export a function which is loaded into your PowerShell session. You might need to do this when you create an ad-hoc function and want to save it to a file. This command will take the content of the function and export it to a ps1 file. The function name will be used for the file name. Although, characters like the colon will be stripped to create a filesystem-compatibale filename.
+
+You can also include `#Requires` statements.
+
+```powershell
+ Export-FunctionToFile -Name New-FileLink -Path c:\scripts -Requires "#requires -version 5.1","#requires -RunAsAdministrator"
+```
 
 ### [Export-ModuleLayout](docs/Export-ModuleLayout.md)
 
