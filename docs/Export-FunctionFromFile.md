@@ -16,7 +16,7 @@ Export a PowerShell function from a script file.
 ### All (Default)
 
 ```yaml
-Export-FunctionFromFile [-Path] <String> [-OutputPath <String>] [-Passthru]
+Export-FunctionFromFile [-Path] <String> [-OutputPath <String>] [-PassThru]
 [-Remove] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -24,13 +24,13 @@ Export-FunctionFromFile [-Path] <String> [-OutputPath <String>] [-Passthru]
 
 ```yaml
 Export-FunctionFromFile [-Path] <String> [-OutputPath <String>]
-[-Name <String[]>] [-Passthru] [-Remove] [-WhatIf] [-Confirm] [<CommonParameters>]
+[-Name <String[]>] [-PassThru] [-Remove] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### all
 
 ```yaml
-Export-FunctionFromFile [-Path] <String> [-OutputPath <String>] [-All] [-Remove] [-Passthru] [-WhatIf] [-Confirm] [<CommonParameters>]
+Export-FunctionFromFile [-Path] <String> [-OutputPath <String>] [-All] [-Remove] [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -125,7 +125,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Passthru
+### -PassThru
 
 Pass the output file to the pipeline.
 

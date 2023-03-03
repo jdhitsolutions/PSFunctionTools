@@ -34,19 +34,19 @@ foreach ($item in $csv) {
 #create the root module
 $psm1 = @"
 
-Get-Childitem `$psscriptroot\functions\*.ps1 |
+Get-ChildItem `$PSScriptRoot\functions\*.ps1 |
 Foreach-Object {
 . `$_.FullName
 }
 
 "@
 
-$psm1 | Out-File "$path\$newmodulename.psm1"
+$psm1 | Out-File "$path\$NewModuleName.psm1"
 
 #create the module manifest
 $splat = @{
-    Path                 = "$path\$newmodulename.psd1"
-    RootModule           = "$newmodulename.psm1"
+    Path                 = "$path\$NewModuleName.psd1"
+    RootModule           = "$NewModuleName.psm1"
     ModuleVersion        = "0.1.0"
     Author               = $env:USERNAME
     Description          = $Description

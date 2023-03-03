@@ -37,7 +37,7 @@ Function Get-ParameterBlock {
         [switch]$ToString
     )
     Begin {
-        Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Starting $($myinvocation.mycommand)"
+        Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
     } #begin
     Process {
         $Path = Convert-Path -Path $path
@@ -67,7 +67,7 @@ Function Get-ParameterBlock {
         }
     } #process
     End {
-        Write-Verbose "[$((Get-Date).TimeofDay) END    ] Ending $($myinvocation.mycommand)"
+        Write-Verbose "[$((Get-Date).TimeofDay) END    ] Ending $($MyInvocation.MyCommand)"
     } #end
 
 } #close Get-ParameterBlock

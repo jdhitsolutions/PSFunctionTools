@@ -1,7 +1,7 @@
 Function Format-FunctionName {
     [cmdletbinding()]
     [alias("ffn")]
-    [Outputtype("String")]
+    [OutputType("String")]
     Param (
         [parameter(
             Position = 0,
@@ -22,7 +22,7 @@ Function Format-FunctionName {
     )
 
     Begin {
-        Write-Verbose "[$((Get-Date).TimeofDay) BEGIN] Starting $($myinvocation.mycommand)"
+        Write-Verbose "[$((Get-Date).TimeofDay) BEGIN] Starting $($MyInvocation.MyCommand)"
     } #begin
     Process {
         Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Processing $name"
@@ -31,6 +31,6 @@ Function Format-FunctionName {
 
     } #process
     End {
-        Write-Verbose "[$((Get-Date).TimeofDay) END    ] Ending $($myinvocation.mycommand)"
+        Write-Verbose "[$((Get-Date).TimeofDay) END    ] Ending $($MyInvocation.MyCommand)"
     } #end
 }

@@ -1,7 +1,7 @@
 Function Get-FunctionAlias {
     [cmdletbinding()]
     [alias("gfal", "ga")]
-    [outputType("string")]
+    [OutputType("string")]
     Param(
         [Parameter(
             Position = 0,
@@ -29,7 +29,7 @@ Function Get-FunctionAlias {
         [string]$Path
     )
     Begin {
-        Write-Verbose "[$((Get-Date).TimeofDay) BEGIN] Starting $($myinvocation.mycommand)"
+        Write-Verbose "[$((Get-Date).TimeofDay) BEGIN] Starting $($MyInvocation.MyCommand)"
     } #begin
     Process {
         $Path = Convert-Path -Path $path
@@ -49,7 +49,7 @@ Function Get-FunctionAlias {
                     }, $true)
 
                 if ($aliasAST.positionalArguments) {
-                    [pscustomobject]@{
+                    [PSCustomObject]@{
                         PSTypeName = "PSFunctionAlias"
                         Name       = $f.name
                         Alias      = $aliasAST.PositionalArguments.Value
@@ -59,6 +59,6 @@ Function Get-FunctionAlias {
         } #if functions.count > 0
     } #process
     End {
-        Write-Verbose "[$((Get-Date).TimeofDay) END    ] Ending $($myinvocation.mycommand)"
+        Write-Verbose "[$((Get-Date).TimeofDay) END    ] Ending $($MyInvocation.MyCommand)"
     } #end
 } #end function

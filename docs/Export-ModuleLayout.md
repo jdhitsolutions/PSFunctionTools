@@ -15,7 +15,7 @@ Export a model module layout.
 
 ```yaml
 Export-ModuleLayout -SourcePath <String> [-Version <String>]
-[-FilePath <String>] [-Passthru] [<CommonParameters>]
+[-FilePath <String>] [-PassThru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -77,7 +77,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Passthru
+### -PassThru
 
 Show the file result.
 

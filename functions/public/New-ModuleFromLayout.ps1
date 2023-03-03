@@ -74,19 +74,19 @@ Function New-ModuleFromLayout {
         #create the root module
         $psm1 = @"
 
-Get-Childitem `$psscriptroot\$functionpath\*.ps1 -recurse |
+Get-ChildItem `$PSScriptRoot\$FunctionPath\*.ps1 -recurse |
 Foreach-Object {
 . `$_.FullName
 }
 
 "@
-        Write-Verbose "Creating root module $path\$newmodulename.psm1"
-        $psm1 | Out-File "$path\$newmodulename.psm1"
+        Write-Verbose "Creating root module $path\$NewModuleName.psm1"
+        $psm1 | Out-File "$path\$NewModuleName.psm1"
 
         #create the module manifest
         $splat = @{
-            Path                 = "$path\$newmodulename.psd1"
-            RootModule           = "$newmodulename.psm1"
+            Path                 = "$path\$NewModuleName.psd1"
+            RootModule           = "$NewModuleName.psm1"
             ModuleVersion        = "0.1.0"
             Description          = $Description
             PowerShellVersion    = "5.1"

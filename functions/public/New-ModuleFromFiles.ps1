@@ -119,9 +119,9 @@ Function New-ModuleFromFiles {
         $functionFiles = $files | ForEach-Object {
             Write-Verbose "Processing $_"
             #Export standard functions only.
-            Export-FunctionFromFile -Path $_ -OutputPath (Join-Path -Path $Path -ChildPath $FunctionPath) -Passthru
+            Export-FunctionFromFile -Path $_ -OutputPath (Join-Path -Path $Path -ChildPath $FunctionPath) -PassThru
             #get aliases
-            if ($pscmdlet.ShouldProcess($_, "Getting function aliases")) {
+            if ($PSCmdlet.ShouldProcess($_, "Getting function aliases")) {
                 $aliases += Get-FunctionAlias -path $_ | Select-Object -ExpandProperty alias
             }
         }
@@ -137,21 +137,21 @@ Function New-ModuleFromFiles {
         }
 
         #create the root module
-        Write-Verbose "Creating root module $path\$newmodulename.psm1"
+        Write-Verbose "Creating root module $path\$NewModuleName.psm1"
         $psm1 = @"
 
-Get-Childitem `$psscriptroot\$functionPath\*.ps1 -recurse |
+Get-Childitem `$PSScriptRoot\$functionPath\*.ps1 -recurse |
 Foreach-Object {
 . `$_.FullName
 }
 
 "@
-        $psm1 | Out-File "$path\$newmodulename.psm1"
+        $psm1 | Out-File "$path\$NewModuleName.psm1"
 
         #create the module manifest
         $splat = @{
-            Path                 = "$path\$newmodulename.psd1"
-            RootModule           = "$newmodulename.psm1"
+            Path                 = "$path\$NewModuleName.psd1"
+            RootModule           = "$NewModuleName.psm1"
             ModuleVersion        = "0.1.0"
             Description          = $Description
             CmdletsToExport      = @()

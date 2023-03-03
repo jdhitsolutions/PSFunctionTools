@@ -2,10 +2,10 @@
 
 Function Get-PSFunctionTools {
     [cmdletbinding()]
-    [outputtype("PSFunctionTool")]
+    [OutputType("PSFunctionTool")]
     Param()
     Begin {
-        Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Starting $($myinvocation.mycommand)"
+        Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
 
     } #begin
 
@@ -14,7 +14,7 @@ Function Get-PSFunctionTools {
         $cmds = Get-Command -Module PSFunctionTools -CommandType Function | where-object { Test-FunctionName $_.name -Quiet }
         Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Found $($cmds.count) commands"
         foreach ($cmd in $cmds) {
-            [pscustomobject]@{
+            [PSCustomObject]@{
                 PSTypeName    = "PSFunctionTool"
                 Name          = $cmd.Name
                 Alias         = ($n = Get-Alias -Definition $cmd.name -ErrorAction SilentlyContinue) ? $n.name : $null
@@ -26,8 +26,7 @@ Function Get-PSFunctionTools {
     } #process
 
     End {
-        Write-Verbose "[$((Get-Date).TimeofDay) END    ] Ending $($myinvocation.mycommand)"
-
+        Write-Verbose "[$((Get-Date).TimeofDay) END    ] Ending $($MyInvocation.MyCommand)"
     } #end
 
 } #close Get-PSFunctionTools

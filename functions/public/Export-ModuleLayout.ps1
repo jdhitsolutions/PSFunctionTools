@@ -14,13 +14,13 @@ Function Export-ModuleLayout {
         [ValidatePattern("\.json$")]
         [string]$FilePath = ".\modulelayout.json",
         [Parameter(HelpMessage = "Show the file result.")]
-        [switch]$Passthru
+        [switch]$PassThru
     )
     Write-Verbose "Starting $($MyInvocation.MyCommand)"
 
     $out = [System.Collections.Generic.list[object]]::New()
     #making the metadata work cross-platform
-    $meta = [pscustomobject]@{
+    $meta = [PSCustomObject]@{
         ItemType     = "ModuleLayoutMetadata"
         Created      = (Get-Date -Format g)
         CreatedBy    = "$([System.Environment]::UserDomainName)\$([System.Environment]::UserName)"
@@ -32,24 +32,24 @@ Function Export-ModuleLayout {
     Push-Location
     #change location to the folder so that the relative path structure can be used.
     Set-Location -path $SourcePath
-    Write-Verbose "Exporting directory structure from $Sourcepath"
+    Write-Verbose "Exporting directory structure from $SourcePath"
 
     Get-ChildItem -Recurse |
     ForEach-Object {
-        $relPath = (Resolve-Path -Path $_.fullname -Relative) -replace "\.\\", ""
+        $relPath = (Resolve-Path -Path $_.FullName -Relative) -replace "\.\\", ""
         Write-Verbose "Processing $relPath"
-        if ($_.Gettype().name -eq 'FileInfo') {
-            $f = [pscustomobject]@{
+        if ($_.GetType().name -eq 'FileInfo') {
+            $f = [PSCustomObject]@{
                 ItemType = "file"
                 Path     = $relPath
                 #Windows PowerShell adds PS environment data to json conversions
                 #this is a work around
-                Content  = (Get-Content -Path $_.fullname | Out-String)
+                Content  = (Get-Content -Path $_.FullName | Out-String)
             }
             $out.add($f)
         }
         else {
-            $d = [pscustomobject]@{
+            $d = [PSCustomObject]@{
                 ItemType = "directory"
                 Path     = $relPath
             }
@@ -60,8 +60,8 @@ Function Export-ModuleLayout {
     Write-Verbose "Exporting module layout to $FilePath"
     $out | ConvertTo-Json | Out-File -FilePath $FilePath
     Pop-Location
-    if ($Passthru) {
+    if ($PassThru) {
         Get-Item $Filepath
     }
-    Write-Verbose "Ending $($myinvocation.MyCommand)"
+    Write-Verbose "Ending $($MyInvocation.MyCommand)"
 }

@@ -111,7 +111,7 @@ Function Get-WindowsVersion {
     )
 
     Begin {
-        Write-Verbose "Starting $($MyInvocation.Mycommand)"
+        Write-Verbose "Starting $($MyInvocation.MyCommand)"
 
         $sb = {
             $RegPath = 'HKLM:\SOFTWARE\Microsoft\Windows nt\CurrentVersion\'
@@ -147,7 +147,7 @@ Function Get-WindowsVersion {
     } #process
 
     End {
-        Write-Verbose "Ending $($MyInvocation.Mycommand)"
+        Write-Verbose "Ending $($MyInvocation.MyCommand)"
 
     } #end
 } #close function
@@ -256,7 +256,7 @@ Function Get-WindowsVersionString {
     )
 
     Begin {
-        Write-Verbose "Starting $($MyInvocation.Mycommand)"
+        Write-Verbose "Starting $($MyInvocation.MyCommand)"
     } #begin
 
     Process {
@@ -269,7 +269,7 @@ Function Get-WindowsVersionString {
     } #process
 
     End {
-        Write-Verbose "Ending $($MyInvocation.Mycommand)"
+        Write-Verbose "Ending $($MyInvocation.MyCommand)"
     } #end
 }
 function Get-OSInfo {

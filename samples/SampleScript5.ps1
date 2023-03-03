@@ -1,8 +1,9 @@
 ﻿#requires -version 5.1
-#requires -runasAdministrator
+#requires -RunAsAdministrator
 
-#this function can be used for analysis and testing. It
+#This function can be used for analysis and testing. It
 #Isn't something that will run without error or make any sense.
+#The use of aliases is intentional for testing purposes
 
 Function Get-Result {
     <#

@@ -16,13 +16,13 @@ Function Export-FunctionToFile {
         [ValidateScript({ Test-Path $_ })]
         [string]$Path = ".",
         [Parameter(HelpMessage = "Show the file result.")]
-        [switch]$Passthru,
+        [switch]$PassThru,
         [Parameter(HelpMessage = "Specify #Requires statements, including the #")]
         [ValidatePattern("^#[rR]equires")]
         [string[]]$Requires
     )
     Begin {
-        Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Starting $($myinvocation.mycommand)"
+        Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
     } #begin
 
     Process {
@@ -56,7 +56,7 @@ $($fun.Definition.Trim())
             $export = Join-Path -Path (Convert-Path $path) -ChildPath "$Name.ps1"
             Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Exporting $Name to $Export"
             Set-Content -Path $export -Value $value
-            if ($Passthru -AND (-Not $WhatIfPreference)) {
+            if ($PassThru -AND (-Not $WhatIfPreference)) {
                 Get-Item -Path $export
             }
         }
@@ -64,7 +64,7 @@ $($fun.Definition.Trim())
     } #process
 
     End {
-        Write-Verbose "[$((Get-Date).TimeofDay) END    ] Ending $($myinvocation.mycommand)"
+        Write-Verbose "[$((Get-Date).TimeofDay) END    ] Ending $($MyInvocation.MyCommand)"
     } #end
 
 } #close Export-FunctionToFile

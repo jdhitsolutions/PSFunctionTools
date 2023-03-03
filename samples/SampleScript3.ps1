@@ -1,5 +1,5 @@
 ﻿#requires -version 5.0
-#requires -runasadministrator
+#requires -RunAsAdministrator
 
 #this is a sample script
 

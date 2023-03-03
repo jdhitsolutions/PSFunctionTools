@@ -28,7 +28,7 @@ Function Export-FunctionFromFile {
         [Parameter(HelpMessage = "Export all detected functions.", ParameterSetName = "all")]
         [switch]$All,
         [Parameter(HelpMessage = "Pass the output file to the pipeline.")]
-        [switch]$Passthru
+        [switch]$PassThru
     )
     DynamicParam {
 
@@ -57,7 +57,7 @@ Function Export-FunctionFromFile {
 
     Begin {
 
-        Write-Verbose "[BEGIN  ] Starting $($MyInvocation.MyCommand) [$($pscmdlet.ParameterSetName)]"
+        Write-Verbose "[BEGIN  ] Starting $($MyInvocation.MyCommand) [$($PSCmdlet.ParameterSetName)]"
         Write-Verbose ($PSBoundParameters | Out-String)
 
         if (-Not $OutputPath) {
@@ -89,7 +89,7 @@ Function Export-FunctionFromFile {
             Foreach ($item in $functions) {
                 Write-Verbose "[PROCESS] Detected function $($item.name)"
 
-                Switch ($pscmdlet.ParameterSetName) {
+                Switch ($PSCmdlet.ParameterSetName) {
 
                     "byName" {
                         if ($Name -contains $item.Name) {
@@ -115,9 +115,9 @@ Function Export-FunctionFromFile {
                 } #switch
 
                 If ($export) {
-                    $newfile = Join-Path -Path $OutputPath -ChildPath "$($item.name).ps1"
-                    Write-Verbose "[PROCESS] Creating new file $newFile"
-                    Set-Content -Path $newFile -Value $item.ToString() -Force
+                    $NewFile = Join-Path -Path $OutputPath -ChildPath "$($item.name).ps1"
+                    Write-Verbose "[PROCESS] Creating new file $NewFile"
+                    Set-Content -Path $NewFile -Value $item.ToString() -Force
 
                     if ($PSBoundParameters.ContainsKey("Remove")) {
                         $f = $item.extent
@@ -127,10 +127,10 @@ Function Export-FunctionFromFile {
                             "PowerShell ISE" {
                                 Write-Verbose "[PROCESS] Removing from the PowerShell ISE"
                                 psedit $path
-                                $source = ($psise.CurrentPowerShellTab.Files).where({ $_.fullpath -eq $path })
+                                $source = ($psISE.CurrentPowerShellTab.Files).where({ $_.fullpath -eq $path })
                                 Write-Verbose "[PROCESS] Selecting a span of $span lines"
                                 $source.Editor.Select($f.StartLineNumber, $f.StartColumnNumber, $f.EndLineNumber, $f.EndColumnNumber)
-                                if ($PScmdlet.ShouldProcess($item.name, "Deleting from $Path at $($f.StartLineNumber),$($f.StartColumnNumber),$($f.EndLineNumber),$($f.EndColumnNumber)")) {
+                                if ($PSCmdlet.ShouldProcess($item.name, "Deleting from $Path at $($f.StartLineNumber),$($f.StartColumnNumber),$($f.EndLineNumber),$($f.EndColumnNumber)")) {
                                     $source.Editor.InsertText($line * $span)
                                     #set a flag to save the file at the end
                                     $SaveISE = $True
@@ -139,9 +139,9 @@ Function Export-FunctionFromFile {
                             "Visual Studio Code" {
                                 Write-Verbose "[PROCESS] Removing from VS Code"
                                 Open-EditorFile $Path
-                                $ctx = $pseditor.getEditorContext()
-                                if ($pscmdlet.ShouldProcess($item.name, "Deleting from $Path at $($f.StartLineNumber),$($f.StartColumnNumber),$($f.EndLineNumber),$($f.EndColumnNumber)")) {
-                                    $pseditor.Window.SetStatusBarMessage("Removing lines $($f.StartLineNumber) to $($f.EndLineNumber) from $path", 1000)
+                                $ctx = $psEditor.getEditorContext()
+                                if ($PSCmdlet.ShouldProcess($item.name, "Deleting from $Path at $($f.StartLineNumber),$($f.StartColumnNumber),$($f.EndLineNumber),$($f.EndColumnNumber)")) {
+                                    $psEditor.Window.SetStatusBarMessage("Removing lines $($f.StartLineNumber) to $($f.EndLineNumber) from $path", 1000)
                                     $ctx.CurrentFile.InsertText(($line * $span), $f.StartLineNumber, $f.StartColumnNumber, $f.EndLineNumber, $f.EndColumnNumber)
                                     Start-Sleep -Milliseconds 250
                                     #set a flag to save the file at the end
@@ -150,8 +150,8 @@ Function Export-FunctionFromFile {
                             }
                         }
                     }
-                    if ($Passthru -AND (-Not $WhatIfPreference)) {
-                        Get-Item -Path $newfile
+                    if ($PassThru -AND (-Not $WhatIfPreference)) {
+                        Get-Item -Path $NewFile
                     }
                 }
                 else {

@@ -18,8 +18,8 @@ function Import-ModuleLayout {
 
     Write-Verbose "Starting $($MyInvocation.MyCommand)"
     $ParentPath = Convert-Path $ParentPath
-    Write-Verbose "Creating module layout for $name under $parentpath using layout from $layout."
-    $modpath = New-Item -Path $ParentPath -Name $name -ItemType Directory -Force
+    Write-Verbose "Creating module layout for $name under $ParentPath using layout from $layout."
+    $ModPath = New-Item -Path $ParentPath -Name $name -ItemType Directory -Force
 
     <#
      ConvertFrom-Json has a bug in Windows PowerShell so
@@ -31,16 +31,16 @@ function Import-ModuleLayout {
     Sort-Object -Property ItemType |
     ForEach-Object {
         #create all the directories first
-        if ($_.Itemtype -eq 'directory') {
-            if ($pscmdlet.ShouldProcess($_.path, "Create directory")) {
-                New-Item -Path $modpath -Name $_.path -ItemType Directory -Force
+        if ($_.ItemType -eq 'directory') {
+            if ($PSCmdlet.ShouldProcess($_.path, "Create directory")) {
+                New-Item -Path $ModPath -Name $_.path -ItemType Directory -Force
             }
         } #directory item
-        elseif ($_.itemtype -eq 'file') {
-            if ($pscmdlet.ShouldProcess($_.path, "Create file")) {
-                $newFile = (Join-Path -Path $modPath -ChildPath $_.path)
-                Set-Content -Path $newfile -Value $_.content
-                Get-Item -path $newFile
+        elseif ($_.ItemType -eq 'file') {
+            if ($PSCmdlet.ShouldProcess($_.path, "Create file")) {
+                $NewFile = (Join-Path -Path $ModPath -ChildPath $_.path)
+                Set-Content -Path $NewFile -Value $_.content
+                Get-Item -path $NewFile
             }
         } #file item
     } #foreach-object

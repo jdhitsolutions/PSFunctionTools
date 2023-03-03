@@ -37,7 +37,7 @@ Function Get-FunctionAttribute {
         [switch]$ToString
     )
     Begin {
-        Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Starting $($myinvocation.mycommand)"
+        Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
     } #begin
     Process {
         $Path = Convert-Path -Path $path
@@ -61,7 +61,7 @@ Function Get-FunctionAttribute {
                 Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Processing extent text"
                 foreach ($item in $pb.attributes) {
                     Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] $($item.typename.name)"
-                    [pscustomobject]@{
+                    [PSCustomObject]@{
                         PSTypeName          = "PSFunctionAttribute"
                         Type                = $item.TypeName.name
                         NamedArguments      = $item.NamedArguments
@@ -81,7 +81,7 @@ Function Get-FunctionAttribute {
         }
     } #process
     End {
-        Write-Verbose "[$((Get-Date).TimeofDay) END    ] Ending $($myinvocation.mycommand)"
+        Write-Verbose "[$((Get-Date).TimeofDay) END    ] Ending $($MyInvocation.MyCommand)"
     } #end
 
 } #close Get-FunctionAttribute

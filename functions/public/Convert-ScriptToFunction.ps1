@@ -1,6 +1,6 @@
 Function Convert-ScriptToFunction {
     [cmdletbinding()]
-    [Outputtype("System.String")]
+    [OutputType("System.String")]
     [alias('csf')]
     Param(
         [Parameter(
@@ -80,7 +80,7 @@ Function Convert-ScriptToFunction {
                if ($ast.ScriptRequirements.RequiredModules) {
                     Foreach ($m in $ast.ScriptRequirements.RequiredModules) {
                         #test for version requirements
-                        $ver = $m.psobject.properties.where({$_.name -match 'version' -AND $_.value})
+                        $ver = $m.PSObject.properties.where({$_.name -match 'version' -AND $_.value})
                         if ($ver) {
                             $new.Add("#requires -module @{ModuleName = '$($m.name)';$($ver.Name) = '$($ver.value)'}")
                         }
@@ -126,7 +126,7 @@ Function $Name {
             }
 
             [regex]$rx = "\[cmdletbinding\(.*\)\]"
-            if ($rx.Ismatch($ast.Extent.text)) {
+            if ($rx.IsMatch($ast.Extent.text)) {
                 Write-Verbose "Using existing cmdletbinding"
                 #use the first match
                 $cb = $rx.match($ast.extent.text).Value
@@ -143,7 +143,7 @@ Function $Name {
            }
             if ($ast.ParamBlock) {
                 Write-Verbose "Adding defined Param() block"
-                [void]($ast.ParamBlock.tostring().split("`n").Foreach({$new.add("`t$_")}) -join "`n")
+                [void]($ast.ParamBlock.ToString().split("`n").Foreach({$new.add("`t$_")}) -join "`n")
                 $new.Add("`n")
             }
             else {
@@ -153,12 +153,12 @@ Function $Name {
             if ($ast.DynamicParamBlock) {
                 #assumes no more than 1 dynamic parameter
                 Write-Verbose "Adding dynamic parameters"
-                [void]($ast.DynamicParamBlock.tostring().split("`n").Foreach({$new.Add($_)}) -join "`n")
+                [void]($ast.DynamicParamBlock.ToString().split("`n").Foreach({$new.Add($_)}) -join "`n")
             }
 
             if ($ast.BeginBlock.Extent.text) {
                 Write-Verbose "Adding defined Begin block"
-                [void]($ast.BeginBlock.Extent.toString().split("`n").Foreach({$new.Add($_)}) -join "`n")
+                [void]($ast.BeginBlock.Extent.ToString().split("`n").Foreach({$new.Add($_)}) -join "`n")
                 $UseBPE = $True
             }
 
@@ -173,7 +173,7 @@ Function $Name {
                     $new.Add("`tEnd {")
                 }
                     Write-Verbose "Adding the remaining code or defined endblock"
-                    [void]($ast.Endblock.Statements.foreach({ $_.tostring() }).Foreach({ $new.Add($_)}))
+                    [void]($ast.Endblock.Statements.foreach({ $_.ToString() }).Foreach({ $new.Add($_)}))
                 if ($UseBPE) {
                 Write-Verbose "Adding closing End {} block"
                     $new.Add("`t}")
@@ -188,13 +188,13 @@ Function $Name {
            if ($PSBoundParameters.ContainsKey("ToEditor")) {
                 Write-Verbose "Opening result in editor"
                 if ($host.name -match "ISE") {
-                    $newfile = $psise.CurrentPowerShellTab.Files.add()
-                    $newfile.Editor.InsertText(($new -join "`n"))
-                    $newfile.editor.select(1,1,1,1)
+                    $NewFile = $psISE.CurrentPowerShellTab.Files.add()
+                    $NewFile.Editor.InsertText(($new -join "`n"))
+                    $NewFile.editor.select(1,1,1,1)
                 }
                 elseif ($host.name -match "Code") {
-                    $pseditor.Workspace.NewFile()
-                    $ctx = $pseditor.GetEditorContext()
+                    $psEditor.Workspace.NewFile()
+                    $ctx = $psEditor.GetEditorContext()
                     $ctx.CurrentFile.InsertText($new -join "`n")
                 }
                 else {
@@ -213,6 +213,6 @@ Function $Name {
 
     } #process
     End {
-        Write-Verbose "Ending $($MyInvocation.mycommand)"
+        Write-Verbose "Ending $($MyInvocation.MyCommand)"
     }
 }

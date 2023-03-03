@@ -40,7 +40,7 @@ Function Get-PSRequirements {
             $out = $ast.ScriptRequirements |
             Add-Member -MemberType NoteProperty -Name "Path" -Value $Path -Force -PassThru
             #insert a custom type name for formatting purposes
-            $out.psobject.typenames.insert(0,'PSScriptRequirements')
+            $out.PSObject.typenames.insert(0,'PSScriptRequirements')
             #write the object to the pipeline
             $out
         }

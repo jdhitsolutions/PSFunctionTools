@@ -17,6 +17,6 @@ $splat = @{
 
 Write-Host "Using these parameters"
 $splat | Out-String | Write-Host
-Write-host "Whatif = $WhatIfPreference"
+Write-host "WhatIf = $WhatIfPreference"
 pause
-New-ModuleFromFiles @splat -whatif
+New-ModuleFromFiles @splat -whatIf

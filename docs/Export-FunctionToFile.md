@@ -14,7 +14,7 @@ Export a PowerShell function to a file.
 ## SYNTAX
 
 ```yaml
-Export-FunctionToFile [-Name] <String> [-Path <String>] [-Passthru] [-Requires <String[]>] [-WhatIf] [-Confirm]  [<CommonParameters>]
+Export-FunctionToFile [-Name] <String> [-Path <String>] [-PassThru] [-Requires <String[]>] [-WhatIf] [-Confirm]  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -34,7 +34,7 @@ Get the prompt function from your PowerShell session and export it to C:\Scripts
 ### Example 2
 
 ```powershell
-PS C:\> Export-FunctionToFile -Name New-FileLink -Path c:\work -Requires "#requires -version 5.1","#requires -RunAsAdministrator" -Passthru
+PS C:\> Export-FunctionToFile -Name New-FileLink -Path c:\work -Requires "#requires -version 5.1","#requires -RunAsAdministrator" -PassThru
 
     Directory: C:\work
 
@@ -79,7 +79,7 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Passthru
+### -PassThru
 
 Show the file result.
 

@@ -1,7 +1,7 @@
 Function Get-FunctionName {
     [cmdletbinding()]
     [alias('gfn')]
-    [outputType("string", "PSFunctionName")]
+    [OutputType("string", "PSFunctionName")]
     Param(
         [Parameter(
             Position = 0,
@@ -34,7 +34,7 @@ Function Get-FunctionName {
     )
 
     Begin {
-        Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Starting $($myinvocation.mycommand)"
+        Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
     } #begin
     Process {
         $Path = Convert-Path -Path $path
@@ -52,7 +52,7 @@ Function Get-FunctionName {
             }
             if ($Detailed) {
                 foreach ($item in $($out | Sort-Object)) {
-                    [pscustomobject]@{
+                    [PSCustomObject]@{
                         PSTypeName = "PSFunctionName"
                         Name       = $item
                         Path       = $Path
@@ -68,6 +68,6 @@ Function Get-FunctionName {
         }
     } #process
     End {
-        Write-Verbose "[$((Get-Date).TimeofDay) END    ] Ending $($myinvocation.mycommand)"
+        Write-Verbose "[$((Get-Date).TimeofDay) END    ] Ending $($MyInvocation.MyCommand)"
     } #end
 } #close function

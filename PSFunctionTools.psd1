@@ -4,12 +4,12 @@
 
 @{
     RootModule           = 'PSFunctionTools.psm1'
-    ModuleVersion        = '1.0.0'
+    ModuleVersion        = '1.1.0'
     CompatiblePSEditions = 'Core'
     GUID                 = '151466e0-a952-4b6a-ad81-40dafc9ef9bb'
     Author               = 'Jeff Hicks'
     CompanyName          = 'JDH Information Technology Solutions, Inc.'
-    Copyright            = '(c) 2021-2022 JDH Information Technology Solutions, Inc.'
+    Copyright            = '(c) 2021-2023 JDH Information Technology Solutions, Inc.'
     Description          = 'A set of PowerShell commands for managing and automating PowerShell scripts, functions, and modules.'
     PowerShellVersion    = '7.1'
     # TypesToProcess = @()

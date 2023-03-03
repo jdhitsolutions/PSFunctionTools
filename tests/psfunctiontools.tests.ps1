@@ -6,7 +6,7 @@ $global:ModuleName = (Get-Item $PSScriptRoot\..\ -OutVariable p).Name
 if (Get-Module -Name $global:ModuleName) {
     Remove-Module -Name $global:ModuleName
 }
-$global:psd1 = Join-Path $p.fullname -ChildPath "$global:ModuleName.psd1"
+$global:psd1 = Join-Path $p.FullName -ChildPath "$global:ModuleName.psd1"
 
 Import-Module $global:psd1 -Force
 
@@ -27,11 +27,11 @@ Describe "$($global:ModuleName)" {
         } -Tag Layout
     } -Tag structure
     It "Has 18 exported functions" {
-        Get-Command -Module $moduleName -CommandType function | Should -HaveCount 17
+        Get-Command -Module $moduleName -CommandType function | Should -HaveCount 18
     } -Tag demo
 
     It "Has a markdown help file for <name>" -ForEach @(
-        (Get-Command -Module PSFunctiontools -CommandType function).ForEach({ @{Name = $_.name } })
+        (Get-Command -Module PSFunctionTools -CommandType function).ForEach({ @{Name = $_.name } })
     ) {
         $mdPath = Join-Path -Path "..\docs" -ChildPath "$($_.name).md"
         $mdPath | Should -Exist
@@ -61,8 +61,8 @@ Describe Convert-ScriptToFunction {
         Get-Command Convert-ScriptToFunction | Should -HaveParameter $Name -Mandatory
     } -Tag acceptance
     It "Should run without error" {
-        { Convert-ScriptToFunction -path 'Testdrive:\test.ps1' -Name get-foo | Out-File testdrive:\get-foo.ps1 } | Should -Not -Throw
-        Get-Item Testdrive:\get-foo.ps1 | Should -Exist
+        { Convert-ScriptToFunction -path 'TestDrive:\test.ps1' -Name get-foo | Out-File TestDrive:\get-foo.ps1 } | Should -Not -Throw
+        Get-Item TestDrive:\get-foo.ps1 | Should -Exist
     } -Tag acceptance
     #only run this test under VS Code
     if ($host.name -eq "Visual Studio Code Host") {
@@ -96,7 +96,7 @@ Describe Convert-ScriptToFunction {
     } -Tag acceptance
     It "Should fail on an invalid function name" {
         Try {
-            Convert-ScriptToFunction -path 'Testdrive:test.ps1' -Name 'barfoo' -ErrorAction Stop
+            Convert-ScriptToFunction -path 'TestDrive:test.ps1' -Name 'barfoo' -ErrorAction Stop
         }
         Catch {
             $e = $_
@@ -146,8 +146,8 @@ Function Get-Foo {
         } -Tag unit -Skip
     }
     It "Should run without error" {
-        { Export-FunctionFromFile -path testdrive:\test.ps1 -all } | Should -Not -Throw
-        Get-Item Testdrive:\get-foo.ps1 | Should -Exist
+        { Export-FunctionFromFile -path TestDrive:\test.ps1 -all } | Should -Not -Throw
+        Get-Item TestDrive:\get-foo.ps1 | Should -Exist
     } -Tag acceptance
     It "Should fail on an invalid path" {
         Try {
@@ -189,7 +189,7 @@ Describe Export-ModuleLayout {
     } -Tag unit
     It "Should run without error" {
         #mock and set mandatory parameters as needed
-        { Export-ModuleLayout -sourcepath testdrive:\ } | Should -Not -Throw
+        { Export-ModuleLayout -sourcepath TestDrive:\ } | Should -Not -Throw
         Get-Item TestDrive:modulelayout.json | Should -Exist
     } -Tag acceptance
     It "Should fail on an invalid path" {
@@ -203,7 +203,7 @@ Describe Export-ModuleLayout {
     } -Tag acceptance
     It "Should fail on an invalid filepath" {
         Try {
-            Export-ModuleLayout -sourcepath testdrive:\ -filepath foo.txt -ErrorAction Stop
+            Export-ModuleLayout -sourcepath TestDrive:\ -filepath foo.txt -ErrorAction Stop
         }
         Catch {
             $e = $_
@@ -289,10 +289,10 @@ Function Get-Foo {
         $e.exception.message | Should -Match "cannot validate argument on parameter 'Path'"
     } -Tag acceptance
     It "Should run without error" {
-        $a = Get-FunctionAlias -path testdrive:test.ps1
+        $a = Get-FunctionAlias -path TestDrive:test.ps1
         $a.Name | Should -Be "Get-Foo"
         $a.alias | Should -Contain "gf"
-        $a.psobject.typenames[0] | Should -Be "PSFunctionAlias"
+        $a.PSObject.typenames[0] | Should -Be "PSFunctionAlias"
     } -Tag acceptance
 
 } -Tag function
@@ -351,7 +351,7 @@ $name.ToUpper()
         $e.exception.message | Should -Match "cannot validate argument on parameter 'Path'"
     } -Tag acceptance
     It "Should run without error" {
-        $rt = Get-FunctionAttribute -path testdrive:\test.ps1 -Name get-foo
+        $rt = Get-FunctionAttribute -path TestDrive:\test.ps1 -Name get-foo
         $rt.Count | Should -Be 2
         $rt[0].type | Should -Be 'cmdletbinding'
         $rt[1].type | Should -Be 'alias'
@@ -409,17 +409,17 @@ function private {1}
         $e.exception.message | Should -Match "cannot validate argument on parameter 'Path'"
     } -Tag acceptance
     It "Should run without error" {
-        $r = Get-FunctionName -path testdrive:\test.ps1
+        $r = Get-FunctionName -path TestDrive:\test.ps1
         $r | Should -Be "Get-Foo"
     } -Tag acceptance
 
     It "Should write a detailed object to the pipeline" {
-        $r = Get-FunctionName -path testdrive:\test.ps1 -detailed
+        $r = Get-FunctionName -path TestDrive:\test.ps1 -detailed
         $r.name | Should -Be "Get-Foo"
-        $r.path | Should -Be $(Convert-Path testdrive:\test.ps1)
+        $r.path | Should -Be $(Convert-Path TestDrive:\test.ps1)
     } -Tag acceptance
     It "Should detect all functions" {
-        $r = Get-FunctionName -path testdrive:\test.ps1 -all
+        $r = Get-FunctionName -path TestDrive:\test.ps1 -all
         $r | Should -HaveCount 2
         $r[1] | Should -Be "private"
     } -Tag acceptance
@@ -525,7 +525,7 @@ $name.ToUpper()
     }
 ]
 '@
-        $json | Out-File Testdrive:\test.json
+        $json | Out-File TestDrive:\test.json
     } #beforeall
 
     It "Should have help documentation" {
@@ -550,7 +550,7 @@ $name.ToUpper()
     } -Tag acceptance
     It "Should fail on an invalid filename" {
         Try {
-            Get-ModuleLayout -path testdrive:\test.ps1 ErrorAction Stop
+            Get-ModuleLayout -path TestDrive:\test.ps1 ErrorAction Stop
         }
         Catch {
             $e = $_
@@ -565,7 +565,7 @@ $name.ToUpper()
     } -Pending -Tag unit
     It "Should run without error" {
         #mock and set mandatory parameters as needed
-        $r = Get-ModuleLayout -path testdrive:\test.json
+        $r = Get-ModuleLayout -path TestDrive:\test.json
         $r.folders | Should -HaveCount 9
         $r.Files | Should -HaveCount 7
         $r.sourceComputer | Should -Be 'THINKP1'
@@ -573,7 +573,7 @@ $name.ToUpper()
     } -Tag acceptance
 
     It "Should display a tree" {
-        $r = Get-ModuleLayout -path testdrive:test.json -asTree
+        $r = Get-ModuleLayout -path TestDrive:test.json -asTree
         $r | Should -HaveCount 23
         $r | Out-String | Should -Match "\+|\|"
     } -Tag acceptance
@@ -619,7 +619,7 @@ $name.ToUpper()
     } -Tag acceptance
     It "Should fail on an invalid filename" {
         Try {
-            Get-ParameterBlock -path testdrive:\test.txt -Name get-foo -ErrorAction Stop
+            Get-ParameterBlock -path TestDrive:\test.txt -Name get-foo -ErrorAction Stop
         }
         Catch {
             $e = $_
@@ -628,7 +628,7 @@ $name.ToUpper()
     } -Tag acceptance
     It "Should run without error" {
         $pb = Get-ParameterBlock -Path TestDrive:\test.ps1 -Name Get-Foo
-        $pb.Gettype().Name | Should -Be 'ParamBlockAst'
+        $pb.GetType().Name | Should -Be 'ParamBlockAst'
         $pb.parameters.count | Should -Be 1
         $pb.attributes.count | Should -Be 2
     } -Tag acceptance
@@ -670,7 +670,7 @@ Get-Date
     } -Tag acceptance
     It "Should fail on an invalid filename" {
         Try {
-            &$cmd -path testdrive:\test.txt -ErrorAction Stop
+            &$cmd -path TestDrive:\test.txt -ErrorAction Stop
         }
         Catch {
             $e = $_
@@ -680,7 +680,7 @@ Get-Date
 
     It "Should run without error" {
         $r = &$cmd -path TestDrive:\test.ps1
-        $r.gettype().Name | Should -Be ScriptRequirements
+        $r.GetType().Name | Should -Be ScriptRequirements
         $r.RequiredPSVersion | Should -Be '5.1'
         $r.IsElevationRequired | Should -Be $True
     } -Tag acceptance
@@ -691,7 +691,7 @@ Describe Import-ModuleLayout {
     BeforeAll {
         $cmd = "Import-ModuleLayout"
 
-        New-Item Testdrive:\test.txt -ItemType File
+        New-Item TestDrive:\test.txt -ItemType File
         @"
     [
         {
@@ -725,7 +725,7 @@ Describe Import-ModuleLayout {
             "Content":  "# README\r\n"
         }
     ]
-"@ | Out-File testdrive:\layout.json
+"@ | Out-File TestDrive:\layout.json
     }
     It "Should have help documentation" {
         (Get-Help $cmd).Description | Should -Not -BeNullOrEmpty
@@ -743,7 +743,7 @@ Describe Import-ModuleLayout {
     } -Tag acceptance
     It "Should fail on an invalid path" {
         Try {
-            & $cmd -Name foo -parentpath q:\foo\ -layout testdrive:\layout.json -ErrorAction Stop
+            & $cmd -Name foo -parentpath q:\foo\ -layout TestDrive:\layout.json -ErrorAction Stop
         }
         Catch {
             $e = $_
@@ -752,7 +752,7 @@ Describe Import-ModuleLayout {
     } -Tag acceptance
     It "Should fail on an invalid filename" {
         Try {
-            & $cmd -Name foo -parentpath testdrive:\ -layout testdrive:\test.txt -ErrorAction Stop
+            & $cmd -Name foo -parentpath TestDrive:\ -layout TestDrive:\test.txt -ErrorAction Stop
         }
         Catch {
             $e = $_
@@ -761,10 +761,10 @@ Describe Import-ModuleLayout {
     } -Tag acceptance
 
     It "Should run without error" {
-        { & $cmd -Name Foo -parentpath Testdrive:\ -layout testdrive:\layout.json } | Should -Not -Throw
-        Get-Item Testdrive:\foo\readme.md | Should -Exist
-        Get-ChildItem Testdrive:\foo -Directory | Should -HaveCount 3
-        Get-ChildItem Testdrive:\foo -File -Recurse | Should -HaveCount 2
+        { & $cmd -Name Foo -parentpath TestDrive:\ -layout TestDrive:\layout.json } | Should -Not -Throw
+        Get-Item TestDrive:\foo\readme.md | Should -Exist
+        Get-ChildItem TestDrive:\foo -Directory | Should -HaveCount 3
+        Get-ChildItem TestDrive:\foo -File -Recurse | Should -HaveCount 2
     } -Tag acceptance
 
     #insert additional command-specific tests
@@ -789,7 +789,7 @@ Param (
 #the path might be a . or a PSDrive shortcut so get the complete path
 Get-Item -Path $path
 }
-'@ | Out-File Testdrive:\sample.ps1
+'@ | Out-File TestDrive:\sample.ps1
     }
 
     It "Should have help documentation" {
@@ -807,9 +807,9 @@ Get-Item -Path $path
         (Get-Alias 'nch').ResolvedCommand.name | Should -Be $cmd
     } -Tag acceptance
     It "Should take a parameterblock as input" {
-        Get-ParameterBlock -path testdrive:\sample.ps1 -Name 'Get-FolderData' |
-        New-CommentHelp | Out-File Testdrive:\help.txt
-        Get-Item testdrive:\help.txt | Should -Exist
+        Get-ParameterBlock -path TestDrive:\sample.ps1 -Name 'Get-FolderData' |
+        New-CommentHelp | Out-File TestDrive:\help.txt
+        Get-Item TestDrive:\help.txt | Should -Exist
     } -Tag acceptance
     It "Should run without error" {
         { & $cmd -synopsis "Foo" -description "Foo" -templateOnly } | Should -Not -Throw
@@ -855,7 +855,7 @@ Describe New-ModuleFromFiles {
         "Content":  "# README\r\n"
     }
 ]
-"@ | Out-File "testdrive:\layout.json"
+"@ | Out-File "TestDrive:\layout.json"
         @'
 #requires -version 3.0
 
@@ -872,11 +872,11 @@ Function Get-FolderData {
 $path = Convert-Path $path
 Get-Item -Path $path
 }
-'@ | Out-File Testdrive:\sample.ps1
+'@ | Out-File TestDrive:\sample.ps1
 
-        New-Item testdrive:\test.txt -ItemType file
-        #dir testdrive: | Out-String | Write-Host
-        #. testdrive:\sample.ps1
+        New-Item TestDrive:\test.txt -ItemType file
+        #dir TestDrive: | Out-String | Write-Host
+        #. TestDrive:\sample.ps1
         #Get-Folderdata | out-string | write-host
     }
     It "Should have help documentation" {
@@ -903,8 +903,8 @@ Get-Item -Path $path
                 NewModuleName = "PSFoo"
                 ParentPath    = "Q:\Foo\Bar"
                 Description   = "Testing Foo"
-                Layout        = "testdrive:\layout.json"
-                Files         = "testdrive:\sample.ps1"
+                Layout        = "TestDrive:\layout.json"
+                Files         = "TestDrive:\sample.ps1"
             }
             & $cmd @splat
         }
@@ -919,10 +919,10 @@ Get-Item -Path $path
             $splat = @{
                 ErrorAction   = "Stop"
                 NewModuleName = "PSFoo"
-                ParentPath    = "Testdrive:\"
+                ParentPath    = "TestDrive:\"
                 Description   = "Testing Foo"
-                Layout        = "testdrive:\test.txt"
-                Files         = "testdrive:\sample.ps1"
+                Layout        = "TestDrive:\test.txt"
+                Files         = "TestDrive:\sample.ps1"
             }
             & $cmd @splat
         }
@@ -935,16 +935,16 @@ Get-Item -Path $path
         $splat = @{
             ErrorAction   = "Stop"
             NewModuleName = "PSFoo"
-            ParentPath    = "Testdrive:\"
+            ParentPath    = "TestDrive:\"
             Description   = "Testing Foo"
-            Layout        = "testdrive:\layout.json"
-            Files         = "testdrive:\sample.ps1"
+            Layout        = "TestDrive:\layout.json"
+            Files         = "TestDrive:\sample.ps1"
             CreateHelp    = $True
         }
         & $cmd @splat | Out-Null
-        Get-Item Testdrive:\PSFoo | Should -Exist
-        Test-ModuleManifest testdrive:\psfoo\psfoo.psd1 | Should -Be $True
-        (Test-ModuleManifest testdrive:\psfoo\psfoo.psd1).ExportedFunctions.count | Should -Be 1
+        Get-Item TestDrive:\PSFoo | Should -Exist
+        Test-ModuleManifest TestDrive:\psfoo\psfoo.psd1 | Should -Be $True
+        (Test-ModuleManifest TestDrive:\psfoo\psfoo.psd1).ExportedFunctions.count | Should -Be 1
         (Get-ChildItem TestDrive:\PSFoo -Directory -Recurse).count | Should -Be 3
         (Get-ChildItem TestDrive:\PSFoo -File -Recurse).count | Should -Be 7
 
@@ -955,7 +955,7 @@ Get-Item -Path $path
 Describe New-ModuleFromLayout {
     BeforeAll {
         $cmd = "New-ModuleFromLayout"
-        New-Item testdrive:\test.txt -ItemType file
+        New-Item TestDrive:\test.txt -ItemType file
         Mock Get-Command { return $True } -ParameterFilter { $name -match 'git' }
         @"
 [
@@ -990,7 +990,7 @@ Describe New-ModuleFromLayout {
         "Content":  "# README\r\n"
     }
 ]
-"@ | Out-File "testdrive:\layout.json"
+"@ | Out-File "TestDrive:\layout.json"
     }
     It "Should have help documentation" {
         (Get-Help $cmd).Description | Should -Not -BeNullOrEmpty
@@ -1015,7 +1015,7 @@ Describe New-ModuleFromLayout {
                 NewModuleName = "PSFoo"
                 ParentPath    = "Q:\Foo\Bar"
                 Description   = "Testing Foo"
-                Layout        = "testdrive:\layout.json"
+                Layout        = "TestDrive:\layout.json"
             }
             & $cmd @splat
         }
@@ -1030,9 +1030,9 @@ Describe New-ModuleFromLayout {
             $splat = @{
                 ErrorAction   = "Stop"
                 NewModuleName = "PSFoo"
-                ParentPath    = "Testdrive:\"
+                ParentPath    = "TestDrive:\"
                 Description   = "Testing Foo"
-                Layout        = "testdrive:\test.txt"
+                Layout        = "TestDrive:\test.txt"
             }
             & $cmd @splat
         }
@@ -1046,9 +1046,9 @@ Describe New-ModuleFromLayout {
         $splat = @{
             ErrorAction   = "Stop"
             NewModuleName = "PSFooBar"
-            ParentPath    = "Testdrive:\"
+            ParentPath    = "TestDrive:\"
             Description   = "Testing Foo"
-            Layout        = "testdrive:\layout.json"
+            Layout        = "TestDrive:\layout.json"
         }
         & $cmd @splat
         Get-Item TestDrive:\PSFooBar | Should -Exist
@@ -1088,7 +1088,7 @@ Describe Test-FunctionName {
 Describe Get-FunctionProfile {
     BeforeAll {
         $cmd = "Get-FunctionProfile"
-        New-Item testdrive:\foo.ps1
+        New-Item TestDrive:\foo.ps1
         $out = @'
 #requires -version 5.1
 Function Get-Foo {
@@ -1104,7 +1104,7 @@ Function Get-Foo {
 }
 '@
 
-    $out | Out-File testdrive:\get-foo.ps1
+    $out | Out-File TestDrive:\get-foo.ps1
     }
     It "Should have a defined alias of 'gfp'" {
         (Get-Alias 'gfp').ResolvedCommand.name | Should -Be $cmd
@@ -1138,7 +1138,7 @@ Function Get-Foo {
         Try {
             $splat = @{
                 ErrorAction = "Stop"
-                Path        = "Testdrive:\foo.ps1"
+                Path        = "TestDrive:\foo.ps1"
                 Name        = "BadName"
             }
             & $cmd @splat
@@ -1150,18 +1150,18 @@ Function Get-Foo {
     } -Tag acceptance
 
     It "Should run without error" {
-        $r = & $cmd -name Get-Foo -path testdrive:\get-foo.ps1
+        $r = & $cmd -name Get-Foo -path TestDrive:\get-foo.ps1
         ($r | get-member name).typename | Should -Be "PSFunctionProfile"
         $r.DynamicParameters | Should -be $True
         $r.FunctionAlias | Should -be 'xyz'
         $r.dotNet | Should -Not -BeNullOrEmpty
-        $r.requiredversion | Should -Be "5.1"
+        $r.RequiredVersion | Should -Be "5.1"
         $r.externalCommands | Should -BeNullOrEmpty
         $r.name | Should -Be 'Get-Foo'
     } -Tag Acceptance
 
     It "Should accept pipeline input" {
-        { Get-ChildItem testdrive:\get-foo.ps1 | Get-FunctionName -detailed | Get-FunctionProfile} | Should -Not -Throw
+        { Get-ChildItem TestDrive:\get-foo.ps1 | Get-FunctionName -detailed | Get-FunctionProfile} | Should -Not -Throw
     } -tag acceptance
 } -Tag function
 Describe Export-FunctionToFile {
@@ -1185,7 +1185,7 @@ Describe Export-FunctionToFile {
         {Export-FunctionToFile -name prompt -Path TestDrive:} | Should -Not -Throw
     } -Tag Acceptance
     It "Should fail on an invalid function name error" {
-        {Export-FunctionToFile -name foozzz -Path Testdrive:} | Should -Throw
+        {Export-FunctionToFile -name foozzz -Path TestDrive:} | Should -Throw
     } -Tag Acceptance
     It "Should fail on an invalid path name error" {
         {Export-FunctionToFile -name foozzz -Path TestDrive: } | Should -Throw

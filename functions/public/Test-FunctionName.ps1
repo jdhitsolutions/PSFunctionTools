@@ -3,7 +3,12 @@ Function Test-FunctionName {
     [alias('tfn')]
     [OutputType("boolean", "string")]
     Param(
-        [Parameter(Position = 0, Mandatory, ValueFromPipeline, HelpMessage = "Specify a function name.")]
+        [Parameter(
+            Position = 0,
+            Mandatory,
+            ValueFromPipeline,
+            HelpMessage = "Specify a function name."
+        )]
         [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter(HelpMessage = "Get a boolean test result.")]

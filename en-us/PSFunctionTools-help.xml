@@ -203,7 +203,7 @@
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Passthru</maml:name>
+          <maml:name>PassThru</maml:name>
           <maml:description>
             <maml:para>Pass the output file to the pipeline.</maml:para>
           </maml:description>
@@ -286,7 +286,7 @@
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Passthru</maml:name>
+          <maml:name>PassThru</maml:name>
           <maml:description>
             <maml:para>Pass the output file to the pipeline.</maml:para>
           </maml:description>
@@ -370,7 +370,7 @@
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>Passthru</maml:name>
+        <maml:name>PassThru</maml:name>
         <maml:description>
           <maml:para>Pass the output file to the pipeline.</maml:para>
         </maml:description>
@@ -521,7 +521,7 @@
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Passthru</maml:name>
+          <maml:name>PassThru</maml:name>
           <maml:description>
             <maml:para>Show the file result.</maml:para>
           </maml:description>
@@ -594,7 +594,7 @@
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>Passthru</maml:name>
+        <maml:name>PassThru</maml:name>
         <maml:description>
           <maml:para>Show the file result.</maml:para>
         </maml:description>
@@ -685,7 +685,7 @@
       </command:example>
       <command:example>
         <maml:title>-------------------------- Example 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Export-FunctionToFile -Name New-FileLink -Path c:\work -Requires "#requires -version 5.1","#requires -RunAsAdministrator" -Passthru
+        <dev:code>PS C:\&gt; Export-FunctionToFile -Name New-FileLink -Path c:\work -Requires "#requires -version 5.1","#requires -RunAsAdministrator" -PassThru
 
     Directory: C:\work
 
@@ -732,7 +732,7 @@ Mode                 LastWriteTime         Length Name
           <dev:defaultValue>modulelayout.json</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Passthru</maml:name>
+          <maml:name>PassThru</maml:name>
           <maml:description>
             <maml:para>Show the file result.</maml:para>
           </maml:description>
@@ -782,7 +782,7 @@ Mode                 LastWriteTime         Length Name
         <dev:defaultValue>modulelayout.json</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>Passthru</maml:name>
+        <maml:name>PassThru</maml:name>
         <maml:description>
           <maml:para>Show the file result.</maml:para>
         </maml:description>

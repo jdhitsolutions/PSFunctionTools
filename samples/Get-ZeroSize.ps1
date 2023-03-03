@@ -10,7 +10,7 @@ Function Get-ZeroLengthFiles {
         [switch]$Recurse
     )
     Begin {
-        Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Starting $($myinvocation.mycommand)"
+        Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
         #select a subset of properties which speeds things up
         $get = "Name", "CreationDate", "LastModified", "FileSize"
 
@@ -96,6 +96,6 @@ Function Get-ZeroLengthFiles {
         }
     } #process
     End {
-        Write-Verbose "[$((Get-Date).TimeofDay) END    ] Ending $($myinvocation.mycommand)"
+        Write-Verbose "[$((Get-Date).TimeofDay) END    ] Ending $($MyInvocation.MyCommand)"
     } #end
 }

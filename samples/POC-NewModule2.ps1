@@ -37,9 +37,9 @@ Import-ModuleLayout -Name $NewModuleName -ParentPath $ParentPath -Layout $layout
 #I removed the parameter validation on the target path
 $functionFiles = $files | ForEach-Object {
     Write-Verbose "Processing $_"
-    Export-FunctionFromFile -Path $_ -OutputPath $Path\functions\public -All -Passthru
+    Export-FunctionFromFile -Path $_ -OutputPath $Path\functions\public -All -PassThru
     #get aliases
-    if ($pscmdlet.ShouldProcess($_,"Getting function aliases")) {
+    if ($PSCmdlet.ShouldProcess($_,"Getting function aliases")) {
         $aliases += Get-FunctionAlias -path $_ | Select-Object -ExpandProperty alias
     }
 }
@@ -51,19 +51,19 @@ if ($functionFiles) {
 #create the root module
 $psm1 = @"
 
-Get-Childitem `$psscriptroot\functions\*.ps1 -recurse |
+Get-ChildItem `$PSScriptRoot\functions\*.ps1 -recurse |
 Foreach-Object {
 . `$_.FullName
 }
 
 "@
-Write-Verbose "Creating root module $path\$newmodulename.psm1"
-$psm1 | Out-File "$path\$newmodulename.psm1"
+Write-Verbose "Creating root module $path\$NewModuleName.psm1"
+$psm1 | Out-File "$path\$NewModuleName.psm1"
 
 #create the module manifest
 $splat = @{
-    Path                 = "$path\$newmodulename.psd1"
-    RootModule           = "$newmodulename.psm1"
+    Path                 = "$path\$NewModuleName.psd1"
+    RootModule           = "$NewModuleName.psm1"
     ModuleVersion        = "0.1.0"
     Author               = "Jeff Hicks"
     CompanyName          = "JDH Information Technology Solutions, Inc."

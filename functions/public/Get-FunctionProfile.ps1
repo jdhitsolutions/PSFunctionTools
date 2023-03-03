@@ -35,7 +35,7 @@ Function Get-FunctionProfile {
         [string]$Path
     )
     Begin {
-        Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Starting $($myinvocation.mycommand)"
+        Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
 
         New-Variable astTokens -Force
         New-Variable astErr -Force
@@ -109,7 +109,7 @@ Function Get-FunctionProfile {
         }
         #separate PowerShell cmdlets from external commands
         $cmdlets, $external = $cmds.Where({ $_ -notmatch ".*(exe|bat|sh|cmd|vbs|wsf)$" }, "Split")
-        [pscustomobject]@{
+        [PSCustomObject]@{
             PSTypeName            = "PSFunctionProfile"
             Name                  = $Name
             FunctionAlias         = $fa.where({ $_.type -eq 'alias' }).PositionalArguments.Value
@@ -129,7 +129,7 @@ Function Get-FunctionProfile {
     } #process
 
     End {
-        Write-Verbose "[$((Get-Date).TimeofDay) END    ] Ending $($myinvocation.mycommand)"
+        Write-Verbose "[$((Get-Date).TimeofDay) END    ] Ending $($MyInvocation.MyCommand)"
 
     } #end
 

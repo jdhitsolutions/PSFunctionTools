@@ -17,7 +17,7 @@ Function Get-ModuleLayout {
         [switch]$AsTree
     )
     Begin {
-        Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Starting $($myinvocation.mycommand)"
+        Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
     } #begin
 
     Process {
@@ -74,7 +74,7 @@ Function Get-ModuleLayout {
     } #process
 
     End {
-        Write-Verbose "[$((Get-Date).TimeofDay) END    ] Ending $($myinvocation.mycommand)"
+        Write-Verbose "[$((Get-Date).TimeofDay) END    ] Ending $($MyInvocation.MyCommand)"
     } #end
 
 } #close Get-ModuleLayout
