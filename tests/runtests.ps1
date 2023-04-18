@@ -1,6 +1,7 @@
 #requires -module @{ModuleName = 'Pester';ModuleVersion='5.2'}
 
 $config = New-PesterConfiguration
+$config.Run.Path = $PSScriptRoot
 #$config.Run.SkipRun = $true
 #$config.run.PassThru = $True
 $config.Output.Verbosity = "Detailed"
