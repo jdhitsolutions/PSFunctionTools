@@ -1,12 +1,12 @@
-﻿#requires -version 4.0
-#requires -runasAdministrator
+#requires -version 4.0
+#requires -RunAsAdministrator
 
 #this is a sample script
 
 Param (
     [Parameter(Position = 0, HelpMessage = "How many numbers do you want?")]
     [ValidateRange(1, 100)]
-    [int]$Count = 1
+    [Int]$Count = 1
 )
 DynamicParam {
     #this is a sample dynamic parameter

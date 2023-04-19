@@ -1,7 +1,7 @@
 #requires -version 7.1
 #this demo assumes you have the Platyps module and git installed
 
-[cmdletbinding(SupportsShouldProcess)]
+[CmdletBinding(SupportsShouldProcess)]
 Param()
 
 $splat = @{
@@ -17,6 +17,6 @@ $splat = @{
 
 Write-Host "Using these parameters"
 $splat | Out-String | Write-Host
-Write-host "WhatIf = $WhatIfPreference"
+Write-Host "WhatIf = $WhatIfPreference"
 pause
-New-ModuleFromFiles @splat -whatIf
+New-ModuleFromFiles @splat -WhatIf

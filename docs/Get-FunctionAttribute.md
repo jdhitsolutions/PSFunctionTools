@@ -26,28 +26,28 @@ This command can be used to get function attributes such as cmdletbinding or ali
 ### Example 1
 
 ```powershell
-PS C:\> Get-Functionattribute -path c:\scripts\Get-ParameterBlock.ps1 -Name get-parameterblock
+PS C:\> Get-FunctionAttribute -path c:\scripts\Get-ParameterBlock.ps1 -Name Get-ParameterBlock
 
 
 Type                : cmdletbinding
 NamedArguments      : {}
 PositionalArguments : {}
 String              : [cmdletbinding()]
-Function            : Get-Parameterblock
+Function            : Get-ParameterBlock
 Path                : C:\scripts\Get-ParameterBlock.ps1
 
 Type                : alias
 NamedArguments      : {}
 PositionalArguments : {"gpb"}
 String              : [alias("gpb")]
-Function            : Get-Parameterblock
+Function            : Get-ParameterBlock
 Path                : C:\scripts\Get-ParameterBlock.ps1
 
 Type                : OutputType
 NamedArguments      : {}
 PositionalArguments : {"ParamBlockAst", "String"}
 String              : [OutputType("ParamBlockAst","String")]
-Function            : Get-Parameterblock
+Function            : Get-ParameterBlock
 Path                : C:\scripts\PSFunctionTools\functions\public\Get-ParameterB
                       lock.ps1
 ```

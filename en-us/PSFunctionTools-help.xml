@@ -492,7 +492,7 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>You can use this command to export a function which is loaded into your PowerShell session. You might need to do this when you create an ad-hoc function and want to save it to a file. This command will take the content of the function and export it to a ps1 file. The function name will be used for the file name. Although, characters like the colon will be stripped to create a filesystem-compatibale filename.</maml:para>
+      <maml:para>You can use this command to export a function which is loaded into your PowerShell session. You might need to do this when you create an ad-hoc function and want to save it to a file. This command will take the content of the function and export it to a ps1 file. The function name will be used for the file name. Although, characters like the colon will be stripped to create a filesystem-compatible filename.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -546,7 +546,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Requires</maml:name>
           <maml:description>
-            <maml:para>Specify #Requires statements, including the #</maml:para>
+            <maml:para>Specify #Requires statements, including the # character.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -620,7 +620,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Requires</maml:name>
         <maml:description>
-          <maml:para>Specify #Requires statements, including the #</maml:para>
+          <maml:para>Specify #Requires statements, including the # character.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -698,6 +698,10 @@ Mode                 LastWriteTime         Length Name
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/3mI7E6w</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Export-FunctionFromFile</maml:linkText>
         <maml:uri></maml:uri>
@@ -912,12 +916,12 @@ PS C:\&gt;</dev:code>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Format-FunctionName is intended to be used as a helper function in your scripting automation. This is a simple function that will format a verb-noun function name into proper case. It will take an input such as test-data and format it as Test-Data. It will not format as PascalCase. The command also will not verify that the verb component is acceptable. Use Test-FunctionName for that process.</maml:para>
+      <maml:para>Format-FunctionName is intended to be used as a helper function in your scripting automation. This is a simple function that will format a verb-noun function name into proper case. It will take an input such as test-data and format it as Test-Data. It will not format as Pascal case, although you can capitalize N number of characters in the Noun portion of your command name. The command also will not verify that the verb component is acceptable. Use Test-FunctionName for that process.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Format-FunctionName</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="byValue" position="0" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="none">
           <maml:name>Name</maml:name>
           <maml:description>
             <maml:para>What is the name of your function? It should follow the Verb-Noun naming convention. Although the verb will not be validated.</maml:para>
@@ -929,10 +933,22 @@ PS C:\&gt;</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>NounCapitals</maml:name>
+          <maml:description>
+            <maml:para>Capitalize the first N number of characters in the Noun.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="byValue" position="0" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="none">
         <maml:name>Name</maml:name>
         <maml:description>
           <maml:para>What is the name of your function? It should follow the Verb-Noun naming convention. Although the verb will not be validated.</maml:para>
@@ -940,6 +956,18 @@ PS C:\&gt;</dev:code>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>NounCapitals</maml:name>
+        <maml:description>
+          <maml:para>Capitalize the first N number of characters in the Noun.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -984,7 +1012,15 @@ Test-Data</dev:code>
         <dev:code>PS C:\&gt; Format-FunctionName try-pssystem
 Try-Pssystem</dev:code>
         <dev:remarks>
-          <maml:para>The command does not validate the verb nor can it produce a PascalCase result like Try-PsSystem.</maml:para>
+          <maml:para>The command does not validate the verb nor can it produce a Pascal Case result like Try-PsSystem.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Format-FunctionName test-pssystem -NounCapitals 3
+Test-PSSystem</dev:code>
+        <dev:remarks>
+          <maml:para>Even though you can't format in Pascal case, you can specify how many characters of the Noun portion of your command that you want to capitalize.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1009,7 +1045,7 @@ Try-Pssystem</dev:code>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Get-FunctionAlias is a tool you can use in your scripting automation. It will extract function names and aliases from a PowerShell script file. The source must be a .ps1 or .psm1 file. The command will only idenfity aliases defined as part of the function using code like [alias('foo')].</maml:para>
+      <maml:para>Get-FunctionAlias is a tool you can use in your scripting automation. It will extract function names and aliases from a PowerShell script file. The source must be a .ps1 or .psm1 file. The command will only identify aliases defined as part of the function using code like [alias('foo')].</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1222,28 +1258,28 @@ Restore-SQLdatabase rsql</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-Functionattribute -path c:\scripts\Get-ParameterBlock.ps1 -Name get-parameterblock
+        <dev:code>PS C:\&gt; Get-FunctionAttribute -path c:\scripts\Get-ParameterBlock.ps1 -Name Get-ParameterBlock
 
 
 Type                : cmdletbinding
 NamedArguments      : {}
 PositionalArguments : {}
 String              : [cmdletbinding()]
-Function            : Get-Parameterblock
+Function            : Get-ParameterBlock
 Path                : C:\scripts\Get-ParameterBlock.ps1
 
 Type                : alias
 NamedArguments      : {}
 PositionalArguments : {"gpb"}
 String              : [alias("gpb")]
-Function            : Get-Parameterblock
+Function            : Get-ParameterBlock
 Path                : C:\scripts\Get-ParameterBlock.ps1
 
 Type                : OutputType
 NamedArguments      : {}
 PositionalArguments : {"ParamBlockAst", "String"}
 String              : [OutputType("ParamBlockAst","String")]
-Function            : Get-Parameterblock
+Function            : Get-ParameterBlock
 Path                : C:\scripts\PSFunctionTools\functions\public\Get-ParameterB
                       lock.ps1</dev:code>
         <dev:remarks>
@@ -1285,7 +1321,7 @@ Path                : C:\scripts\PSFunctionTools\functions\public\Get-ParameterB
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>When exporting functions from files, you may only want to export specific functions. Which you can do if you know the name. Use Get-FunctionName to identify the names of functions. The default behavior is to get names of functions that follow the verb-noun naming convention.</maml:para>
+      <maml:para>When exporting functions from files, you may only want to export specific functions. Which you can do if you know the name. Use Get-FunctionName to identify the names of functions. The default behavior is to get names of functions that follow the Verb-Noun naming convention.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1642,7 +1678,7 @@ Path                  : C:\Scripts\PSFunctionTools\samples\SampleScript5.ps1</de
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>This command will provide information about a module layout folder which was created using Export-ModuleLayout. The default output is custom object. You can elect to view the layout as a tree. This parameter requires the tree commandline utility which should be available on Windows systems by default. On non-Windows platforms, you may need to install the utility.</maml:para>
+      <maml:para>This command will provide information about a module layout folder which was created using Export-ModuleLayout. The default output is custom object. You can elect to view the layout as a tree. This parameter requires the tree command-line utility which should be available on Windows systems by default. On non-Windows platforms, you may need to install the utility.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1923,7 +1959,7 @@ C:\&lt;PathTo&gt;\&lt;MYMODULE&gt;
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\Scripts&gt; Get-parameterblock -path c:\scripts\SimpleFunction.ps1 -name Get-FolderData
+        <dev:code>PS C:\&gt; Get-ParameterBlock -path c:\scripts\SimpleFunction.ps1 -name Get-FolderData
 
 Attributes Parameters                Extent
 ---------- ----------                ------
@@ -1934,7 +1970,7 @@ Attributes Parameters                Extent
       </command:example>
       <command:example>
         <maml:title>-------------------------- Example 2 --------------------------</maml:title>
-        <dev:code>PS C:\Scripts&gt; Get-parameterblock  -path c:\scripts\SimpleFunction.ps1 -name Get-FolderData -ToString
+        <dev:code>PS C:\&gt; Get-ParameterBlock  -path c:\scripts\SimpleFunction.ps1 -name Get-FolderData -ToString
 [parameter(HelpMessage = "Specify the folder to analyze")]
 [string]$Path="."
 [datetime]$Cutoff
@@ -2009,19 +2045,21 @@ Attributes Parameters                Extent
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; PS C:\Scripts\PSFunctionTools&gt; Get-PSFunctionTools
+        <dev:code>PS C:\&gt; Get-PSFunctionTools
 
-   Module: PSFunctionTools [v0.6.0]
+   Module: PSFunctionTools [v1.2.0]
 
 Name                       Alias    Synopsis
 ----                       -----    --------
 Convert-ScriptToFunction    csf     Convert a script file to a PowerShell funct…
 Export-FunctionFromFile     eff     Export a PowerShell function from a script …
+Export-FunctionToFile       etf     Export a PowerShell function to a file.
 Export-ModuleLayout         eml     Export a model module layout.
-Format-FunctionName                 Format a function name to proper case.
+Format-FunctionName         ffn     Format a function name to proper case.
 Get-FunctionAlias        {ga, gfal} Get a defined function alias.
 Get-FunctionAttribute       gfa     Get function attributes like cmdletbinding.
-Get-FunctionName                    Identify the names of PowerShell functions …
+Get-FunctionName            gfn     Identify the names of PowerShell functions …
+Get-FunctionProfile         gfp     Get a technical summary of a PowerShell fun…
 Get-ModuleLayout                    Get information about a module layout file.
 Get-ParameterBlock          gpb     Get a function's parameter block.
 Get-PSFunctionTools                 Get a summary of PSFunctionTools commands.
@@ -2029,8 +2067,8 @@ Get-PSRequirements                  List PowerShell command requirements.
 Import-ModuleLayout         iml     Create a module structure from a layout fil…
 New-CommentHelp             nch     Create comment based help.
 New-ModuleFromFiles                 Create a PowerShell module from a set of fi…
-New-ModuleFromLayout                Creat a new module based on a layout.
-Test-FunctionName                   Test the validity of a PowerShell function …</dev:code>
+New-ModuleFromLayout                Create a new module based on a layout.
+Test-FunctionName           tfn     Test the validity of a PowerShell function …</dev:code>
         <dev:remarks>
           <maml:para>The default output is formatted as a table.</maml:para>
         </dev:remarks>
@@ -2523,7 +2561,7 @@ Mode                 LastWriteTime         Length Name
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-Parameterblock  -path c:\scripts\SimpleFunction.ps1 -name Get-FolderData | New-CommentHelp -Synopsis "Get folder details"
+        <dev:code>PS C:\&gt; Get-ParameterBlock  -path c:\scripts\SimpleFunction.ps1 -name Get-FolderData | New-CommentHelp -Synopsis "Get folder details"
 &lt;#
     .Synopsis
       Get folder details
@@ -2908,7 +2946,7 @@ Mode                 LastWriteTime         Length Name
 }
 PS C:\&gt; New-ModuleFromFiles @splat</dev:code>
         <dev:remarks>
-          <maml:para>Using the parameter values defined in the hashtable, create a new module called PSTools using the functions from pstools.psm1 and servertools.ps1. Only functions with valid verb-noun names will be exported. This example will also create initial help documentation and initialize a git repository.</maml:para>
+          <maml:para>Using the parameter values defined in the hashtable, create a new module called PSTools using the functions from pstools.psm1 and servertools.ps1. Only functions with valid verb-noun names will be exported. This example will also create the initial help documentation and initialize a git repository.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -2941,7 +2979,7 @@ PS C:\&gt; New-ModuleFromFiles @splat</dev:code>
       <command:verb>New</command:verb>
       <command:noun>ModuleFromLayout</command:noun>
       <maml:description>
-        <maml:para>Creat a new module based on a layout.</maml:para>
+        <maml:para>Create a new module based on a layout.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>

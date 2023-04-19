@@ -14,12 +14,12 @@ Format a function name to proper case.
 ## SYNTAX
 
 ```yaml
-Format-FunctionName [[-Name] <String>] [<CommonParameters>]
+Format-FunctionName [-Name] <String> [-NounCapitals <Int32>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Format-FunctionName is intended to be used as a helper function in your scripting automation. This is a simple function that will format a verb-noun function name into proper case. It will take an input such as test-data and format it as Test-Data. It will not format as PascalCase. The command also will not verify that the verb component is acceptable. Use Test-FunctionName for that process.
+Format-FunctionName is intended to be used as a helper function in your scripting automation. This is a simple function that will format a verb-noun function name into proper case. It will take an input such as test-data and format it as Test-Data. It will not format as Pascal case, although you can capitalize N number of characters in the Noun portion of your command name. The command also will not verify that the verb component is acceptable. Use Test-FunctionName for that process.
 
 ## EXAMPLES
 
@@ -39,7 +39,16 @@ PS C:\> Format-FunctionName try-pssystem
 Try-Pssystem
 ```
 
-The command does not validate the verb nor can it produce a PascalCase result like Try-PsSystem.
+The command does not validate the verb nor can it produce a Pascal Case result like Try-PsSystem.
+
+### Example 3
+
+```powershell
+PS C:\> Format-FunctionName test-pssystem -NounCapitals 3
+Test-PSSystem
+```
+
+Even though you can't format in Pascal case, you can specify how many characters of the Noun portion of your command that you want to capitalize.
 
 ## PARAMETERS
 
@@ -55,7 +64,23 @@ Aliases:
 Required: True
 Position: 0
 Default value: None
-Accept pipeline input: byValue
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -NounCapitals
+
+Capitalize the first N number of characters in the Noun.
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

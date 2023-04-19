@@ -43,7 +43,7 @@ PS C:\> $splat = @{
 PS C:\> New-ModuleFromFiles @splat
 ```
 
-Using the parameter values defined in the hashtable, create a new module called PSTools using the functions from pstools.psm1 and servertools.ps1. Only functions with valid verb-noun names will be exported. This example will also create initial help documentation and initialize a git repository.
+Using the parameter values defined in the hashtable, create a new module called PSTools using the functions from pstools.psm1 and servertools.ps1. Only functions with valid verb-noun names will be exported. This example will also create the initial help documentation and initialize a git repository.
 
 ## PARAMETERS
 

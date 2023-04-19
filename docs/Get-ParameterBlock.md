@@ -26,7 +26,7 @@ This command is designed to use the PowerShell AST and retrieve a function's par
 ### Example 1
 
 ```powershell
-PS C:\Scripts> Get-parameterblock -path c:\scripts\SimpleFunction.ps1 -name Get-FolderData
+PS C:\> Get-ParameterBlock -path c:\scripts\SimpleFunction.ps1 -name Get-FolderData
 
 Attributes Parameters                Extent
 ---------- ----------                ------
@@ -38,7 +38,7 @@ Get the AST parameter block object.
 ### Example 2
 
 ```powershell
-PS C:\Scripts> Get-parameterblock  -path c:\scripts\SimpleFunction.ps1 -name Get-FolderData -ToString
+PS C:\> Get-ParameterBlock  -path c:\scripts\SimpleFunction.ps1 -name Get-FolderData -ToString
 [parameter(HelpMessage = "Specify the folder to analyze")]
 [string]$Path="."
 [datetime]$Cutoff

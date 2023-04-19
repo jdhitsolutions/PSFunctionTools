@@ -19,7 +19,7 @@ Get-FunctionAlias [-Path] <String> [<CommonParameters>]
 
 ## DESCRIPTION
 
-Get-FunctionAlias is a tool you can use in your scripting automation. It will extract function names and aliases from a PowerShell script file. The source must be a .ps1 or .psm1 file. The command will only idenfity aliases defined as part of the function using code like [alias('foo')].
+Get-FunctionAlias is a tool you can use in your scripting automation. It will extract function names and aliases from a PowerShell script file. The source must be a .ps1 or .psm1 file. The command will only identify aliases defined as part of the function using code like [alias('foo')].
 
 ## EXAMPLES
 

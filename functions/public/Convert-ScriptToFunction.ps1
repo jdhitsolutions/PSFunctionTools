@@ -1,35 +1,35 @@
 Function Convert-ScriptToFunction {
     [cmdletbinding()]
-    [OutputType("System.String")]
+    [OutputType('System.String')]
     [alias('csf')]
     Param(
         [Parameter(
             Position = 0,
             Mandatory,
             ValueFromPipelineByPropertyName,
-            HelpMessage = "Enter the path to your PowerShell script file."
+            HelpMessage = 'Enter the path to your PowerShell script file.'
         )]
-        [ValidateScript({Test-Path $_ })]
-        [ValidatePattern("\.ps1$")]
+        [ValidateScript({ Test-Path $_ })]
+        [ValidatePattern('\.ps1$')]
         [string]$Path,
 
         [Parameter(
             Position = 1,
             Mandatory,
             ValueFromPipelineByPropertyName,
-            HelpMessage = "What is the name of your new function?")]
+            HelpMessage = 'What is the name of your new function?')]
         [ValidateScript({
-            if ($_ -match "^\w+-\w+$") {
-                $true
-            }
-            else {
-                Throw "Your function name should have a Verb-Noun naming convention"
-                $False
-            }
-        })]
+                if ($_ -match '^\w+-\w+$') {
+                    $true
+                }
+                else {
+                    Throw 'Your function name should have a Verb-Noun naming convention'
+                    $False
+                }
+            })]
         [string]$Name,
 
-        [Parameter(ValueFromPipelineByPropertyName,HelpMessage = "Specify an optional alias for your new function. You can define multiple aliases separated by commas.")]
+        [Parameter(ValueFromPipelineByPropertyName, HelpMessage = 'Specify an optional alias for your new function. You can define multiple aliases separated by commas.')]
         [ValidateNotNullOrEmpty()]
         [string[]]$Alias
     )
@@ -38,8 +38,7 @@ Function Convert-ScriptToFunction {
         If running this function in the PowerShell ISE or VS Code,
         define a ToEditor switch parameter
         #>
-        If ($host.name -match "ISE|Code") {
-
+        If ($host.name -match 'ISE|Code') {
             $paramDictionary = New-Object -Type System.Management.Automation.RuntimeDefinedParameterDictionary
 
             # Defining parameter attributes
@@ -57,7 +56,7 @@ Function Convert-ScriptToFunction {
     } #end DynamicParam
     Begin {
         Write-Verbose "Starting $($MyInvocation.MyCommand)"
-        Write-Verbose "Initializing"
+        Write-Verbose 'Initializing'
         $new = [System.Collections.Generic.list[string]]::new()
     } #begin
     Process {
@@ -69,18 +68,18 @@ Function Convert-ScriptToFunction {
         $AST = _getAST $path
 
         if ($ast.extent) {
-            Write-Verbose "Getting any comment based help"
+            Write-Verbose 'Getting any comment based help'
             $ch = $astTokens | Where-Object { $_.kind -eq 'comment' -AND $_.text -match '\.synopsis' }
 
             if ($ast.ScriptRequirements) {
-                Write-Verbose "Adding script requirements"
-               if($ast.ScriptRequirements.RequiredPSVersion) {
-                   $new.Add("#requires -version $($ast.ScriptRequirements.RequiredPSVersion.ToString())")
-               }
-               if ($ast.ScriptRequirements.RequiredModules) {
+                Write-Verbose 'Adding script requirements'
+                if ($ast.ScriptRequirements.RequiredPSVersion) {
+                    $new.Add("#requires -version $($ast.ScriptRequirements.RequiredPSVersion.ToString())")
+                }
+                if ($ast.ScriptRequirements.RequiredModules) {
                     Foreach ($m in $ast.ScriptRequirements.RequiredModules) {
                         #test for version requirements
-                        $ver = $m.PSObject.properties.where({$_.name -match 'version' -AND $_.value})
+                        $ver = $m.PSObject.properties.where({ $_.name -match 'version' -AND $_.value })
                         if ($ver) {
                             $new.Add("#requires -module @{ModuleName = '$($m.name)';$($ver.Name) = '$($ver.value)'}")
                         }
@@ -88,111 +87,111 @@ Function Convert-ScriptToFunction {
                             $new.add("#requires -module $($m.Name)")
                         }
                     }
-               }
-               if ($ast.ScriptRequirements.IsElevationRequired) {
-                    $new.Add("#requires -RunAsAdministrator")
-               }
-               If ($ast.ScriptRequirements.requiredPSEditions) {
+                }
+                if ($ast.ScriptRequirements.IsElevationRequired) {
+                    $new.Add('#requires -RunAsAdministrator')
+                }
+                If ($ast.ScriptRequirements.requiredPSEditions) {
                     $new.add("#requires -PSEdition $($ast.ScriptRequirements.requiredPSEditions)")
-               }
+                }
 
-               $new.Add("`n")
+                $new.Add("`n")
             }
             else {
-                Write-Verbose "No script requirements found"
+                Write-Verbose 'No script requirements found'
             }
 
-           $head = @"
+            $head = @"
 # Function exported from $Path
 
 Function $Name {
 
 "@
-        $new.add($head)
+            $new.add($head)
 
             if ($ch) {
                 $new.Add($ch.text)
                 $new.Add("`n")
             }
             else {
-                Write-Verbose "Generating new comment based help from parameters"
+                Write-Verbose 'Generating new comment based help from parameters'
                 if ($ast.ParamBlock) {
-                    New-CommentHelp -ParamBlock $ast.ParamBlock | Foreach-Object { $new.Add("$_")}
+                    New-CommentHelp -ParamBlock $ast.ParamBlock | ForEach-Object { $new.Add("$_") }
                 }
                 else {
-                    New-CommentHelp -templateonly |Foreach-Object { $new.Add("$_")}
+                    New-CommentHelp -TemplateOnly | ForEach-Object { $new.Add("$_") }
                 }
                 $new.Add("`n")
             }
 
-            [regex]$rx = "\[cmdletbinding\(.*\)\]"
+            [regex]$rx = '\[cmdletbinding\(.*\)\]'
             if ($rx.IsMatch($ast.Extent.text)) {
-                Write-Verbose "Using existing cmdletbinding"
+                Write-Verbose 'Using existing cmdletbinding'
                 #use the first match
                 $cb = $rx.match($ast.extent.text).Value
                 $new.Add("`t$cb")
             }
             else {
-                 Write-Verbose "Adding [cmdletbinding()]"
-               $new.Add("`t[cmdletbinding()]")
+                Write-Verbose 'Adding [cmdletbinding()]'
+                $new.Add("`t[cmdletbinding()]")
             }
 
-           if ($alias) {
+            if ($alias) {
                 Write-Verbose "Adding function alias definition $($alias -join ',')"
                 $new.Add("`t[Alias('$($alias -join "','")')]")
-           }
+            }
             if ($ast.ParamBlock) {
-                Write-Verbose "Adding defined Param() block"
-                [void]($ast.ParamBlock.ToString().split("`n").Foreach({$new.add("`t$_")}) -join "`n")
+                Write-Verbose 'Adding defined Param() block'
+                [void]($ast.ParamBlock.ToString().split("`n").Foreach({ $new.add("`t$_") }) -join "`n")
                 $new.Add("`n")
             }
             else {
-                Write-Verbose "Adding Param() block"
+                Write-Verbose 'Adding Param() block'
                 $new.add("`tParam()")
             }
             if ($ast.DynamicParamBlock) {
                 #assumes no more than 1 dynamic parameter
-                Write-Verbose "Adding dynamic parameters"
-                [void]($ast.DynamicParamBlock.ToString().split("`n").Foreach({$new.Add($_)}) -join "`n")
+                Write-Verbose 'Adding dynamic parameters'
+                [void]($ast.DynamicParamBlock.ToString().split("`n").Foreach({ $new.Add($_) }) -join "`n")
             }
 
             if ($ast.BeginBlock.Extent.text) {
-                Write-Verbose "Adding defined Begin block"
-                [void]($ast.BeginBlock.Extent.ToString().split("`n").Foreach({$new.Add($_)}) -join "`n")
+                Write-Verbose 'Adding defined Begin block'
+                [void]($ast.BeginBlock.Extent.ToString().split("`n").Foreach({ $new.Add($_) }) -join "`n")
                 $UseBPE = $True
             }
 
             if ($ast.ProcessBlock.Extent.text) {
-                Write-Verbose "Adding defined Process block"
-                [void]($ast.ProcessBlock.Extent.ToString().split("`n").Foreach({$new.add($_) }) -join "`n")
+                Write-Verbose 'Adding defined Process block'
+                [void]($ast.ProcessBlock.Extent.ToString().split("`n").Foreach({ $new.add($_) }) -join "`n")
             }
 
             if ($ast.EndBlock.Extent.text) {
                 if ($UseBPE) {
-                    Write-Verbose "Adding opening End{} block"
+                    Write-Verbose 'Adding opening End{} block'
                     $new.Add("`tEnd {")
                 }
-                    Write-Verbose "Adding the remaining code or defined endblock"
-                    [void]($ast.Endblock.Statements.foreach({ $_.ToString() }).Foreach({ $new.Add($_)}))
+                Write-Verbose 'Adding the remaining code or defined endblock'
+                [void]($ast.Endblock.Statements.foreach({ $_.ToString() }).Foreach({ $new.Add($_) }))
                 if ($UseBPE) {
-                Write-Verbose "Adding closing End {} block"
+                    Write-Verbose 'Adding closing End {} block'
                     $new.Add("`t}")
                 }
             }
             else {
-                $new.Add("End { }")
+                $new.Add('End { }')
             }
-            Write-Verbose "Closing the function"
-           $new.Add( "`n} #close $name")
+            Write-Verbose 'Closing the function'
+            $new.Add( "`n} #close $name")
 
-           if ($PSBoundParameters.ContainsKey("ToEditor")) {
-                Write-Verbose "Opening result in editor"
-                if ($host.name -match "ISE") {
+            if ($PSBoundParameters.ContainsKey('ToEditor')) {
+                Write-Verbose 'Opening result in editor'
+                if ($host.name -match 'ISE') {
                     $NewFile = $psISE.CurrentPowerShellTab.Files.add()
                     $NewFile.Editor.InsertText(($new -join "`n"))
-                    $NewFile.editor.select(1,1,1,1)
+                    $NewFile.editor.select(1, 1, 1, 1)
                 }
-                elseif ($host.name -match "Code") {
+                elseif ($host.name -match 'Code') {
                     $psEditor.Workspace.NewFile()
                     $ctx = $psEditor.GetEditorContext()
                     $ctx.CurrentFile.InsertText($new -join "`n")
@@ -201,14 +200,14 @@ Function $Name {
                     $new -join "`n" | Set-Clipboard
                     Write-Warning "Can't detect the PowerShell ISE or VS Code. Output has been copied to the clipboard."
                 }
-        }
-        else {
-            Write-Verbose "Writing output [$($new.count) lines] to the pipeline"
-            $new -join "`n"
-        }
+            }
+            else {
+                Write-Verbose "Writing output [$($new.count) lines] to the pipeline"
+                $new -join "`n"
+            }
         } #if ast found
         else {
-            Write-Warning "Failed to find a script body to convert to a function."
+            Write-Warning 'Failed to find a script body to convert to a function.'
         }
 
     } #process

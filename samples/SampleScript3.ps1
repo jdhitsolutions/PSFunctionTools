@@ -1,13 +1,13 @@
-﻿#requires -version 5.0
+#requires -version 5.0
 #requires -RunAsAdministrator
 
 #this is a sample script
 
 Param (
     [Parameter(Position = 0, HelpMessage = "How many numbers do you want?")]
-    [int]$Count = 1,
-    [string]$Name,
-    [switch]$Demo
+    [Int]$Count = 1,
+    [String]$Name,
+    [Switch]$Demo
 )
 
 Write-Host "this is a sample script that doesn't do anything but write a random number" -ForegroundColor Yellow

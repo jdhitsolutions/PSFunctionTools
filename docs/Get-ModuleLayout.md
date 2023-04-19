@@ -19,7 +19,7 @@ Get-ModuleLayout [-Path] <String> [-AsTree] [<CommonParameters>]
 
 ## DESCRIPTION
 
-This command will provide information about a module layout folder which was created using Export-ModuleLayout. The default output is custom object. You can elect to view the layout as a tree. This parameter requires the tree commandline utility which should be available on Windows systems by default. On non-Windows platforms, you may need to install the utility.
+This command will provide information about a module layout folder which was created using Export-ModuleLayout. The default output is custom object. You can elect to view the layout as a tree. This parameter requires the tree command-line utility which should be available on Windows systems by default. On non-Windows platforms, you may need to install the utility.
 
 ## EXAMPLES
 

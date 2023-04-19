@@ -23,7 +23,7 @@ To see a summary of these commands at any time, run [Get-PSFunctionTools](docs/G
 ```dos
 PS C:\> Get-PSFunctionTools
 
-   Module: PSFunctionTools [v1.0.0]
+   Module: PSFunctionTools [v1.2.0]
 
 Name                       Alias    Synopsis
 ----                       -----    --------
@@ -43,7 +43,7 @@ Get-PSRequirements                  List PowerShell command requirements.
 Import-ModuleLayout         iml     Create a module structure from a layout fil…
 New-CommentHelp             nch     Create comment based help.
 New-ModuleFromFiles                 Create a PowerShell module from a set of fi…
-New-ModuleFromLayout                Creat a new module based on a layout.
+New-ModuleFromLayout                Create a new module based on a layout.
 Test-FunctionName           tfn     Test the validity of a PowerShell function …
 ```
 
@@ -124,7 +124,7 @@ Test-Data
 
 ### [Get-FunctionAlias](docs/Get-FunctionAlias.md)
 
-`Get-FunctionAlias` is a tool you can use in your scripting automation. It will extract function names and aliases from a PowerShell script file. The source must be a .ps1 or .psm1 file. The command will only idenfity aliases defined as part of the function using code like `[alias('foo')]`.
+`Get-FunctionAlias` is a tool you can use in your scripting automation. It will extract function names and aliases from a PowerShell script file. The source must be a .ps1 or .psm1 file. The command will only identify aliases defined as part of the function using code like `[alias('foo')]`.
 
 ```dos
 PS C:\> Get-FunctionAlias -Path C:\scripts\SQLBackup.psm1
@@ -221,7 +221,7 @@ Attributes Parameters                Extent
 ---------- ----------                ------
 {}         {$Path, $Cutoff, $Filter} Param (…
 
-PS C:\> Get-Parameterblock  -path c:\scripts\SimpleFunction.ps1 -name Get-FolderData -ToString
+PS C:\> Get-ParameterBlock  -path c:\scripts\SimpleFunction.ps1 -name Get-FolderData -ToString
 [parameter(HelpMessage = "Specify the folder to analyze")]
 [string]$Path="."
 [datetime]$Cutoff
@@ -446,3 +446,13 @@ You are welcome to copy, paste, and edit these samples as much as you would like
 ## Bugs and Enhancements
 
 Please use the repository's Issues section for reporting bugs and requesting new features. Remember, the commands in this module are designed for PowerShell 7.1 and later.
+
+## Related Commands and Projects
+
+You might also be interested in the [PSScriptTools](https://github.com/jdhitsolutions/PSScriptTools) module. This module has several commands that you might use in your toolmaking.
+
++ [New-PSFormatXML](http://bit.ly/31SGo5o)
++ [New-PSDynamicParameterForm](https://bit.ly/3HNNcpU)
++ [New-PSDynamicParameter](https://bit.ly/3JX8R0w)
+
+Use the commands in the [PSTypeExtensionTools](https://github.com/jdhitsolutions/PSTypeExtensionTools) to extend standard types as well as custom types and classes in your work.

@@ -18,7 +18,10 @@ Function Format-FunctionName {
                 $False
             }
             })]
-        [string]$Name
+        [string]$Name,
+        [Parameter(HelpMessage = "Capitalize the first N number of characters in the Noun.")]
+        [ValidateScript({$_ -gt 0})]
+        [int]$NounCapitals
     )
 
     Begin {
@@ -27,7 +30,17 @@ Function Format-FunctionName {
     Process {
         Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Processing $name"
         $split = $name -split "-"
-        "{0}{1}-{2}{3}" -f $split[0][0].ToString().ToUpper(), $split[0].Substring(1).Tolower(), $split[1][0].ToString().ToUpper(), $split[1].Substring(1).ToLower()
+        $verb = $split[0]
+        $noun = $split[1]
+        #"{0}{1}-{2}{3}" -f $split[0][0].ToString().ToUpper(), $split[0].Substring(1).ToLower(), $split[1][0].ToString().ToUpper(), $split[1].Substring(1).ToLower()
+        If ($NounCapitals -gt 0) {
+            Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Using custom noun formatting"
+            "{0}{1}-{2}{3}" -f $verb[0].ToString().ToUpper(), $verb.Substring(1).ToLower(), $n.Substring(0,$NounCapitals).ToUpper(), $noun.Substring($NounCapitals).ToLower()
+        }
+        Else {
+            Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Using standard formatting"
+            "{0}{1}-{2}{3}" -f $verb[0].ToString().ToUpper(), $verb.Substring(1).ToLower(), $noun[0].ToString().ToUpper(), $noun.Substring(1).ToLower()
+        }
 
     } #process
     End {

@@ -1,5 +1,22 @@
 # Changelog for PSFunctionTools
 
+## v1.2.0
+
+### Changed
+
+- Pester test revisions.
+- Modified `Format-FunctionName` to let you capitalize N number of characters in the Noun portion of your command name.
+- Help updates.
+- Updated `README.md`.
+
+### Added
+
+- Added missing online help links.
+
+### Removed
+
+- Deleted unused `Types` folder.
+
 ## v1.1.0
 
 ### Changed

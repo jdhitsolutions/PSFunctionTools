@@ -19,7 +19,7 @@ Get-FunctionName [-Path] <String> [-All] [-Detailed] [<CommonParameters>]
 
 ## DESCRIPTION
 
-When exporting functions from files, you may only want to export specific functions. Which you can do if you know the name. Use Get-FunctionName to identify the names of functions. The default behavior is to get names of functions that follow the verb-noun naming convention.
+When exporting functions from files, you may only want to export specific functions. Which you can do if you know the name. Use Get-FunctionName to identify the names of functions. The default behavior is to get names of functions that follow the Verb-Noun naming convention.
 
 ## EXAMPLES
 
@@ -129,6 +129,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS

@@ -1,4 +1,4 @@
-﻿#requires -version 3.0
+#requires -version 3.0
 
 #this is a sample script
 <#
@@ -10,7 +10,7 @@ This is a sample
 How many numbers do you want?
 #>
 
-Param ([int]$Count = 1,[string]$Name = "Foo")
+Param ([Int]$Count = 1,[String]$Name = "Foo")
 
 Begin {
     Write-Host "this is a sample script that doesn't do anything but write a random number" -ForegroundColor Yellow
@@ -18,11 +18,11 @@ Begin {
 }
 Process {
     #get numbers
-    1..$count | Foreach-Object {
+    1..$count | ForEach-Object {
     Get-Random -Minimum 1 -Maximum 1000
     }
 }
 End {
-    write-host "Ending script" -ForegroundColor yellow
+    Write-Host "Ending script" -ForegroundColor yellow
 }
 #eof

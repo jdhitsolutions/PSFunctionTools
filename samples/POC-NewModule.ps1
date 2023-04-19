@@ -1,4 +1,4 @@
-﻿#requires -version 7.1
+#requires -version 7.1
 
 #a proof of concept to convert scripts to a new module
 
@@ -35,7 +35,7 @@ foreach ($item in $csv) {
 $psm1 = @"
 
 Get-ChildItem `$PSScriptRoot\functions\*.ps1 |
-Foreach-Object {
+ForEach-Object {
 . `$_.FullName
 }
 

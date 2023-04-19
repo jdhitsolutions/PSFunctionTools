@@ -4,13 +4,13 @@
 
 @{
     RootModule           = 'PSFunctionTools.psm1'
-    ModuleVersion        = '1.1.0'
+    ModuleVersion        = '1.2.0'
     CompatiblePSEditions = 'Core'
     GUID                 = '151466e0-a952-4b6a-ad81-40dafc9ef9bb'
     Author               = 'Jeff Hicks'
     CompanyName          = 'JDH Information Technology Solutions, Inc.'
     Copyright            = '(c) 2021-2023 JDH Information Technology Solutions, Inc.'
-    Description          = 'A set of PowerShell commands for managing and automating PowerShell scripts, functions, and modules.'
+    Description          = 'A set of PowerShell 7 commands for managing and automating PowerShell scripts, functions, and modules. You can use these tools to accelerate PowerShell script development.'
     PowerShellVersion    = '7.1'
     # TypesToProcess = @()
     FormatsToProcess     = @('formats\modulelayout.format.ps1xml',
@@ -25,7 +25,8 @@
         'Get-PSRequirements', 'New-CommentHelp', 'Format-FunctionName',
         'Get-ModuleLayout', 'Get-ParameterBlock', 'Get-FunctionAttribute',
         'Get-FunctionProfile', 'New-ModuleFromFiles', 'New-ModuleFromLayout',
-        'Get-PSFunctionTools','Export-FunctionToFile')
+        'Get-PSFunctionTools','Export-FunctionToFile'
+        )
     CmdletsToExport      = @()
     # VariablesToExport = @()
     AliasesToExport      = @('gfal', 'ga', 'eff', 'eml', 'iml', 'csf', 'gpb',
@@ -44,4 +45,3 @@
         } # End of PSData hashtable
     } # End of PrivateData hashtable
 }
-

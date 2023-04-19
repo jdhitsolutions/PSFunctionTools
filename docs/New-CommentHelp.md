@@ -36,7 +36,7 @@ You can also specify a synopsis and/or description. Otherwise, you can edit the 
 ### Example 1
 
 ```powershell
-PS C:\> Get-Parameterblock  -path c:\scripts\SimpleFunction.ps1 -name Get-FolderData | New-CommentHelp -Synopsis "Get folder details"
+PS C:\> Get-ParameterBlock  -path c:\scripts\SimpleFunction.ps1 -name Get-FolderData | New-CommentHelp -Synopsis "Get folder details"
 <#
     .Synopsis
       Get folder details

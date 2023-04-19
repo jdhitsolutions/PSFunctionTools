@@ -1,7 +1,7 @@
 ---
 external help file: PSFunctionTools-help.xml
 Module Name: PSFunctionTools
-online version:
+online version: https://bit.ly/3mI7E6w
 schema: 2.0.0
 ---
 
@@ -19,7 +19,7 @@ Export-FunctionToFile [-Name] <String> [-Path <String>] [-PassThru] [-Requires <
 
 ## DESCRIPTION
 
-You can use this command to export a function which is loaded into your PowerShell session. You might need to do this when you create an ad-hoc function and want to save it to a file. This command will take the content of the function and export it to a ps1 file. The function name will be used for the file name. Although, characters like the colon will be stripped to create a filesystem-compatibale filename.
+You can use this command to export a function which is loaded into your PowerShell session. You might need to do this when you create an ad-hoc function and want to save it to a file. This command will take the content of the function and export it to a ps1 file. The function name will be used for the file name. Although, characters like the colon will be stripped to create a filesystem-compatible filename.
 
 ## EXAMPLES
 
@@ -113,7 +113,7 @@ Accept wildcard characters: False
 
 ### -Requires
 
-Specify #Requires statements, including the #
+Specify #Requires statements, including the # character.
 
 ```yaml
 Type: String[]

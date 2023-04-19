@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Creat a new module based on a layout.
+Create a new module based on a layout.
 
 ## SYNTAX
 

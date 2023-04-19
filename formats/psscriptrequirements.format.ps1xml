@@ -18,10 +18,6 @@ https://github.com/jdhitsolutions/PSScriptTools
         <ListEntries>
           <ListEntry>
             <ListItems>
-              <!--
-            By default the entries use property names, but you can replace them with scriptblocks.
-            <ScriptBlock>$_.foo /1mb -as [int]</ScriptBlock>
--->
               <ListItem>
                 <Label>Path</Label>
                 <PropertyName>Path</PropertyName>
@@ -53,13 +49,13 @@ https://github.com/jdhitsolutions/PSScriptTools
               <ListItem>
                 <Label>IsElevationRequired</Label>
                 <ScriptBlock>
-                 If ($_.IsElevationRequired -AND $host.name -match "console|code") {
+                  If ($_.IsElevationRequired -AND $host.name -match "console|code") {
                   "$([char]27)[92m$($_.IsElevationRequired)$([char]27)[0m"
-                 }
-                 else {
-                   $_.IsElevationRequired
-                 }
-                 </ScriptBlock>
+                  }
+                  else {
+                    $_.IsElevationRequired
+                  }
+                </ScriptBlock>
               </ListItem>
             </ListItems>
           </ListEntry>
