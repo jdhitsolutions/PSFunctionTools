@@ -1,4 +1,4 @@
-#requires -version 7.1
+#requires -version 7.4
 #this demo assumes you have the Platyps module and git installed
 
 [CmdletBinding(SupportsShouldProcess)]
@@ -14,9 +14,15 @@ $splat = @{
     FunctionPath  = "functions\public"
     InitializeGit = $True
 }
-
-Write-Host "Using these parameters"
-$splat | Out-String | Write-Host
-Write-Host "WhatIf = $WhatIfPreference"
+Clear-Host
+Write-Host "Using these parameters" -ForegroundColor yellow
+$splat | Out-String | Write-Host -ForegroundColor yellow
+Write-Host "WhatIf = $WhatIfPreference" -ForegroundColor yellow
 pause
-New-ModuleFromFiles @splat -WhatIf
+Write-Host "Creating new module from files" -ForegroundColor Green
+New-ModuleFromFiles @splat
+$newModulePath = Join-Path -Path $splat.ParentPath -ChildPath $splat.NewModuleName
+Write-Host "New module created in newModulePath" -ForegroundColor Green
+if (-Not $WhatIfPreference) {
+    Get-ChildItem -Path $newModulePath -Recurse
+}

@@ -36,16 +36,16 @@ Function Get-ZeroLengthFiles {
         Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Converted to $cPath"
 
         #trim off any trailing \ if cPath is other than a drive root like C:\
-        if ($cpath.Length -gt 3 -AND $cpath -match '\\$') {
-            $cpath = $cpath -replace '\\$', ''
+        if ($cPath.Length -gt 3 -AND $cPath -match '\\$') {
+            $cPath = $cPath -replace '\\$', ''
         }
 
         #parse out the drive
-        $drive = $cpath.Substring(0, 2)
+        $drive = $cPath.Substring(0, 2)
         Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Using Drive $drive"
 
         #get the folder path from the first \
-        $folder = $cpath.Substring($cpath.IndexOf('\')).replace('\', '\\')
+        $folder = $cPath.Substring($cPath.IndexOf('\')).replace('\', '\\')
         Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Using folder $folder (escaped)"
 
         if ($folder -match '\w+' -AND $PSBoundParameters.ContainsKey('Recurse')) {
@@ -68,7 +68,7 @@ Function Get-ZeroLengthFiles {
         #initialize a counter to keep track of the number of files found
         $i = 0
         Try {
-            Write-Host "Searching for zero length files in $cpath. This might take a few minutes..." -ForegroundColor magenta
+            Write-Host "Searching for zero length files in $cPath. This might take a few minutes..." -ForegroundColor magenta
             #find files matching the query and create a custom object for each
             Get-CimInstance @cimParams | ForEach-Object {
                 #increment the counter
@@ -89,7 +89,7 @@ Function Get-ZeroLengthFiles {
         }
         if ($i -eq 0) {
             #display a message if no files were found
-            Write-Host "No zero length files were found in $cpath." -ForegroundColor yellow
+            Write-Host "No zero length files were found in $cPath." -ForegroundColor yellow
         }
         else {
             Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Found $i matching files"

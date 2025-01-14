@@ -25,7 +25,7 @@ Function Get-FunctionName {
                     $False
                 }
             })]
-        [alias("pspath")]
+        [alias("PSPath")]
         [string]$Path,
         [Parameter(HelpMessage = "List all detected function names.")]
         [switch]$All,

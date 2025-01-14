@@ -1,5 +1,4 @@
-
-#helper functions
+# private helper functions
 
 Function _mkHelp {
     [cmdletbinding()]
@@ -15,11 +14,11 @@ Function _mkHelp {
     Write-Verbose "Invoking Import-Module on $ModulePath"
     Import-Module -Name $ModulePath -Scope global
     $ModuleName = (Get-Item $ModulePath).BaseName
-    Get-Command -Module $NewModuleName -OutVariable modcmds | Out-String | Write-Verbose
+    Get-Command -Module $NewModuleName -OutVariable ModCmds | Out-String | Write-Verbose
     Write-Verbose "Invoking New-MarkdownHelp for module $ModuleName"
     Try {
         New-MarkdownHelp -Module $ModuleName -OutputFolder $MarkdownPath -Force -ErrorAction Stop
-        Write-Verbose "Invoking New-Externalhelp to $outputPath"
+        Write-Verbose "Invoking New-Externalhelp to $OutputPath"
         New-ExternalHelp -Path $MarkdownPath -OutputPath $OutputPath -Force -ErrorAction Stop
     }
     Catch {
@@ -31,6 +30,7 @@ Function _getAST {
     [cmdletbinding()]
     Param([string]$Path)
 
+    #always create the variables
     New-Variable astTokens -Force -WhatIf:$false
     New-Variable astErr -Force -WhatIf:$false
     Write-Verbose "Parsing file $path for AST tokens"

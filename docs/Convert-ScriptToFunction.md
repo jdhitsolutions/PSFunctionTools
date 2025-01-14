@@ -19,12 +19,9 @@ Convert-ScriptToFunction [-Path] <String> [-Name] <String> [-Alias <String[]>] [
 
 ## DESCRIPTION
 
-This command takes the body of a script file and wraps it in a function declaration. The command will insert missing elements like cmdletbinding() and comment-based help. You will most likely need to edit and clean up the
-result in your scripting editor.
+This command takes the body of a script file and wraps it in a function declaration. The command will insert missing elements like cmdletbinding() and comment-based help. You will most likely need to edit and clean up the result in your scripting editor.
 
-If you run this command in the PowerShell ISE or the VS Code PowerShell
-integrated terminal, you can use the dynamic parameter ToEditor to open a
-new file with with the output. You can edit and save the file manually.
+If you run this command in the PowerShell ISE or the VS Code PowerShell integrated terminal, you can use the dynamic parameter ToEditor to open a new file with with the output. You can edit and save the file manually.
 
 It is assumed that your script file is complete and without syntax errors.
 
@@ -36,9 +33,7 @@ It is assumed that your script file is complete and without syntax errors.
 PS C:\> Convert-ScriptToFunction c:\scripts\Daily.ps1 -name Invoke-DailyTask | Set-Clipboard
 ```
 
-Convert Daily.ps1 to a function called Invoke-DailyTask and copy the
-results to the Windows clipboard. You can then paste the results into
-scripting editor.
+Convert Daily.ps1 to a function called Invoke-DailyTask and copy the  results to the Windows clipboard. You can then paste the results into scripting editor.
 
 ### EXAMPLE 2
 
@@ -46,8 +41,7 @@ scripting editor.
 PS C:\> Convert-ScriptToFunction c:\scripts\systemreport.ps1 -name New-SystemReport | Out-File c:\scripts\New-SystemReport.ps1
 ```
 
-Convert the SystemReport.ps1 script file to a function called
-New-SystemReport and save the results to a file.
+Convert the SystemReport.ps1 script file to a function called New-SystemReport and save the results to a file.
 
 ### EXAMPLE 3
 
@@ -55,8 +49,7 @@ New-SystemReport and save the results to a file.
 PS C:\> Convert-ScriptToFunction c:\scripts\systemreport.ps1 -name New-System -alias nsr | Tee-Object -variable f
 ```
 
-Convert the script to a function called New-System and tee the output to $f.
-This will also define an function alias of nsr.
+Convert the script to a function called New-System and tee the output to $f. This will also define an function alias of nsr.
 
 ## PARAMETERS
 
@@ -119,7 +112,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### System.String
 
 ## NOTES
-
-Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
 
 ## RELATED LINKS

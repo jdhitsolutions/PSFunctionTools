@@ -140,7 +140,7 @@ Function New-ModuleFromFiles {
         Write-Verbose "Creating root module $path\$NewModuleName.psm1"
         $psm1 = @"
 
-Get-Childitem `$PSScriptRoot\$functionPath\*.ps1 -recurse |
+Get-ChildItem `$PSScriptRoot\$functionPath\*.ps1 -recurse |
 Foreach-Object {
 . `$_.FullName
 }
@@ -170,11 +170,11 @@ Foreach-Object {
             Write-Verbose "Creating module help files"
             if ($PSCmdlet.ShouldProcess($mdPath, "create markdown help files")) {
                 if (Test-Path $mdPath) {
-                    Write-Verbose "Creating markdown files in $mdpath"
-                    _mkHelp -ModulePath $splat.path -Markdownpath $mdpath -OutputPath $xmlpath
+                    Write-Verbose "Creating markdown files in $mdPath"
+                    _mkHelp -ModulePath $splat.path -MarkdownPath $mdPath -OutputPath $xmlpath
                 }
                 else {
-                    Write-Warning "Could not find $mdpath."
+                    Write-Warning "Could not find $mdPath."
                 }
             }
         } #if create help

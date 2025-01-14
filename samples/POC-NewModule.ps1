@@ -1,4 +1,4 @@
-#requires -version 7.1
+#requires -version 7.4
 
 #a proof of concept to convert scripts to a new module
 

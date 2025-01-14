@@ -9,7 +9,7 @@ Function Get-FunctionAlias {
             ValueFromPipelineByPropertyName,
             HelpMessage = "Specify the .ps1 or .psm1 file with defined functions."
         )]
-        [alias("pspath")]
+        [alias("PSPath")]
         [ValidateScript({
             If (Test-Path $_ ) {
                 $True

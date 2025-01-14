@@ -1,33 +1,38 @@
-#requires -version 7.1
+#requires -version 7.4
 
 #tests for Pester 5.x
 
-$global:ModuleName = (Get-Item $PSScriptRoot\..\ -OutVariable p).Name
-if (Get-Module -Name $global:ModuleName) {
-    Remove-Module -Name $global:ModuleName
+BeforeDiscovery {
+    $script:ModuleName = (Get-Item $PSScriptRoot\..\ -OutVariable p).Name
+    if (Get-Module -Name $script:ModuleName) {
+        #Write-Host "Removing module $ModuleName" -ForegroundColor Cyan
+        Remove-Module -Name $script:ModuleName
+    }
+    $script:psd1 = Join-Path $p.FullName -ChildPath "$script:ModuleName.psd1"
+
+    #Write-Host "Importing module $psd1" -ForegroundColor Cyan
+    Import-Module $psd1 -Force
 }
-$global:psd1 = Join-Path $p.FullName -ChildPath "$global:ModuleName.psd1"
 
-Import-Module $global:psd1 -Force
-
-Describe "$($global:ModuleName)" {
+Describe "$($script:ModuleName)" {
     BeforeAll {
         $dir = Get-ChildItem $PSScriptRoot\.. -Directory
     }
     Context Layout {
-        It 'Has a valid manifest' {
-            { Test-ModuleManifest $global:psd1 } | Should -Not -Throw
+        It "$($script:psd1) is a valid manifest" {
+            { Test-ModuleManifest $psd1 } | Should -Not -Throw
         } -Tag manifest
         It 'Has a <_> folder' -ForEach @('docs', 'tests', 'functions', 'formats', 'images', 'en-us') {
             $dir.name | Should -Contain $_
         } -Tag layout
-        It 'Has a <_> file' -ForEach @('changelog.md', 'license.txt', 'readme.md', "..\en-us\$global:ModuleName-help.xml") {
+        It 'Has a <_> file' -ForEach @('changelog.md', 'license.txt', 'readme.md', "..\en-us\$ModuleName-help.xml") {
             $filepath = Join-Path $PSScriptRoot..\ -ChildPath $_
             $filePath | Should -Exist
         } -Tag Layout
     } -Tag structure
-    It 'Has 18 exported functions' {
-        Get-Command -Module $moduleName -CommandType function | Should -HaveCount 18
+    It 'Has 20 exported functions' {
+        #Write-Host "Measuring exported function in ModuleName" -ForegroundColor cyan
+        Get-Command -Module $ModuleName -CommandType function | Should -HaveCount 20
     } -Tag demo
 
     It 'Has a markdown help file for <name>' -ForEach @(
@@ -281,7 +286,7 @@ Function Get-Foo {
         $a = Get-FunctionAlias -Path TestDrive:test.ps1
         $a.Name | Should -Be 'Get-Foo'
         $a.alias | Should -Contain 'gf'
-        $a.PSObject.typenames[0] | Should -Be 'PSFunctionAlias'
+        $a.PSObject.TypeNames[0] | Should -Be 'PSFunctionAlias'
     } -Tag acceptance
 
 } -Tag function
@@ -435,9 +440,9 @@ $name.ToUpper()
 [
     {
         "ItemType":  "ModuleLayoutMetadata",
-        "Created":  "12/16/2021 11:42 AM",
-        "CreatedBy":  "THINKP1\\Jeff",
-        "Computername":  "THINKP1",
+        "Created":  "12/16/2024 11:42 AM",
+        "CreatedBy":  "DESK11\\Jeff",
+        "Computername":  "DESK11",
         "Source":  "C:\\work\\sample",
         "Version":  "1.1"
     },
@@ -546,18 +551,13 @@ $name.ToUpper()
         }
         $e.exception.message | Should -Match "cannot validate argument on parameter 'Path'"
     } -Tag acceptance
-    It 'Should call Get-Command with -AsTree' {
 
-    } -Pending -Tag unit
-    It 'Should call Import-ModuleLayout with -AsTree' {
-
-    } -Pending -Tag unit
     It 'Should run without error' {
         #mock and set mandatory parameters as needed
         $r = Get-ModuleLayout -Path TestDrive:\test.json
         $r.folders | Should -HaveCount 9
         $r.Files | Should -HaveCount 7
-        $r.sourceComputer | Should -Be 'THINKP1'
+        $r.sourceComputer | Should -Be 'DESK11'
         $r.LayoutVersion | Should -Be '1.1'
     } -Tag acceptance
 
@@ -629,7 +629,7 @@ Describe Get-PSRequirements {
         $cmd = 'Get-PSRequirements'
         $f = @'
 #requires -version 5.1
-#requires -RunasAdministrator
+#requires -RunAsAdministrator
 
 Get-Date
 }
@@ -685,9 +685,9 @@ Describe Import-ModuleLayout {
     [
         {
             "ItemType":  "ModuleLayoutMetadata",
-            "Created":  "12/16/2021 11:42 AM",
-            "CreatedBy":  "THINKP1\\Jeff",
-            "Computername":  "THINKP1",
+            "Created":  "12/16/2024 11:42 AM",
+            "CreatedBy":  "DESK11\\Jeff",
+            "Computername":  "DESK11",
             "Source":  "C:\\work\\sample",
             "Version":  "1.1"
         },
@@ -788,7 +788,7 @@ Get-Item -Path $path
         (Get-Command -CommandType function -Name $cmd).OutputType | Should -Not -BeNullOrEmpty
     } -Tag acceptance
     It 'Should have a mandatory parameter of <name>' -ForEach @(
-        @{Name = 'Paramblock' }
+        @{Name = 'ParamBlock' }
     ) {
         Get-Command $cmd | Should -HaveParameter $Name -Mandatory
     } -Tag unit
@@ -815,9 +815,9 @@ Describe New-ModuleFromFiles {
 [
     {
         "ItemType":  "ModuleLayoutMetadata",
-        "Created":  "12/16/2021 11:42 AM",
-        "CreatedBy":  "THINKP1\\Jeff",
-        "Computername":  "THINKP1",
+        "Created":  "12/16/2024 11:42 AM",
+        "CreatedBy":  "DESK11\\Jeff",
+        "Computername":  "DESK11",
         "Source":  "C:\\work\\sample",
         "Version":  "1.1"
     },
@@ -950,9 +950,9 @@ Describe New-ModuleFromLayout {
 [
     {
         "ItemType":  "ModuleLayoutMetadata",
-        "Created":  "12/16/2021 11:42 AM",
-        "CreatedBy":  "THINKP1\\Jeff",
-        "Computername":  "THINKP1",
+        "Created":  "12/16/2024 11:42 AM",
+        "CreatedBy":  "DESK11\\Jeff",
+        "Computername":  "DESK11",
         "Source":  "C:\\work\\sample",
         "Version":  "1.1"
     },
@@ -1153,6 +1153,7 @@ Function Get-Foo {
         { Get-ChildItem TestDrive:\get-foo.ps1 | Get-FunctionName -Detailed | Get-FunctionProfile } | Should -Not -Throw
     } -Tag acceptance
 } -Tag function
+
 Describe Export-FunctionToFile {
     BeforeAll {
         $cmd = 'Export-FunctionToFile'
@@ -1181,3 +1182,65 @@ Describe Export-FunctionToFile {
     } -Tag Acceptance
 
 } -Tag function
+Describe Open-PSFunctionToolsHelp {
+
+    It "Should have help documentation" {
+        (Get-Help Open-PSFunctionToolsHelp).Description | Should -Not -BeNullOrEmpty
+    }
+    It "Should have a defined output type" {
+        (Get-Command -CommandType function -name Open-PSFunctionToolsHelp).OutputType | Should -Not -BeNullOrEmpty
+    }
+
+    InModuleScope PSFunctionTools {
+        BeforeAll {
+            Mock Show-Markdown { } -Parameter {$Path -match "README"}
+            Mock Invoke-Item { } -Parameter {$Path -match "pdf"}
+            Mock Test-Path { return $True} -Parameter {$Path -match "pdf"}
+            Mock Test-Path { return $False} -Parameter {$Path -match "README"}
+        }
+        It "Should fail to run with missing file" {
+            {Open-PSFunctionToolsHelp -AsMarkdown} | Should -Throw
+        }
+
+        It "Should call Invoke-Item" {
+            Open-PSFunctionToolsHelp
+            Should -Invoke Invoke-Item -Times 1 -Exactly
+        }
+
+        It "Should call Show-Markdown for markdown output" {
+            #override the BeforeAll mock
+            Mock Test-Path { return $True} -Parameter {$Path -match "README"}
+            Open-PSFunctionToolsHelp -AsMarkdown
+            Should -Invoke Show-Markdown -Times 1 -Exactly
+        }
+        It "Should run without error" {
+            {Open-PSFunctionToolsHelp} | Should -Not -Throw
+        }
+    } #end InModuleScope
+
+} -tag function
+Describe Open-PSFunctionToolsSamples {
+
+    It "Should have help documentation" {
+        (Get-Help Open-PSFunctionToolsSamples).Description | Should -Not -BeNullOrEmpty
+    }
+    It "Should have a defined output type" {
+        (Get-Command -CommandType function -name Open-PSFunctionToolsSamples).OutputType | Should -Not -BeNullOrEmpty
+    }
+    InModuleScope PSFunctionTools {
+        BeforeAll {
+            Mock Set-Location { return $True } -Verifiable
+            Mock Get-ChildItem { } -Verifiable
+        }
+        It "Should call Set-Location" {
+            Open-PSFunctionToolsSamples | Should -InvokeVerifiable
+        }
+        It "Should call Get-ChildItem" {
+            Open-PSFunctionToolsSamples | Should -InvokeVerifiable
+        }
+        It "Should run without error" {
+            {Open-PSFunctionToolsSamples} | Should -Not -Throw
+        }
+    } #end InModuleScope
+
+} -tag function

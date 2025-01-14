@@ -32,23 +32,23 @@ PS C:\> Import-ModuleLayout -Name PSDemo -ParentPath D:\scripts -Layout C:\work\
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
-d----          12/16/2021  9:45 AM                types
-d----          12/16/2021  9:45 AM                .github
-d----          12/16/2021  9:45 AM                .vscode
-d----          12/16/2021  9:45 AM                docs
+d----          12/16/2024  9:45 AM                types
+d----          12/16/2024  9:45 AM                .github
+d----          12/16/2024  9:45 AM                .vscode
+d----          12/16/2024  9:45 AM                docs
 ...
     Directory: D:\scripts\PSDemo\functions
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
-d----          12/16/2021  9:45 AM                public
-d----          12/16/2021  9:45 AM                private
+d----          12/16/2024  9:45 AM                public
+d----          12/16/2024  9:45 AM                private
 
     Directory: D:\scripts\PSDemo\functions\public
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
--a---          12/16/2021  9:49 AM            276 readme.txt
+-a---          12/16/2024  9:49 AM            276 readme.txt
 ...
 ```
 
@@ -153,8 +153,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### System.IO.DirectoryInfo
 
 ## NOTES
-
-Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
 
 ## RELATED LINKS
 

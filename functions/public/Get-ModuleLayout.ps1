@@ -35,7 +35,7 @@ Function Get-ModuleLayout {
                 Write-Verbose "Using temporary path $tmpModPath"
                 Try {
                     [void](Import-ModuleLayout -Layout $Path -parentpath $parent -name $name -ErrorAction Stop)
-                    if ($iswindows) {
+                    if ($IsWindows) {
                       (tree $tmpModPath /f /a | Select-Object -Skip 2) -replace ($tmpModPath.replace("\", "\\")), "C:\<PathTo>\<MYMODULE>"
                     }
                     else {
@@ -67,8 +67,8 @@ Function Get-ModuleLayout {
                 SourcePath     = $in[0].Source
                 LayoutVersion  = $in[0].Version
                 SourceComputer = $in[0].computername
-                Folders        = $in.where({ $_.itemtype -eq 'directory' }).Path
-                Files          = $in.where({ $_.itemtype -eq 'file' }).Path
+                Folders        = $in.where({ $_.ItemType -eq 'directory' }).Path
+                Files          = $in.where({ $_.ItemType -eq 'file' }).Path
             }
         }
     } #process

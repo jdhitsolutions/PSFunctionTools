@@ -45,7 +45,7 @@ Specify the .ps1 or .psm1 file with defined functions.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: pspath
+Aliases: PSPath
 
 Required: True
 Position: 0

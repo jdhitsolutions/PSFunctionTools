@@ -19,14 +19,14 @@ Function Convert-ScriptToFunction {
             ValueFromPipelineByPropertyName,
             HelpMessage = 'What is the name of your new function?')]
         [ValidateScript({
-                if ($_ -match '^\w+-\w+$') {
-                    $true
-                }
-                else {
-                    Throw 'Your function name should have a Verb-Noun naming convention'
-                    $False
-                }
-            })]
+            if ($_ -match '^\w+-\w+$') {
+                $true
+            }
+            else {
+                Throw 'Your function name should have a Verb-Noun naming convention'
+                $False
+            }
+        })]
         [string]$Name,
 
         [Parameter(ValueFromPipelineByPropertyName, HelpMessage = 'Specify an optional alias for your new function. You can define multiple aliases separated by commas.')]

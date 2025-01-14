@@ -44,8 +44,8 @@ Function Export-FunctionFromFile {
             $attributeCollection.Add($attributes)
 
             # Adding a parameter alias
-            $dynalias = New-Object System.Management.Automation.AliasAttribute -ArgumentList 'rm'
-            $attributeCollection.Add($dynalias)
+            $dynAlias = New-Object System.Management.Automation.AliasAttribute -ArgumentList 'rm'
+            $attributeCollection.Add($dynAlias)
 
             # Defining the runtime parameter
             $dynParam1 = New-Object -Type System.Management.Automation.RuntimeDefinedParameter('Remove', [Switch], $attributeCollection)
@@ -85,7 +85,7 @@ Function Export-FunctionFromFile {
 
         if ($functions.count -gt 0) {
             Write-Verbose "[PROCESS] Found $($functions.count) functions"
-            Write-Verbose "[PROCESS] Creating files in $outputpath"
+            Write-Verbose "[PROCESS] Creating files in $OutputPath"
             Foreach ($item in $functions) {
                 Write-Verbose "[PROCESS] Detected function $($item.name)"
 

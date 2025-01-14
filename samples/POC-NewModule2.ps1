@@ -1,4 +1,4 @@
-#requires -version 7.1
+#requires -version 7.4
 #requires -module Platyps
 
 #this is a proof of concept script file

@@ -15,7 +15,7 @@ https://github.com/jdhitsolutions/PSScriptTools
         <TypeName>PSFunctionTool</TypeName>
       </ViewSelectedBy>
       <GroupBy>
-        <ScriptBlock>"{0} [v{1}]" -f $_.Module, $_.moduleversion</ScriptBlock>
+        <ScriptBlock>"{0} [v{1}]" -f $_.Module, $_.ModuleVersion</ScriptBlock>
         <Label>Module</Label>
       </GroupBy>
       <TableControl>

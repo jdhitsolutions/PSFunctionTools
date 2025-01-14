@@ -1,4 +1,4 @@
-#requires -version 7.1
+#requires -version 7.4
 
 #export functions from a single file to separate files
 Import-Module PSFunctionTools

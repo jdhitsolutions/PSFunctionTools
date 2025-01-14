@@ -25,7 +25,7 @@ This command will give you a brief summary of all commands, including aliases, i
 
 ### Example 1
 
-```powershell
+```text
 PS C:\> Get-PSFunctionTools
 
    Module: PSFunctionTools [v1.2.0]
@@ -69,8 +69,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### PSFunctionTool
 
 ## NOTES
-
-Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
 
 ## RELATED LINKS
 

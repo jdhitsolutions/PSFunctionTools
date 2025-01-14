@@ -32,12 +32,12 @@ Function New-CommentHelp {
 
     Process {
         if ($PSCmdlet.ParameterSetName -eq 'ast') {
-            Write-Verbose "Processing a paramblock AST object"
+            Write-Verbose "Processing a ParamBlock AST object"
             foreach ($p in $ParamBlock.Parameters) {
-                $paramName = $p.name.variablepath.userpath
-                Write-Verbose "Adding parameter help for $paramname"
-                $h.Add("  .Parameter $paramName")
-                $paramHelp = $p.Attributes.namedArguments.where({ $_.argumentname -eq 'helpmessage' })
+                $ParamName = $p.name.VariablePath.UserPath
+                Write-Verbose "Adding parameter help for $ParamName"
+                $h.Add("  .Parameter $ParamName")
+                $paramHelp = $p.Attributes.namedArguments.where({ $_.ArgumentName -eq 'helpmessage' })
                 if ($paramHelp) {
                     $h.Add("    $($paramHelp.argument.value)")
                 }
@@ -45,7 +45,7 @@ Function New-CommentHelp {
                     $h.Add("    <enter a parameter description>")
                 }
             }
-        } #if paramblock
+        } #if ParamBlock
 
     } #process
     End {

@@ -103,7 +103,7 @@ Specify the .ps1 or .psm1 file with defined functions.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: pspath
+Aliases: PSPath
 
 Required: True
 Position: 0
@@ -143,8 +143,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### PSFunctionName
 
 ## NOTES
-
-Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
 
 ## RELATED LINKS
 

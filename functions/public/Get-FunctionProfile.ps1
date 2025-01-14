@@ -17,21 +17,21 @@ Function Get-FunctionProfile {
             HelpMessage = "Specify the path to the .ps1 or .psm1 file."
         )]
         [ValidateScript({
-                If (Test-Path $_ ) {
-                    $True
-                    If ($_ -match "\.ps(m)?1$") {
-                        $True
-                    }
-                    Else {
-                        Throw "The path must be to a .ps1 or .psm1 file."
-                        $False
-                    }
-                }
-                Else {
-                    Throw "Can't validate that $_ exists. Please verify and try again."
-                    $False
-                }
-            })]
+        If (Test-Path $_ ) {
+            $True
+            If ($_ -match "\.ps(m)?1$") {
+                $True
+            }
+            Else {
+                Throw "The path must be to a .ps1 or .psm1 file."
+                $False
+            }
+        }
+        Else {
+            Throw "Can't validate that $_ exists. Please verify and try again."
+            $False
+        }
+    })]
         [string]$Path
     )
     Begin {
@@ -52,7 +52,7 @@ Function Get-FunctionProfile {
 
         $fa = Get-FunctionAttribute @PSBoundParameters
         $pb = Get-ParameterBlock @PSBoundParameters
-        $attrib = ($pb.parameters.attributes).where({ $_.NamedArguments.Argumentname -eq "ParameterSetName" }).namedarguments | Where-Object { $_.ArgumentName -eq 'parameterSetName' }
+        $attrib = ($pb.parameters.attributes).where({ $_.NamedArguments.ArgumentName -eq "ParameterSetName" }).NamedArguments | Where-Object { $_.ArgumentName -eq 'parameterSetName' }
         $req = Get-PSRequirements -Path $Path
 
         $AST = [System.Management.Automation.Language.Parser]::ParseFile($Path, [ref]$astTokens, [ref]$astErr)
@@ -72,9 +72,9 @@ Function Get-FunctionProfile {
             }
         }
         #get commands
-        $rawlist = ($asttokens).where({ ($_.tokenflags -contains 'commandname') -AND ($_.kind -eq 'generic') }).Text.ToLower() |
+        $RawList = ($astTokens).where({ ($_.TokenFlags -contains 'CommandName') -AND ($_.kind -eq 'generic') }).Text.ToLower() |
         Select-Object -Unique
-        foreach ($item in $rawlist) {
+        foreach ($item in $RawList) {
             if ($item -match "^\w+-\w+$") {
                 $item = Format-FunctionName -Name $item
             }
@@ -85,7 +85,7 @@ Function Get-FunctionProfile {
         }
 
         #get aliases
-        $aliases = ($asttokens).where({ ($_.tokenflags -contains 'commandname') -AND ($_.kind -eq 'identifier') })
+        $aliases = ($astTokens).where({ ($_.TokenFlags -contains 'CommandName') -AND ($_.kind -eq 'identifier') })
         if ($aliases) {
             Write-Verbose "Detected $($aliases.count) aliases"
             $filteredAliases = $aliases.Text.toLower() | Select-Object -Unique
@@ -113,12 +113,12 @@ Function Get-FunctionProfile {
             PSTypeName            = "PSFunctionProfile"
             Name                  = $Name
             FunctionAlias         = $fa.where({ $_.type -eq 'alias' }).PositionalArguments.Value
-            SupportsShouldProcess = $fa.where({ $_.type -eq 'cmdletbinding' }).NamedArguments.argumentname -contains "SupportsShouldProcess"
+            SupportsShouldProcess = $fa.where({ $_.type -eq 'cmdletbinding' }).NamedArguments.ArgumentName -contains "SupportsShouldProcess"
             ParameterSets         = $attrib.argument.value | Select-Object -Unique
             DynamicParameters     = (Get-Content $path | Select-String '^(\s+)?DynamicParam\s+{') ?  $True : $False
             RequiredVersion       = $req.RequiredPSVersion
             RequiredModules       = $req.RequiredModules
-            RequiresElevation     = $req.IsElevationrequired
+            RequiresElevation     = $req.IsElevationRequired
             Commands              = $cmdlets | Sort-Object
             ExternalCommands      = $external | Sort-Object
             DotNet                = $dotnet

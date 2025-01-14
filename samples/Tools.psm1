@@ -83,8 +83,7 @@ Function Get-WindowsVersion {
     .OUTPUTS
     Custom object
     .NOTES
-    Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
-    .LINK
+        .LINK
     WinVer.exe
     .LINK
     Invoke-Command
@@ -106,7 +105,7 @@ Function Get-WindowsVersion {
         [switch]$UseSSL,
         [Int32]$ThrottleLimit,
         [ValidateSet('Default', 'Basic', 'Credssp', 'Digest', 'Kerberos', 'Negotiate', 'NegotiateWithImplicitCredential')]
-        [ValidateNotNullorEmpty()]
+        [ValidateNotNullOrEmpty()]
         [string]$Authentication = "Default"
     )
 
@@ -229,8 +228,7 @@ Function Get-WindowsVersionString {
     .OUTPUTS
     System.String
     .NOTES
-    Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
-    .LINK
+        .LINK
     Get-WindowsVersion
     .lINK
     Winver.exe
@@ -251,7 +249,7 @@ Function Get-WindowsVersionString {
         [switch]$UseSSL,
         [Int32]$ThrottleLimit,
         [ValidateSet('Default', 'Basic', 'Credssp', 'Digest', 'Kerberos', 'Negotiate', 'NegotiateWithImplicitCredential')]
-        [ValidateNotNullorEmpty()]
+        [ValidateNotNullOrEmpty()]
         [string]$Authentication = "Default"
     )
 

@@ -32,7 +32,7 @@ PS C:\> Get-ModuleLayout C:\scripts\ModuleLayout.json
 
 Created             CreatedBy    Version Folders Files
 -------             ---------    ------- ------- -----
-12/16/2021 11:42 AM THINKP1\Jeff   1.0        13    10
+12/16/2024 11:42 AM THINKP1\Jeff   1.0        13    10
 ```
 
 The default output is a custom object.
@@ -43,7 +43,7 @@ The default output is a custom object.
 PS C:\> Get-ModuleLayout C:\scripts\ModuleLayout.json | Format-List
 
 Path           : C:\scripts\ModuleLayout.json
-Created        : 12/16/2021 11:42 AM
+Created        : 12/16/2024 11:42 AM
 CreatedBy      : THINKP1\Jeff
 SourcePath     : C:\work\sample
 LayoutVersion  : 1.0
@@ -128,8 +128,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### String
 
 ## NOTES
-
-Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
 
 ## RELATED LINKS
 
